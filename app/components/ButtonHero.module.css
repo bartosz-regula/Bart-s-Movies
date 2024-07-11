@@ -1,0 +1,24 @@
+.btn {
+	margin-top: 2rem;
+	background: none;
+	color: white;
+	padding: 1rem;
+	border: 1px solid white;
+	cursor: pointer;
+}
+
+.btn:hover {
+	background: white;
+	color: black;
+}
+
+.btn_favorite {
+	background: white;
+	color: black;
+	margin-left: 1.5rem;
+}
+
+.btn_favorite:hover {
+	background: none;
+	color: white;
+}

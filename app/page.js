@@ -1,3 +1,9 @@
+import Header from './components/Hero';
+
 export default function Home() {
-	return <div>Home Page </div>;
+	return (
+		<div>
+			<Header />
+		</div>
+	);
 }

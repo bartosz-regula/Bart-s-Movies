@@ -1,0 +1,26 @@
+.hero {
+	background-image: url('https://m.media-amazon.com/images/I/71RGoav5XdL._SL1500_.jpg');
+	background-size: cover;
+	min-height: 60rem;
+	width: 100%;
+	margin-top: -10rem;
+	color: white;
+}
+
+.text_container {
+	padding-top: 28rem;
+	margin-left: 8rem;
+}
+
+.hero h1 {
+	font-size: 4.8rem;
+	width: 50%;
+}
+
+.hero p {
+	font-size: 1.6rem;
+	margin-top: 2rem;
+	width: 45%;
+	color: rgb(198, 198, 198);
+	line-height: 2.1rem;
+}
