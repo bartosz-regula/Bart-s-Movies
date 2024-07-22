@@ -2,6 +2,10 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+
+	--white: #ffffff;
+	--grey: #c6c6c6;
+	--black: #000000;
 }
 
 html {

@@ -1,24 +1,24 @@
 .btn {
 	margin-top: 2rem;
 	background: none;
-	color: white;
+	color: var(--white);
 	padding: 1rem;
-	border: 1px solid white;
+	border: 1px solid var(--white);
 	cursor: pointer;
 }
 
 .btn:hover {
-	background: white;
-	color: black;
+	background: var(--white);
+	color: var(--black);
 }
 
 .btn_favorite {
-	background: white;
-	color: black;
+	background: var(--white);
+	color: var(--black);
 	margin-left: 1.5rem;
 }
 
 .btn_favorite:hover {
 	background: none;
-	color: white;
+	color: var(--white);
 }

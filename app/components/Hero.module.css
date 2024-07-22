@@ -4,7 +4,7 @@
 	min-height: 60rem;
 	width: 100%;
 	margin-top: -10rem;
-	color: white;
+	color: var(--white);
 }
 
 .text_container {
@@ -21,6 +21,6 @@
 	font-size: 1.6rem;
 	margin-top: 2rem;
 	width: 45%;
-	color: rgb(198, 198, 198);
+	color: var(--grey);
 	line-height: 2.1rem;
 }

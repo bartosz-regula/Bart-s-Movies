@@ -8,5 +8,5 @@
 	width: 100%;
 	font-size: 1.6rem;
 	/* background-color: red; */
-	color: white;
+	color: var(--white);
 }

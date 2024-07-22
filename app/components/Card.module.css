@@ -1,0 +1,17 @@
+.card {
+	max-width: 21.5rem;
+	height: 40rem;
+	border: 1px solid black;
+	margin: 1rem;
+}
+
+.title {
+	text-align: center;
+	margin-top: 1rem;
+}
+
+.details_container {
+	display: flex;
+	margin: 1rem;
+	justify-content: space-between;
+}
