@@ -12,5 +12,6 @@
 }
 .show_list {
 	display: flex;
-	overflow-x: scroll;
+	overflow-x: auto;
+	white-space: nowrap;
 }
