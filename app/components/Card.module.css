@@ -2,16 +2,31 @@
 	max-width: 21.5rem;
 	height: 40rem;
 	border: 1px solid black;
-	margin: 1rem;
+	margin-right: 2.1rem;
+	margin-bottom: 2rem;
+	margin-top: 2rem;
+	cursor: pointer;
+}
+
+.img {
+	border-top: 0.01px solid var(--grey-darker);
+	border-left: 0.01px solid var(--grey-darker);
+	border-right: 0.01px solid var(--grey-darker);
 }
 
 .title {
+	font-size: 1.6rem;
+	margin-top: 1.4rem;
+	margin-bottom: 1rem;
 	text-align: center;
-	margin-top: 1rem;
+	color: var(--white);
 }
 
 .details_container {
 	display: flex;
-	margin: 1rem;
 	justify-content: space-between;
+	color: var(--grey);
+	font-size: 1.4rem;
+	margin-right: 0.5rem;
+	margin-left: 0.5rem;
 }

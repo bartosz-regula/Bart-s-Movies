@@ -1,0 +1,16 @@
+.container {
+	max-width: 140rem;
+	margin: 0 auto;
+	margin-top: 3rem;
+}
+
+.header {
+	display: flex;
+	justify-content: space-between;
+	margin: 0 auto;
+	max-width: 137rem;
+}
+.show_list {
+	display: flex;
+	overflow-x: scroll;
+}
