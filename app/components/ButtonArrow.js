@@ -1,6 +1,6 @@
-import styles from './ButtonHero.module.css';
+import styles from './ButtonArrow.module.css';
 
-export default function ButtonHero({ children, additionalClass }) {
+export default function ButtonArrow({ children, additionalClass }) {
 	return (
 		<button className={`${styles.btn} ${additionalClass ? styles[additionalClass] : ''}`}>
 			{children}

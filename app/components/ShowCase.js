@@ -1,3 +1,4 @@
+import ButtonArrow from './ButtonArrow';
 import Card from './Card';
 import styles from './ShowCase.module.css';
 
@@ -12,10 +13,13 @@ export default async function ShowCase({ type, title }) {
 				<h2>{title}</h2>
 				<button>Explore More</button>
 			</div>
+
 			<div className={styles.show_list}>
+				<ButtonArrow additionalClass='btn_left'>&lt;</ButtonArrow>
 				{movie.results.map((movie) => (
 					<Card key={movie.id} movie={movie} />
 				))}
+				<ButtonArrow additionalClass='btn_right'>&gt;</ButtonArrow>
 			</div>
 		</div>
 	);

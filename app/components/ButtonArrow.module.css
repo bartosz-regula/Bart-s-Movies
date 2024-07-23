@@ -1,0 +1,30 @@
+.btn {
+	color: white;
+	font-size: 3rem;
+	border: none;
+	background-color: transparent;
+	position: sticky;
+	top: 20px;
+	max-height: 33rem;
+	display: flex;
+	align-items: center;
+	padding: 0 10px;
+	z-index: 50;
+	cursor: pointer;
+	transition: all 300ms ease-in-out;
+	/* opacity: 0; */
+
+	background-color: rgba(0, 0, 0, 0.7);
+	opacity: 1;
+	overflow: visible;
+}
+
+.btn_left {
+	left: 0;
+	margin-left: -3.7rem;
+}
+
+.btn_right {
+	right: 0;
+	margin-left: -5.9rem;
+}
