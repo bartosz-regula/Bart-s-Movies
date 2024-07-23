@@ -1,15 +1,17 @@
 .hero {
-	background-image: url('https://m.media-amazon.com/images/I/71RGoav5XdL._SL1500_.jpg');
-	background-size: cover;
-	min-height: 60rem;
 	width: 100%;
 	margin-top: -10rem;
 	color: var(--white);
 }
 
+.slide {
+	min-height: 65rem;
+}
+
 .text_container {
 	padding-top: 28rem;
 	margin-left: 8rem;
+	text-align: left;
 }
 
 .hero h1 {

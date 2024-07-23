@@ -9,6 +9,7 @@
 	justify-content: space-between;
 	margin: 0 auto;
 	max-width: 137rem;
+	color: var(--white);
 }
 .show_list {
 	display: flex;
