@@ -2,18 +2,20 @@ import Link from 'next/link';
 import Image from 'next/image';
 import styles from './Card.module.css';
 
-export default function Card({ movie }) {
-	const title = movie.title || movie.name;
+export default function Card({ show }) {
+	const type = show.title ? 'movie' : show.name ? 'series' : 'person';
+
+	const title = show.title || show.name;
 	const truncatedTitle = title.length > 24 ? title.slice(0, 24) + '...' : title;
-	const releaseDate = movie.release_date || movie.first_air_date;
+	const releaseDate = show.release_date || show.first_air_date;
 	const year = releaseDate ? new Date(releaseDate).getFullYear() : 'N/A';
-	const vote = movie.vote_average ? movie.vote_average.toFixed(1) : 'N/A';
+	const vote = show.vote_average ? show.vote_average.toFixed(1) : 'N/A';
 
 	return (
-		<Link href={'/'}>
+		<Link href={`/${type}/${show.id}`}>
 			<div className={styles.card}>
 				<Image
-					src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+					src={`https://image.tmdb.org/t/p/w500${show.poster_path}`}
 					className={styles.img}
 					width={215}
 					height={330}

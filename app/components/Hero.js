@@ -47,7 +47,11 @@ export default function Hero() {
 						}}>
 						<div className={styles.text_container}>
 							<h1>{movie.title}</h1>
-							<p>{movie.overview}</p>
+							<p>
+								{movie.overview
+									? movie.overview
+									: `We don't have an overview for ${movie.title} yet.`}
+							</p>
 							<ButtonHero>Watch Trailer</ButtonHero>
 							<ButtonHero additionalClass='btn_favorite'>Add to favorite</ButtonHero>
 						</div>

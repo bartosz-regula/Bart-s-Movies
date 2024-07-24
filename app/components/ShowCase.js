@@ -7,26 +7,26 @@ import { handleScroll } from '../helpers/handleScroll';
 import { useRef, useState, useEffect, useCallback } from 'react';
 
 export default function ShowCase({ type, title }) {
-	const [movies, setMovies] = useState([]);
+	const [shows, setShows] = useState([]);
 	const containerRef = useRef(null);
 
 	useEffect(() => {
-		const fetchMovies = async () => {
+		const fetchShows = async () => {
 			try {
 				const response = await fetch(
 					`${process.env.NEXT_PUBLIC_BASE_URL}/${type}?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
 				);
 				if (!response.ok) {
-					throw new Error('Failed to fetch movies');
+					throw new Error('Failed to fetch shows');
 				}
 				const data = await response.json();
-				setMovies(data.results || []);
+				setShows(data.results || []);
 			} catch (error) {
-				console.error('Error fetching movies:', error);
+				console.error('Error fetching shows:', error);
 			}
 		};
 
-		fetchMovies();
+		fetchShows();
 	}, [type]);
 
 	const handleLeftClick = useCallback(() => {
@@ -48,8 +48,8 @@ export default function ShowCase({ type, title }) {
 				<ButtonArrow additionalClass='btn_left' onClick={handleLeftClick}>
 					&lt;
 				</ButtonArrow>
-				{movies.map((movie) => (
-					<Card key={movie.id} movie={movie} />
+				{shows.map((show) => (
+					<Card key={show.id} show={show} />
 				))}
 				<ButtonArrow additionalClass='btn_right' onClick={handleRightClick}>
 					&gt;
