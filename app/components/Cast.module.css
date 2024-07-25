@@ -1,0 +1,22 @@
+.cast_container {
+  display: flex;
+  max-width: 116rem;
+  margin: 18rem auto 0 auto;
+  overflow-x: scroll;
+}
+
+.actor_box {
+  margin-right: 2.8rem;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.actor_img {
+  margin-bottom: 1rem;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.actor_box p {
+  margin-top: 0.5rem;
+  color: var(--grey);
+}
