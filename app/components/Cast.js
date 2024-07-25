@@ -5,7 +5,7 @@ import styles from './Cast.module.css';
 import Image from 'next/image';
 import ButtonArrow from './ButtonArrow';
 import { handleScroll } from '../helpers/handleScroll';
-import { useRef, useState, useEffect, useCallback } from 'react';
+import { useRef, useCallback } from 'react';
 
 export default function Cast({ cast }) {
   const containerRef = useRef(null);

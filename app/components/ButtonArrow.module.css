@@ -36,10 +36,24 @@
   left: 0;
   margin-left: -3.7rem;
   top: 0px;
-  max-height: 22.75rem;
+  max-height: 23rem;
 }
 
 .btn_cast_r {
+  right: 0;
+  margin-left: -5.9rem;
+  top: 0px;
+  max-height: 23rem;
+}
+
+.btn_images_l {
+  left: 0;
+  margin-left: -3.7rem;
+  top: 0px;
+  max-height: 22.75rem;
+}
+
+.btn_images_r {
   right: 0;
   margin-left: -5.9rem;
   top: 0px;

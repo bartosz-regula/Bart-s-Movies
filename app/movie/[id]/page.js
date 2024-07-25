@@ -1,5 +1,6 @@
 import Cast from '@/app/components/Cast';
 import ShowDetails from '@/app/components/ShowDetails';
+import ShowImages from '@/app/components/ShowImages';
 
 export default async function Page({ params }) {
   const showId = params.id;
@@ -13,15 +14,23 @@ export default async function Page({ params }) {
   );
   const castData = await castResponse.json();
 
+  const imagesResponse = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/movie/${showId}/images?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
+  );
+
+  const imagesData = await imagesResponse.json();
+
   const backgroundStyles = {
     backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.62), rgba(0, 0, 0, 0.95)), url(https://image.tmdb.org/t/p/w1280${showData.backdrop_path})`,
     backgroundSize: 'cover',
     backgroundBlendMode: 'multiply',
   };
+
   return (
     <div style={backgroundStyles}>
       <ShowDetails show={showData} />
       <Cast cast={castData} />
+      <ShowImages images={imagesData.backdrops} />
     </div>
   );
 }
