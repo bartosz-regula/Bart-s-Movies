@@ -59,3 +59,18 @@
   top: 0px;
   max-height: 22.75rem;
 }
+
+/* Videos */
+.btn_videos_l {
+  left: 0;
+  margin-left: -3.7rem;
+  top: 0px;
+  max-height: 20.2rem;
+}
+
+.btn_videos_r {
+  right: 0;
+  margin-left: -5.9rem;
+  top: 0px;
+  max-height: 20.2rem;
+}
