@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import ButtonHero from './ButtonHero';
 import styles from './Hero.module.css';
 import { Carousel } from 'react-responsive-carousel';
-import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 export default function Hero() {
   const [movies, setMovies] = useState([]);

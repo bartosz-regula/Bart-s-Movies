@@ -2,7 +2,6 @@
 
 import styles from './ShowCase.module.css';
 import Card from './Card';
-import ButtonArrow from './ButtonArrow';
 import { handleScroll } from '../helpers/handleScroll';
 import { useRef, useState, useEffect, useCallback } from 'react';
 
@@ -45,15 +44,15 @@ export default function ShowCase({ type, title }) {
       </div>
 
       <div className={styles.show_list} ref={containerRef}>
-        <ButtonArrow additionalClass="btn_show_case_l" onClick={handleLeftClick}>
+        <button className={`${styles.btn} ${styles.btn_left}`} onClick={handleLeftClick}>
           &lt;
-        </ButtonArrow>
+        </button>
         {shows.map((show) => (
           <Card key={show.id} show={show} />
         ))}
-        <ButtonArrow additionalClass="btn_show_case_r" onClick={handleRightClick}>
+        <button className={`${styles.btn} ${styles.btn_right}`} onClick={handleRightClick}>
           &gt;
-        </ButtonArrow>
+        </button>
       </div>
     </div>
   );

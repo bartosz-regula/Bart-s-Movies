@@ -1,7 +1,6 @@
 'use client';
 
 import styles from './ShowVideos.module.css';
-import ButtonArrow from './ButtonArrow';
 import { handleScroll } from '../helpers/handleScroll';
 import { useRef, useCallback } from 'react';
 
@@ -18,9 +17,9 @@ export default function ShowVideos({ videos }) {
 
   return (
     <div className={styles.videos_container} ref={containerRef}>
-      <ButtonArrow additionalClass="btn_videos_l" onClick={handleLeftClick}>
+      <button className={`${styles.btn} ${styles.btn_left}`} onClick={handleLeftClick}>
         &lt;
-      </ButtonArrow>
+      </button>
       {videos.results.map((video, index) => (
         <div key={video.id} className={styles.video}>
           <div className={styles.iframeContainer}>
@@ -36,9 +35,9 @@ export default function ShowVideos({ videos }) {
           <h3>{video.name}</h3>
         </div>
       ))}
-      <ButtonArrow additionalClass="btn_videos_r" onClick={handleRightClick}>
+      <button className={`${styles.btn} ${styles.btn_right}`} onClick={handleRightClick}>
         &gt;
-      </ButtonArrow>
+      </button>
     </div>
   );
 }

@@ -1,18 +1,46 @@
 .container {
-	max-width: 140rem;
-	margin: 0 auto;
-	margin-top: 3rem;
+  max-width: 140rem;
+  margin: 0 auto;
+  margin-top: 3rem;
 }
 
 .header {
-	display: flex;
-	justify-content: space-between;
-	margin: 0 auto;
-	max-width: 137rem;
-	color: var(--white);
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: 137rem;
+  color: var(--white);
 }
 .show_list {
-	display: flex;
-	overflow-x: auto;
-	white-space: nowrap;
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.btn {
+  top: 20px;
+  max-height: 33rem;
+  color: var(--white);
+  font-size: 3rem;
+  border: none;
+  position: sticky;
+  padding: 0 10px;
+  cursor: pointer;
+  transition: all 400ms ease-in-out;
+  background-color: var(--black-transparent);
+  opacity: 1;
+}
+
+.btn_left {
+  left: 0;
+  margin-left: -3.7rem;
+}
+.btn_right {
+  right: 0;
+  margin-left: -5.9rem;
+}
+
+.container:hover .btn_left,
+.container:hover .btn_right {
+  opacity: 1;
 }

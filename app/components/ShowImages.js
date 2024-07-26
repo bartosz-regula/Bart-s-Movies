@@ -2,7 +2,6 @@
 
 import Image from 'next/image';
 import styles from './ShowImages.module.css';
-import ButtonArrow from './ButtonArrow';
 import { handleScroll } from '../helpers/handleScroll';
 import { useRef, useCallback } from 'react';
 
@@ -10,18 +9,18 @@ export default function ShowImages({ images }) {
   const containerRef = useRef(null);
 
   const handleLeftClick = useCallback(() => {
-    handleScroll(containerRef.current, 'left', 975);
+    handleScroll(containerRef.current, 'left', 976.5);
   }, []);
 
   const handleRightClick = useCallback(() => {
-    handleScroll(containerRef.current, 'right', 975);
+    handleScroll(containerRef.current, 'right', 976.5);
   }, []);
 
   return (
     <div className={styles.images_container} ref={containerRef}>
-      <ButtonArrow additionalClass="btn_images_l" onClick={handleLeftClick}>
+      <button className={`${styles.btn} ${styles.btn_left}`} onClick={handleLeftClick}>
         &lt;
-      </ButtonArrow>
+      </button>
       {images.map((image, index) => (
         <Image
           key={index}
@@ -32,9 +31,9 @@ export default function ShowImages({ images }) {
           height={170}
         />
       ))}
-      <ButtonArrow additionalClass="btn_images_r" onClick={handleRightClick}>
+      <button className={`${styles.btn} ${styles.btn_right}`} onClick={handleRightClick}>
         &gt;
-      </ButtonArrow>
+      </button>
     </div>
   );
 }

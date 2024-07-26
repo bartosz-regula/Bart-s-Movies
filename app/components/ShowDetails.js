@@ -2,13 +2,23 @@ import Image from 'next/image';
 import styles from './ShowDetails.module.css';
 import formatList from '../helpers/formatList';
 
-export default function ShowDetails({ show }) {
+export default function ShowDetails({ show, cast }) {
   const title = show.title || show.name;
   const release = show.release_date || show.first_air_date;
   const year = release ? new Date(release).getFullYear() : 'N/A';
   const overview = show.overview ? show.overview : `We don't have an overview for ${show.title} yet.`;
   const tagline = show.tagline || '';
-  const runtime = show.runtime ? `${show.runtime} min` : show.episode_run_time ? `${show.episode_run_time} min` : 'N/A';
+  const runtime = show.runtime
+    ? `${show.runtime} min`
+    : show.episode_run_time?.[0]
+      ? `${show.episode_run_time[0]} min`
+      : 'N/A';
+
+  const director =
+    cast.crew.find((person) => person.job === 'Director')?.name ||
+    show.created_by?.find((person) => person.name)?.name ||
+    'N/A';
+  const numberOfSeasons = show.number_of_seasons;
   const vote = show.vote_average && show.vote_average.toFixed(1) !== '0.0' ? show.vote_average.toFixed(1) : 'N/A';
 
   return (
@@ -41,7 +51,14 @@ export default function ShowDetails({ show }) {
         </div>
         <div className={styles.details_container}>
           <ul>
-            <li>Director?</li>
+            <li>
+              <strong>Director:</strong> {director}
+            </li>
+            {numberOfSeasons && (
+              <li>
+                <strong>Number of seasons:</strong> {numberOfSeasons}
+              </li>
+            )}
             <li>
               <strong>Runtime:</strong> {runtime}
             </li>
@@ -50,13 +67,13 @@ export default function ShowDetails({ show }) {
               {formatList(show.spoken_languages, (language) => language.name)}
             </li>
             <li>
-              <strong>Release Date:</strong> {release}
+              <strong>Production: </strong>
+              {formatList(show.production_countries, (country) => country.name)}
             </li>
           </ul>
           <ul>
             <li>
-              <strong>Production: </strong>
-              {formatList(show.production_countries, (country) => country.name)}
+              <strong>Release Date:</strong> {release}
             </li>
             <li>
               <strong>Popularity:</strong> {show.popularity || 'N/A'}
