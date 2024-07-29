@@ -1,0 +1,56 @@
+.container {
+  margin: -10rem auto;
+  padding-top: 15rem;
+  display: flex;
+  max-width: 120rem;
+}
+
+.text_container {
+  margin-left: 4rem;
+  width: 100%;
+  font-size: 2rem;
+  margin-top: 2rem;
+}
+
+.person_name {
+  font-size: 3.8rem;
+  font-weight: 600;
+  margin-bottom: 3rem;
+}
+
+.biography_container {
+  font-size: 1.6rem;
+  margin-top: 1.2rem;
+}
+
+.biography_container button {
+  margin-top: 1rem;
+  background-color: transparent;
+  color: white;
+  border-bottom: 1px solid white;
+}
+
+.biography_container strong {
+  font-size: 2rem;
+}
+
+.biography_container p {
+  margin-top: 1.2rem;
+  color: var(--grey);
+}
+
+.details_container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.details_container strong {
+  color: var(--white);
+}
+
+.details_container li {
+  margin-top: 2rem;
+  margin-right: 2rem;
+  font-size: 1.4rem;
+  color: var(--grey);
+}

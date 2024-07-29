@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import styles from './ShowDetails.module.css';
 import formatList from '../helpers/formatList';
+import { DEFAULT_SHOW_IMAGE } from '../utilities/config,js';
 
 export default function ShowDetails({ show, cast }) {
   const title = show.title || show.name;
@@ -25,10 +26,10 @@ export default function ShowDetails({ show, cast }) {
     <div className={styles.show_details}>
       <div>
         <Image
-          src={`https://image.tmdb.org/t/p/w300${show.poster_path}`}
+          src={show.poster_path ? `https://image.tmdb.org/t/p/w300${show.poster_path}` : DEFAULT_SHOW_IMAGE}
           width={300}
           height={450}
-          alt={`${title} poster`}
+          alt={show.profile_path ? title : 'No Poster Available'}
         />
       </div>
       <div className={styles.text_container}>

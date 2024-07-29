@@ -15,8 +15,8 @@ export default async function Page({ params }) {
   ]);
 
   const backgroundStyles = {
-    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.62), rgba(0, 0, 0, 0.95)), url(https://image.tmdb.org/t/p/w1280${showData.backdrop_path})`,
-    backgroundSize: 'cover',
+    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 1)), url(https://image.tmdb.org/t/p/w1280${showData.backdrop_path})`,
+    backgroundSize: 'contain',
     backgroundBlendMode: 'multiply',
   };
 
