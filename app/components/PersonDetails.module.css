@@ -1,5 +1,5 @@
 .container {
-  margin: -10rem auto;
+  margin: -10rem auto 10rem auto;
   padding-top: 15rem;
   display: flex;
   max-width: 120rem;

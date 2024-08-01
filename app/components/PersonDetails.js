@@ -2,10 +2,10 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import styles from './PersonData.module.css';
-import { DEFAULT_PERSON_IMAGE } from '../utilities/config,js';
+import styles from './PersonDetails.module.css';
+import { DEFAULT_PERSON_IMAGE } from '../utilities/config.js';
 
-export default function PersonData({ person }) {
+export default function PersonDetails({ person }) {
   const [showFullBiography, setShowFullBiography] = useState(false);
 
   const name = person.name;

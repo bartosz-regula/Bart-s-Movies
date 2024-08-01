@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import styles from './ShowDetails.module.css';
 import formatList from '../helpers/formatList';
-import { DEFAULT_SHOW_IMAGE } from '../utilities/config,js';
+import { DEFAULT_SHOW_IMAGE } from '../utilities/config.js';
 
 export default function ShowDetails({ show, cast }) {
   const title = show.title || show.name;

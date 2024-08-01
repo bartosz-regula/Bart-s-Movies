@@ -1,0 +1,43 @@
+.container {
+  display: flex;
+  max-width: 120rem;
+  margin: 18rem auto 0 auto;
+  overflow-x: scroll;
+}
+
+.container li {
+  margin-right: 2.4rem;
+  text-align: center;
+}
+
+.container h3 {
+  margin-top: 1rem;
+}
+
+.btn {
+  top: 0px;
+  max-height: 26rem;
+  color: var(--white);
+  font-size: 3rem;
+  border: none;
+  position: sticky;
+  padding: 0 10px;
+  cursor: pointer;
+  transition: all 400ms ease-in-out;
+  background-color: var(--black-transparent);
+  opacity: 0;
+}
+
+.btn_left {
+  left: 0;
+  margin-left: -3.7rem;
+}
+.btn_right {
+  right: 0;
+  margin-left: -5.9rem;
+}
+
+.container:hover .btn_left,
+.container:hover .btn_right {
+  opacity: 1;
+}
