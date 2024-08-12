@@ -1,22 +1,22 @@
 .container {
-  display: flex;
   max-width: 120rem;
-  margin: 18rem auto 0 auto;
+  margin: 0 auto;
+  margin-top: 4rem;
+  padding: 1rem 0;
+  display: flex;
   overflow-x: scroll;
 }
 
-.container li {
+.image {
   margin-right: 2.4rem;
-  text-align: center;
-}
-
-.container h3 {
-  margin-top: 1rem;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  cursor: pointer;
 }
 
 .btn {
   top: 0px;
-  max-height: 26rem;
+  max-height: 27rem;
   color: var(--white);
   font-size: 3rem;
   border: none;

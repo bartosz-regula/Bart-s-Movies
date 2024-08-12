@@ -7,7 +7,7 @@ import { handleScroll } from '../helpers/handleScroll';
 import { DEFAULT_SHOW_IMAGE } from '../utilities/config.js';
 import { useRef, useCallback } from 'react';
 
-export default function PersonShowContainer({ show }) {
+export default function PersonShowContainer({ show, header }) {
   const containerRef = useRef(null);
   const handleLeftClick = useCallback(() => {
     handleScroll(containerRef.current, 'left', 1020);
@@ -18,8 +18,9 @@ export default function PersonShowContainer({ show }) {
   }, []);
 
   return (
-    <div>
-      <ul className={styles.container} ref={containerRef}>
+    <div className={styles.container}>
+      <h2>{header}</h2>
+      <ul ref={containerRef}>
         <button className={`${styles.btn} ${styles.btn_left}`} onClick={handleLeftClick}>
           &lt;
         </button>
