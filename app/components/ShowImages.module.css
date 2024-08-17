@@ -3,8 +3,10 @@
   max-width: 127.9rem;
   margin: 5rem auto 0 auto;
   overflow-y: hidden;
-  /* scrollbar-width: none;
-	-ms-overflow-style: none; */
+}
+
+.hiddenOverflow {
+  overflow: hidden;
 }
 
 .images {
