@@ -1,4 +1,4 @@
-import styles from './PersonImages.module.css';
+import styles from './ModalImage.module.css';
 
 export default function ModalImage({ images, activeImage, closeModal, handleNextImage, handlePrevImage }) {
   return (
