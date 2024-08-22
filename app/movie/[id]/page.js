@@ -1,4 +1,4 @@
-import Cast from '@/app/components/Cast';
+import ShowCast from '@/app/components/ShowCast';
 import ShowDetails from '@/app/components/ShowDetails';
 import ShowImages from '@/app/components/ShowImages';
 import ShowVideos from '@/app/components/ShowVideos';
@@ -23,7 +23,7 @@ export default async function Page({ params }) {
   return (
     <div style={backgroundStyles}>
       <ShowDetails show={showData} cast={castData} />
-      <Cast cast={castData} />
+      <ShowCast cast={castData} />
       <ShowImages images={imagesData.backdrops} />
       <ShowVideos videos={videosData} />
     </div>

@@ -5,10 +5,13 @@ import Link from 'next/link';
 import styles from './PersonShowsContainer.module.css';
 import { handleScroll } from '../helpers/handleScroll';
 import { DEFAULT_SHOW_IMAGE } from '../utilities/config.js';
-import { useRef, useCallback } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
+import checkButtonsVisibility from '../helpers/checkButtonsVisibility';
 
 export default function PersonShowContainer({ show, header }) {
   const containerRef = useRef(null);
+  const [showButtons, setShowButtons] = useState(false);
+
   const handleLeftClick = useCallback(() => {
     handleScroll(containerRef.current, 'left', 1020);
   }, []);
@@ -17,13 +20,27 @@ export default function PersonShowContainer({ show, header }) {
     handleScroll(containerRef.current, 'right', 1020);
   }, []);
 
+  useEffect(() => {
+    checkButtonsVisibility(containerRef, setShowButtons);
+
+    const resizeHandler = () => checkButtonsVisibility(containerRef, setShowButtons);
+
+    window.addEventListener('resize', resizeHandler);
+
+    return () => {
+      window.removeEventListener('resize', resizeHandler);
+    };
+  }, [show]);
+
   return (
     <div className={styles.container}>
       <h2>{header}</h2>
       <ul ref={containerRef}>
-        <button className={`${styles.btn} ${styles.btn_left}`} onClick={handleLeftClick}>
-          &lt;
-        </button>
+        {showButtons && (
+          <button className={`${styles.btn} ${styles.btn_left}`} onClick={handleLeftClick}>
+            &lt;
+          </button>
+        )}
         {show.map((item) => {
           const title = item.title || item.name;
           const type = item.title ? 'movie' : 'series';
@@ -38,9 +55,11 @@ export default function PersonShowContainer({ show, header }) {
             </li>
           );
         })}
-        <button className={`${styles.btn} ${styles.btn_right}`} onClick={handleRightClick}>
-          &gt;
-        </button>
+        {showButtons && (
+          <button className={`${styles.btn} ${styles.btn_right}`} onClick={handleRightClick}>
+            &gt;
+          </button>
+        )}
       </ul>
     </div>
   );

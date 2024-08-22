@@ -4,8 +4,9 @@ import styles from './ShowCase.module.css';
 import Card from './Card';
 import { handleScroll } from '../helpers/handleScroll';
 import { useRef, useState, useEffect, useCallback } from 'react';
+import Link from 'next/link';
 
-export default function ShowCase({ type, title }) {
+export default function ShowCase({ type, title, route }) {
   const [shows, setShows] = useState([]);
   const containerRef = useRef(null);
 
@@ -40,7 +41,7 @@ export default function ShowCase({ type, title }) {
     <div className={styles.container}>
       <div className={styles.header}>
         <h2>{title}</h2>
-        <button>Explore More</button>
+        <Link href={route}>Explore More</Link>
       </div>
 
       <div className={styles.show_list} ref={containerRef}>

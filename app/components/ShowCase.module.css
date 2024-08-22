@@ -28,7 +28,7 @@
   cursor: pointer;
   transition: all 400ms ease-in-out;
   background-color: var(--black-transparent);
-  opacity: 1;
+  opacity: 0;
 }
 
 .btn_left {
