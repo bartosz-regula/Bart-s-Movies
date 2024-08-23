@@ -4,6 +4,7 @@ import styles from './ShowVideos.module.css';
 import { handleScroll } from '../helpers/handleScroll';
 import checkButtonsVisibility from '../helpers/checkButtonsVisibility';
 import { useState, useEffect, useRef, useCallback } from 'react';
+import handleKeyPress from '../helpers/handleKeyPress';
 import ModalVideo from './ModalVideo';
 
 export default function ShowVideos({ videos }) {
@@ -39,6 +40,18 @@ export default function ShowVideos({ videos }) {
     };
   }, [videos]);
 
+  useEffect(() => {
+    const keyPressHandler = (event) => {
+      handleKeyPress(event, activeVideo, closeModal);
+    };
+
+    window.addEventListener('keydown', keyPressHandler);
+
+    return () => {
+      window.removeEventListener('keydown', keyPressHandler);
+    };
+  }, [activeVideo, videos]);
+
   return (
     <>
       <div className={styles.videos_container} ref={containerRef}>
@@ -59,7 +72,7 @@ export default function ShowVideos({ videos }) {
                 title={video.name}
               ></iframe>
             </div>
-            <h3>{video.name}</h3>
+            <h3>{video.name.length > 40 ? video.name.slice(0, 40) + '...' : video.name}</h3>
           </div>
         ))}
         {showButtons && (

@@ -12,6 +12,7 @@
 .images {
   margin-right: 2.45rem;
   border: 0.1px solid white;
+  cursor: pointer;
 }
 
 .btn {

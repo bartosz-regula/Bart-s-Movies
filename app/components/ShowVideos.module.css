@@ -9,11 +9,12 @@
 .video {
   margin-right: 2.54rem;
   margin-bottom: 5rem;
+  cursor: pointer;
 }
 
 .iframeContainer {
   border: 0.1px solid rgba(255, 255, 255, 0.319);
-  margin-bottom: 1.2rem;
+  pointer-events: none;
 }
 
 .btn {
@@ -43,3 +44,4 @@
 .videos_container:hover .btn_right {
   opacity: 1;
 }
+
