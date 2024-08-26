@@ -1,6 +1,7 @@
 import NavbarItem from './NavbarItem';
 import styles from './Navbar.module.css';
 import Link from 'next/link';
+import SearchBox from './SearchBox';
 
 export default function Navbar() {
   return (
@@ -13,7 +14,7 @@ export default function Navbar() {
       <NavbarItem title="Favorites" param="/favorites" />
       <NavbarItem title="Watched" param="/watched" />
 
-      <h2>Search</h2>
+      <SearchBox />
     </div>
   );
 }

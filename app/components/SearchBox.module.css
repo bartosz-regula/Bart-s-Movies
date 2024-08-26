@@ -1,0 +1,33 @@
+.search_bar {
+  height: 4.5rem;
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 60px;
+  padding: 10px 20px;
+  backdrop-filter: blur(4px) saturate(180%);
+  margin-top: 2.5rem;
+}
+
+.search_bar input {
+  background: transparent;
+  flex: 1;
+  border: 0;
+  outline: none;
+  padding: 24px 20px;
+  font-size: 20px;
+  color: #cac7ff;
+  color: white;
+}
+
+.search_bar ::placeholder {
+  color: rgb(140 140 140);
+}
+
+.searchIcon {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  color: white;
+}
