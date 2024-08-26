@@ -2,3 +2,18 @@
   display: grid;
   grid-template-columns: repeat(6, 1fr);
 }
+
+.button_up {
+  position: fixed;
+  right: 5%;
+  bottom: 2%;
+  z-index: 9999;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
