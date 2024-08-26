@@ -5,6 +5,7 @@ import ButtonHero from './ButtonHero';
 import styles from './Hero.module.css';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import Link from 'next/link';
 
 export default function Hero() {
   const [movies, setMovies] = useState([]);
@@ -39,21 +40,23 @@ export default function Hero() {
         emulateTouch={true}
       >
         {movies.map((movie) => (
-          <div
-            key={movie.id}
-            className={styles.slide}
-            style={{
-              backgroundImage: `linear-gradient(to top, rgba(0,0,0,1) 5%,  rgba(0,0,0,0) ), url(https://image.tmdb.org/t/p/w1280${movie.backdrop_path})`,
-              backgroundSize: 'cover',
-            }}
-          >
-            <div className={styles.text_container}>
-              <h1>{movie.title}</h1>
-              <p>{movie.overview ? movie.overview : `We don't have an overview for ${movie.title} yet.`}</p>
-              <ButtonHero>Watch Trailer</ButtonHero>
-              <ButtonHero additionalClass="btn_favorite">Add to favorite</ButtonHero>
+          <Link key={movie.id} href={`/movie/${movie.id}`}>
+            <div
+              key={movie.id}
+              className={styles.slide}
+              style={{
+                backgroundImage: `linear-gradient(to top, rgba(0,0,0,1) 5%,  rgba(0,0,0,0) ), url(https://image.tmdb.org/t/p/w1280${movie.backdrop_path})`,
+                backgroundSize: 'cover',
+              }}
+            >
+              <div className={styles.text_container}>
+                <h1>{movie.title}</h1>
+                <p>{movie.overview ? movie.overview : `We don't have an overview for ${movie.title} yet.`}</p>
+                <ButtonHero>Watch Trailer</ButtonHero>
+                <ButtonHero additionalClass="btn_favorite">Add to favorite</ButtonHero>
+              </div>
             </div>
-          </div>
+          </Link>
         ))}
       </Carousel>
     </div>
