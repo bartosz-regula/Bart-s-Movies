@@ -5,10 +5,35 @@ import ButtonHero from './ButtonHero';
 import styles from './Hero.module.css';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import ModalVideo from './ModalVideo';
 import Link from 'next/link';
 
 export default function Hero() {
   const [movies, setMovies] = useState([]);
+  const [activeVideo, setActiveVideo] = useState(null);
+  const [videos, setVideos] = useState([]);
+
+  const closeModal = () => {
+    setActiveVideo(null);
+  };
+
+  const handleVideoClick = async (index) => {
+    setActiveVideo(null);
+
+    const movieId = movies[index].id;
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/movie/${movieId}/videos?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
+    );
+    const data = await res.json();
+
+    if (data.results && data.results.length > 0) {
+      setActiveVideo(data.results[0].key);
+    } else {
+      setActiveVideo(null);
+    }
+
+    setVideos(data.results);
+  };
 
   useEffect(() => {
     async function fetchMovies() {
@@ -39,26 +64,28 @@ export default function Hero() {
         dynamicHeight={false}
         emulateTouch={true}
       >
-        {movies.map((movie) => (
-          <Link key={movie.id} href={`/movie/${movie.id}`}>
-            <div
-              key={movie.id}
-              className={styles.slide}
-              style={{
-                backgroundImage: `linear-gradient(to top, rgba(0,0,0,1) 5%,  rgba(0,0,0,0) ), url(https://image.tmdb.org/t/p/w1280${movie.backdrop_path})`,
-                backgroundSize: 'cover',
-              }}
-            >
-              <div className={styles.text_container}>
+        {movies.map((movie, index) => (
+          <div
+            key={movie.id}
+            className={styles.slide}
+            style={{
+              backgroundImage: `linear-gradient(to top, rgba(0,0,0,1) 5%,  rgba(0,0,0,0) ), url(https://image.tmdb.org/t/p/w1280${movie.backdrop_path})`,
+              backgroundSize: 'cover',
+            }}
+          >
+            <div className={styles.text_container}>
+              <Link href={`/movie/${movie.id}`}>
                 <h1>{movie.title}</h1>
                 <p>{movie.overview ? movie.overview : `We don't have an overview for ${movie.title} yet.`}</p>
-                <ButtonHero>Watch Trailer</ButtonHero>
-                <ButtonHero additionalClass="btn_favorite">Add to favorite</ButtonHero>
-              </div>
+              </Link>
+              <ButtonHero onClick={() => handleVideoClick(index)}>Watch Trailer</ButtonHero>
+              <ButtonHero additionalClass="btn_favorite">Add to favorite</ButtonHero>
             </div>
-          </Link>
+          </div>
         ))}
       </Carousel>
+
+      {activeVideo && <ModalVideo videos={activeVideo} closeModal={closeModal} />}
     </div>
   );
 }

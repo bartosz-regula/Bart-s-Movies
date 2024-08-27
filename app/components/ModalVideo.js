@@ -6,7 +6,7 @@ export default function ModalVideo({ videos, activeVideo, closeModal }) {
       <div className={styles.modal_background} onClick={closeModal}></div>
       <div className={styles.modal_content}>
         <iframe
-          src={`https://www.youtube.com/embed/${videos.results[activeVideo].key}?autoplay=1`}
+          src={`https://www.youtube.com/embed/${videos.results && videos.results[activeVideo] ? videos.results[activeVideo].key : videos}?autoplay=1`}
           frameBorder="0"
           allowFullScreen
         ></iframe>

@@ -7,7 +7,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 90;
+  z-index: 101;
 }
 
 .modal_background {
