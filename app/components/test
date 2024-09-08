@@ -5,8 +5,8 @@ import { DEFAULT_PERSON_IMAGE, DEFAULT_SHOW_IMAGE } from '../utilities/config.js
 import Heart from './Heart';
 import Auth from '../components/Auth';
 import { db, auth } from '../config/firebase';
-import { getDocs, collection, addDoc, deleteDoc, doc, query, where } from 'firebase/firestore'; 
 import { useState, useEffect } from 'react';
+import { getDocs, collection, query, where } from 'firebase/firestore';
 
 export default function Card({ show }) {
   const [isFavorite, setIsFavorite] = useState(false);
@@ -33,7 +33,8 @@ export default function Card({ show }) {
         ? `https://image.tmdb.org/t/p/w500${show.poster_path}`
         : show.poster || DEFAULT_SHOW_IMAGE;
 
-  const moviesCollectionRef = collection(db, 'movies');  
+  const moviesCollectionRef = collection(db, 'movies');
+
   const checkIfFavorite = async () => {
     const q = query(moviesCollectionRef, where('title', '==', truncatedTitle));
     const querySnapshot = await getDocs(q);
@@ -64,6 +65,7 @@ export default function Card({ show }) {
       console.error(err);
     }
   };
+
   return (
     <div className={styles.card}>
       <Link href={`/${type}/${show.id}`}>
@@ -84,11 +86,7 @@ export default function Card({ show }) {
           </div>
         )}
       </Link>
-      <Heart
-        handleAddToFavorites={handleAddToFavorites}
-        isFavorite={isFavorite} 
-        className={styles.heart}
-      />
+      <Heart handleAddToFavorites={handleAddToFavorites} isFavorite={isFavorite} className={styles.heart} />
     </div>
   );
 }
