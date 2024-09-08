@@ -5,11 +5,12 @@ import { DEFAULT_PERSON_IMAGE, DEFAULT_SHOW_IMAGE } from '../utilities/config.js
 import Heart from './Heart';
 import Auth from '../components/Auth';
 import { db, auth } from '../config/firebase';
-import { getDocs, collection, addDoc, deleteDoc, doc, query, where } from 'firebase/firestore'; 
+import { getDocs, collection, addDoc, deleteDoc, doc, query, where } from 'firebase/firestore';
 import { useState, useEffect } from 'react';
 
 export default function Card({ show }) {
   const [isFavorite, setIsFavorite] = useState(false);
+  const [favoriteDocId, setFavoriteDocId] = useState(null); // Przechowuje ID dokumentu, aby móc usunąć film z ulubionych
 
   const typeMap = {
     movie: 'movie',
@@ -33,37 +34,59 @@ export default function Card({ show }) {
         ? `https://image.tmdb.org/t/p/w500${show.poster_path}`
         : show.poster || DEFAULT_SHOW_IMAGE;
 
-  const moviesCollectionRef = collection(db, 'movies');  
+  const moviesCollectionRef = collection(db, 'movies');
+
+  // Funkcja sprawdzająca, czy film jest w ulubionych
   const checkIfFavorite = async () => {
     const q = query(moviesCollectionRef, where('title', '==', truncatedTitle));
     const querySnapshot = await getDocs(q);
 
     if (!querySnapshot.empty) {
+      const docId = querySnapshot.docs[0].id; // Pobierz ID dokumentu, który odpowiada filmowi
       setIsFavorite(true);
+      setFavoriteDocId(docId); // Zapisz ID dokumentu
     } else {
       setIsFavorite(false);
+      setFavoriteDocId(null); // Wyzeruj ID dokumentu
     }
   };
 
+  // Sprawdzenie, czy film jest ulubionym po załadowaniu komponentu
   useEffect(() => {
     checkIfFavorite();
   }, []);
 
+  // Funkcja dodająca film do ulubionych
   const handleAddToFavorites = async () => {
     try {
       if (!isFavorite) {
-        await addDoc(moviesCollectionRef, {
+        const docRef = await addDoc(moviesCollectionRef, {
           title: truncatedTitle,
           releaseDate: year,
           vote: vote,
           poster: imageSrc,
         });
         setIsFavorite(true);
+        setFavoriteDocId(docRef.id); // Zapisz ID nowo dodanego dokumentu
       }
     } catch (err) {
       console.error(err);
     }
   };
+
+  // Funkcja usuwająca film z ulubionych
+  const handleRemoveFromFavorites = async () => {
+    try {
+      if (isFavorite && favoriteDocId) {
+        await deleteDoc(doc(db, 'movies', favoriteDocId)); // Usunięcie dokumentu na podstawie ID
+        setIsFavorite(false);
+        setFavoriteDocId(null); // Wyzeruj ID po usunięciu
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
     <div className={styles.card}>
       <Link href={`/${type}/${show.id}`}>
@@ -86,7 +109,8 @@ export default function Card({ show }) {
       </Link>
       <Heart
         handleAddToFavorites={handleAddToFavorites}
-        isFavorite={isFavorite} 
+        handleRemoveFromFavorites={handleRemoveFromFavorites} // Przekazanie funkcji usuwania
+        isFavorite={isFavorite} // Przekazanie stanu ulubionego
         className={styles.heart}
       />
     </div>

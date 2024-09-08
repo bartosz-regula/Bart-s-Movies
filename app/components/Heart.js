@@ -1,7 +1,11 @@
-export default function Heart({ handleClick, isFavorite, className, handleAddToFavorites }) {
+export default function Heart({ isFavorite, className, handleAddToFavorites, handleRemoveFromFavorites }) {
   const handleHeartClick = (event) => {
     event.stopPropagation();
-    handleAddToFavorites();
+    if (isFavorite) {
+      handleRemoveFromFavorites();
+    } else {
+      handleAddToFavorites();
+    }
   };
 
   return (
