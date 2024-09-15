@@ -1,0 +1,15 @@
+.container {
+	display: flex;
+	align-items: center;
+	gap: 1.6rem;
+}
+
+.star_container {
+	display: flex;
+	gap: 0.4rem;
+}
+
+.text_style {
+	line-height: 1;
+	margin: 0;
+}

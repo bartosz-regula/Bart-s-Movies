@@ -6,28 +6,25 @@ import { useState, useEffect } from 'react';
 import formatList from '../helpers/formatList';
 import { DEFAULT_SHOW_IMAGE } from '../utilities/config.js';
 import Heart from './Heart';
-import { db } from '../config/firebase';
-import { addDoc, deleteDoc, doc, query, where, onSnapshot, serverTimestamp, collection } from 'firebase/firestore';
-import { getAuth } from 'firebase/auth';
-
-const getUserFavoritesCollectionRef = (userIdentifier) => {
-  return collection(db, `users/${userIdentifier}/favorites`);
-};
-
-const getUserIdentifier = () => {
-  const auth = getAuth();
-  const user = auth.currentUser;
-  if (user) {
-    return user.email;
-  }
-  return null;
-};
+import StarRating from './StarRating';
+import { getType } from '../helpers/mediaUtils';
+import {
+  checkIfFavorite,
+  addToFavorites,
+  addToWatched,
+  removeFromFavorites,
+  removeFromWatched,
+} from '../helpers/firebaseUtils';
 
 export default function ShowDetails({ show, cast }) {
   const [isFavorite, setIsFavorite] = useState(false);
   const [favoriteDocId, setFavoriteDocId] = useState(null);
+  const [isWatched, setIsWatched] = useState(false);
+  const [watchedDocId, setWatchedDocId] = useState(null);
 
   const imageSrc = show.poster_path ? `https://image.tmdb.org/t/p/w300${show.poster_path}` : DEFAULT_SHOW_IMAGE;
+  const type = getType(show.media_type, show.title, show.name);
+
   const truncatedTitle = show.title || show.name;
   const release = show.release_date || show.first_air_date;
   const year = release ? new Date(release).getFullYear() : 'N/A';
@@ -48,69 +45,24 @@ export default function ShowDetails({ show, cast }) {
 
   const showId = show.show_id ? show.show_id : show.id;
 
-  const checkIfFavorite = () => {
-    const userIdentifier = getUserIdentifier();
-    if (!userIdentifier) return;
-
-    const favoritesCollectionRef = getUserFavoritesCollectionRef(userIdentifier);
-    const q = query(favoritesCollectionRef, where('show_id', '==', showId));
-
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      if (!querySnapshot.empty) {
-        const docId = querySnapshot.docs[0].id;
-        setIsFavorite(true);
-        setFavoriteDocId(docId);
-      } else {
-        setIsFavorite(false);
-        setFavoriteDocId(null);
-      }
-    });
-
-    return () => unsubscribe();
-  };
-
   useEffect(() => {
-    checkIfFavorite();
+    checkIfFavorite(showId, setIsFavorite, setFavoriteDocId);
   }, [showId]);
 
-  const handleAddToFavorites = async () => {
-    const userIdentifier = getUserIdentifier();
-    if (!userIdentifier || isFavorite) return;
-
-    const favoritesCollectionRef = getUserFavoritesCollectionRef(userIdentifier);
-
-    try {
-      const dataToAdd = {
-        releaseDate: year,
-        vote: vote,
-        poster: imageSrc,
-        timestamp: serverTimestamp(),
-        type: show.title ? 'movie' : 'series',
-        show_id: show.id,
-        title: show.title || show.name,
-      };
-
-      const docRef = await addDoc(favoritesCollectionRef, dataToAdd);
-      setIsFavorite(true);
-      setFavoriteDocId(docRef.id);
-    } catch (err) {
-      console.error('Error adding to favorites:', err);
-    }
+  const handleAddToFavorites = () => {
+    addToFavorites(show, type, year, vote, imageSrc, showId, isFavorite, setIsFavorite, setFavoriteDocId);
   };
 
-  const handleRemoveFromFavorites = async () => {
-    const userIdentifier = getUserIdentifier();
-    if (!userIdentifier || !isFavorite || !favoriteDocId) return;
+  const handleAddToWatched = () => {
+    addToWatched(show, type, year, vote, imageSrc, showId, isWatched, setIsWatched, setWatchedDocId);
+  };
 
-    const favoritesCollectionRef = getUserFavoritesCollectionRef(userIdentifier);
+  const handleRemoveFromFavorites = () => {
+    removeFromFavorites(favoriteDocId, setIsFavorite, setFavoriteDocId);
+  };
 
-    try {
-      await deleteDoc(doc(favoritesCollectionRef, favoriteDocId));
-      setIsFavorite(false);
-      setFavoriteDocId(null);
-    } catch (err) {
-      console.error('Error removing from favorites:', err);
-    }
+  const handleRemoveFromWatched = () => {
+    removeFromWatched(watchedDocId, setIsWatched, setWatchedDocId);
   };
 
   return (
@@ -141,7 +93,9 @@ export default function ShowDetails({ show, cast }) {
             isFavorite={isFavorite}
           />
           <p>⭐️ {vote}</p>
+          <button onClick={handleAddToWatched}>Add to watched</button>
         </div>
+        <StarRating />
         <h3 className={styles.tagline}>{tagline}</h3>
         <div className={styles.overview}>
           <h4>Overview</h4>
