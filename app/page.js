@@ -9,18 +9,16 @@ import { getDocs, collection, addDoc, deleteDoc, doc } from 'firebase/firestore'
 
 export default function Home() {
   const [movieList, setMovieList] = useState([]); // Przechowuje listę filmów pobraną z Firebase.
-
-  // Nowe stany dla dodawanego filmu.
   const [newMovieTitle, setNewMovieTitle] = useState(''); // Tytuł nowego filmu.
   const [newReleaseDate, setNewReleaseDate] = useState(0); // Data wydania nowego filmu.
   const [isNewMovieOscar, setIsNewMovieOscar] = useState(false); // Czy film zdobył Oscara.
+  const [currentUser, setCurrentUser] = useState(null); // Stan przechowujący dane aktualnie zalogowanego użytkownika.
 
   const moviesCollectionRef = collection(db, 'movies'); // Referencja do kolekcji 'movies' w Firestore.
 
   // Funkcja obsługująca dodanie nowego filmu do bazy danych.
   const onSubmitMovie = async () => {
     try {
-      // Dodaje nowy dokument do kolekcji 'movies'.
       await addDoc(moviesCollectionRef, {
         title: newMovieTitle,
         releaseDate: newReleaseDate,
@@ -55,6 +53,15 @@ export default function Home() {
     getMovieList(); // Wywołuje funkcję pobierającą filmy.
   }, [onSubmitMovie]); // Efekt zostanie wykonany, gdy zmieni się stan dodawania nowego filmu.
 
+  // Hook useEffect, który ustawia aktualnie zalogowanego użytkownika.
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setCurrentUser(user); // Ustawia dane zalogowanego użytkownika w stanie.
+    });
+
+    return () => unsubscribe(); // Wywołuje funkcję czyszczącą przy odmontowywaniu komponentu.
+  }, []);
+
   return (
     <div>
       <Header /> {/* Komponent nagłówka */}
@@ -77,12 +84,22 @@ export default function Home() {
         <button onClick={onSubmitMovie}>Submit Movie</button> {/* Przycisk do wysłania nowego filmu */}
       </div>
       <div>
+        {/* Wyświetlanie aktualnie zalogowanego użytkownika */}
+        {currentUser ? (
+          <p>Logged in as: {currentUser.displayName || currentUser.email}</p> // Wyświetla nazwę lub email użytkownika.
+        ) : (
+          <p>Not logged in</p> // Komunikat, gdy użytkownik nie jest zalogowany.
+        )}
+      </div>
+      <div>
         {/* Renderowanie listy filmów */}
         {movieList.map((movie) => (
           <div key={movie.id}>
             {/* Wyświetla tytuł filmu, kolor zielony jeśli zdobył Oscara, czerwony jeśli nie. */}
             <h1 style={{ color: movie.receivedAnOscar ? 'green' : 'red' }}>{movie.title}</h1>
             <p>Date: {movie.releaseDate}</p> {/* Wyświetla datę wydania filmu */}
+            <p>Type: {movie.type}</p>
+            <p>User: {movie.userId}</p>
             <button onClick={() => deleteMovie(movie.id)}>Delete Movie</button> {/* Przycisk do usunięcia filmu */}
           </div>
         ))}

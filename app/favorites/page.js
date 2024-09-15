@@ -2,35 +2,60 @@
 
 import { useState, useEffect } from 'react';
 import Auth from '../components/Auth';
-import { db, auth } from '../config/firebase';
-import { getDocs, collection } from 'firebase/firestore';
+import { db } from '../config/firebase';
+import { collection, query, orderBy, onSnapshot } from 'firebase/firestore';
+import { getAuth } from 'firebase/auth';
 import Card from '../components/Card';
-import Image from 'next/image';
+
+// Funkcja pomocnicza do uzyskania identyfikatora użytkownika
+const getUserIdentifier = () => {
+  const auth = getAuth();
+  const user = auth.currentUser;
+  if (user) {
+    return user.email; // lub user.displayName jeśli używasz nazw użytkowników
+  }
+  return null;
+};
 
 export default function Page() {
   const [movieList, setMovieList] = useState([]);
-
-  const moviesCollectionRef = collection(db, 'movies');
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const getMovieList = async () => {
-      try {
-        const data = await getDocs(moviesCollectionRef);
-        const filteredData = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-        setMovieList(filteredData);
-      } catch (err) {
-        console.error('Error fetching movies: ', err);
-      }
-    };
+    const auth = getAuth();
+    const unsubscribeAuth = auth.onAuthStateChanged((user) => {
+      setUser(user);
+    });
 
-    getMovieList();
-  }, [movieList]);
+    return () => unsubscribeAuth();
+  }, []);
+
+  useEffect(() => {
+    if (user) {
+      const userIdentifier = getUserIdentifier();
+      if (userIdentifier) {
+        const favoritesCollectionRef = collection(db, `users/${userIdentifier}/favorites`);
+        const q = query(favoritesCollectionRef, orderBy('timestamp', 'desc'));
+        const unsubscribe = onSnapshot(q, (snapshot) => {
+          const filteredData = snapshot.docs.map((doc) => ({
+            ...doc.data(),
+            id: doc.id,
+          }));
+          setMovieList(filteredData);
+        });
+
+        return () => unsubscribe();
+      }
+    }
+  }, [user]);
+
+  if (!user) {
+    return <Auth />;
+  }
 
   return (
     <div>
-      {movieList.map((movie) => (
-        <Card key={movie.id} show={movie} />
-      ))}
+      {movieList.length > 0 ? movieList.map((movie) => <Card key={movie.id} show={movie} />) : <p>No movies found</p>}
     </div>
   );
 }
