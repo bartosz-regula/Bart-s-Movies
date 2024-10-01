@@ -26,3 +26,50 @@
   color: var(--grey);
   line-height: 2.1rem;
 }
+
+.buttons_container {
+  display: flex;
+}
+
+.btn_trailer_container {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--white);
+  margin-top: 2rem;
+  margin-right: 1.2rem;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  /* background-color: red; */
+}
+.btn {
+  background: none;
+  color: var(--white);
+  border: none;
+  margin-left: 0.8rem;
+  font-size: 1.4rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn_trailer_container:hover {
+  background-color: red;
+  border: 1px solid red;
+}
+
+.btn_container:hover {
+  /* background: red; */
+  color: var(--black);
+}
+
+.btn_favorite {
+  border: 1px solid var(--white);
+  margin-top: 2rem;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  background: var(--white);
+  color: var(--black);
+  transition: background-color 0.5s;
+}
+
+.btn_favorite:hover {
+  background: none;
+  color: var(--white);
+}

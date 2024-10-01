@@ -32,7 +32,7 @@ export default function Page() {
     if (user) {
       const userIdentifier = getUserIdentifier();
       if (userIdentifier) {
-        const watchedCollectionRef = collection(db, `users/${userIdentifier}/watched`); // Fixed this line
+        const watchedCollectionRef = collection(db, `users/${userIdentifier}/watched`);
         const q = query(watchedCollectionRef, orderBy('timestamp', 'desc'));
         const unsubscribe = onSnapshot(q, (snapshot) => {
           const filteredData = snapshot.docs.map((doc) => ({

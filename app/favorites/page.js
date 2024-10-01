@@ -7,12 +7,11 @@ import { collection, query, orderBy, onSnapshot } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 import Card from '../components/Card';
 
-// Funkcja pomocnicza do uzyskania identyfikatora użytkownika
 const getUserIdentifier = () => {
   const auth = getAuth();
   const user = auth.currentUser;
   if (user) {
-    return user.email; // lub user.displayName jeśli używasz nazw użytkowników
+    return user.email;
   }
   return null;
 };

@@ -10,6 +10,7 @@ import StarRating from './StarRating';
 import { getType } from '../helpers/mediaUtils';
 import {
   checkIfFavorite,
+  checkIfWatched,
   addToFavorites,
   addToWatched,
   removeFromFavorites,
@@ -21,6 +22,7 @@ export default function ShowDetails({ show, cast }) {
   const [favoriteDocId, setFavoriteDocId] = useState(null);
   const [isWatched, setIsWatched] = useState(false);
   const [watchedDocId, setWatchedDocId] = useState(null);
+  const [rating, setRating] = useState(0);
 
   const imageSrc = show.poster_path ? `https://image.tmdb.org/t/p/w300${show.poster_path}` : DEFAULT_SHOW_IMAGE;
   const type = getType(show.media_type, show.title, show.name);
@@ -49,12 +51,16 @@ export default function ShowDetails({ show, cast }) {
     checkIfFavorite(showId, setIsFavorite, setFavoriteDocId);
   }, [showId]);
 
+  useEffect(() => {
+    checkIfWatched(showId, setIsWatched, setWatchedDocId);
+  }, [showId]);
+
   const handleAddToFavorites = () => {
     addToFavorites(show, type, year, vote, imageSrc, showId, isFavorite, setIsFavorite, setFavoriteDocId);
   };
 
   const handleAddToWatched = () => {
-    addToWatched(show, type, year, vote, imageSrc, showId, isWatched, setIsWatched, setWatchedDocId);
+    addToWatched(show, type, rating, runtime, imageSrc, showId, isWatched, setIsWatched, setWatchedDocId);
   };
 
   const handleRemoveFromFavorites = () => {
@@ -93,9 +99,16 @@ export default function ShowDetails({ show, cast }) {
             isFavorite={isFavorite}
           />
           <p>⭐️ {vote}</p>
-          <button onClick={handleAddToWatched}>Add to watched</button>
         </div>
-        <StarRating />
+        {!isWatched ? (
+          <>
+            <StarRating rating={rating} setRating={setRating} />
+            {rating !== 0 && <button onClick={handleAddToWatched}>Mark as watched</button>}
+          </>
+        ) : (
+          <p>no rate</p>
+        )}
+
         <h3 className={styles.tagline}>{tagline}</h3>
         <div className={styles.overview}>
           <h4>Overview</h4>
