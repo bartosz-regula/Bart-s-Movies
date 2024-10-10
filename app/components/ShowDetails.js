@@ -60,7 +60,7 @@ export default function ShowDetails({ show, cast }) {
   };
 
   const handleAddToWatched = () => {
-    addToWatched(show, type, rating, runtime, imageSrc, showId, isWatched, setIsWatched, setWatchedDocId);
+    addToWatched(show, type, year, vote, rating, imageSrc, showId, isWatched, setIsWatched, setWatchedDocId);
   };
 
   const handleRemoveFromFavorites = () => {

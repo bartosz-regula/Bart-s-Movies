@@ -4,7 +4,7 @@ import Auth from '../components/Auth';
 import { db } from '../config/firebase';
 import { collection, query, orderBy, onSnapshot } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
-import Card from '../components/Card';
+import CardRated from '../components/CardRated';
 
 const getUserIdentifier = () => {
   const auth = getAuth();
@@ -53,7 +53,11 @@ export default function Page() {
 
   return (
     <div>
-      {movieList.length > 0 ? movieList.map((movie) => <Card key={movie.id} show={movie} />) : <p>No movies found</p>}
+      {movieList.length > 0 ? (
+        movieList.map((movie) => <CardRated key={movie.id} show={movie} />)
+      ) : (
+        <p>No movies found</p>
+      )}
     </div>
   );
 }

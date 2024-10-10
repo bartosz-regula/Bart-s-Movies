@@ -99,7 +99,8 @@ export const addToFavorites = async (
 export const addToWatched = async (
   show,
   type,
-  runtime,
+  year,
+  vote,
   rating,
   imageSrc,
   showId,
@@ -114,8 +115,9 @@ export const addToWatched = async (
     const watchedCollectionRef = getUserWatchedCollectionRef(userIdentifier);
     const dataToAdd = {
       rating: rating,
-      runetime: runtime,
       poster: imageSrc,
+      year: year,
+      vote: vote,
       timestamp: serverTimestamp(),
       type: type,
       show_id: showId,

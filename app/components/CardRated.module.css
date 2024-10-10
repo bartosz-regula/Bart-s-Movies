@@ -1,0 +1,40 @@
+.card {
+  max-width: 21.5rem;
+  height: 40rem;
+  margin-right: 2.18rem;
+  margin-bottom: 2rem;
+  margin-top: 2rem;
+  cursor: pointer;
+  position: relative;
+}
+
+.img {
+  border-top: 0.01px solid var(--grey-darker);
+  border-left: 0.01px solid var(--grey-darker);
+  border-right: 0.01px solid var(--grey-darker);
+}
+
+.title {
+  font-size: 1.6rem;
+  margin-top: 1.4rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: var(--white);
+}
+
+.details_show_container {
+  display: flex;
+  justify-content: space-between;
+  color: var(--grey);
+  font-size: 1.4rem;
+  margin-right: 0.5rem;
+  margin-left: 0.5rem;
+}
+
+.star {
+  position: absolute;
+  top: 2.2rem;
+  right: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
