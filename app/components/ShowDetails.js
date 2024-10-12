@@ -106,7 +106,7 @@ export default function ShowDetails({ show, cast }) {
             {rating !== 0 && <button onClick={handleAddToWatched}>Mark as watched</button>}
           </>
         ) : (
-          <p>no rate</p>
+          <p>No rating</p>
         )}
 
         <h3 className={styles.tagline}>{tagline}</h3>
@@ -128,11 +128,11 @@ export default function ShowDetails({ show, cast }) {
               <strong>Runtime:</strong> {runtime}
             </li>
             <li>
-              <strong>Language: </strong>
+              <strong>Language:</strong>
               {formatList(show.spoken_languages, (language) => language.name)}
             </li>
             <li>
-              <strong>Production: </strong>
+              <strong>Production:</strong>
               {formatList(show.production_countries, (country) => country.name)}
             </li>
           </ul>
@@ -147,7 +147,7 @@ export default function ShowDetails({ show, cast }) {
               <strong>Vote Count:</strong> {show.vote_count || 'N/A'}
             </li>
             <li>
-              <strong>Entities: </strong>
+              <strong>Entities:</strong>
               {formatList(show.production_companies, (company) => company.name)}
             </li>
           </ul>
