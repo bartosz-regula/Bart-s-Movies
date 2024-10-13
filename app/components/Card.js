@@ -6,20 +6,13 @@ import Image from 'next/image';
 import styles from './Card.module.css';
 import { DEFAULT_SHOW_IMAGE } from '../utilities/config.js';
 import Heart from './Heart';
-import {
-  checkIfFavorite,
-  checkIfWatched,
-  addToFavorites,
-  removeFromFavorites,
-  removeFromWatched,
-} from '../helpers/firebaseUtils';
+import { checkIfFavorite, addToFavorites, removeFromFavorites } from '../helpers/firebaseUtils';
 import { getType, formatTitle, getImageSrc } from '../helpers/mediaUtils';
 
 export default function Card({ show }) {
   const [isFavorite, setIsFavorite] = useState(false);
   const [favoriteDocId, setFavoriteDocId] = useState(null);
-  const [isWatched, setIsWatched] = useState(false);
-  const [watchedDocId, setWatchedDocId] = useState(null);
+
 
   const type = getType(show.media_type, show.title, show.name);
   const title = show?.title || show?.name || 'Untitled';
@@ -33,7 +26,6 @@ export default function Card({ show }) {
 
   useEffect(() => {
     checkIfFavorite(showId, setIsFavorite, setFavoriteDocId);
-    checkIfWatched(showId, setIsWatched, setWatchedDocId);
   }, [showId]);
 
   const handleAddToFavorites = () => {
@@ -42,10 +34,6 @@ export default function Card({ show }) {
 
   const handleRemoveFromFavorites = () => {
     removeFromFavorites(favoriteDocId, setIsFavorite, setFavoriteDocId);
-  };
-
-  const handleRemoveFromWatched = () => {
-    removeFromWatched(watchedDocId, setIsWatched, setWatchedDocId);
   };
 
   return (
@@ -68,7 +56,6 @@ export default function Card({ show }) {
           </div>
         )}
       </Link>
-      <button onClick={handleRemoveFromWatched}>Delete</button>
       <Heart
         handleAddToFavorites={handleAddToFavorites}
         handleRemoveFromFavorites={handleRemoveFromFavorites}

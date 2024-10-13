@@ -5,13 +5,13 @@ import Link from 'next/link';
 import Image from 'next/image';
 import styles from './CardRated.module.css';
 import { DEFAULT_SHOW_IMAGE } from '../utilities/config.js';
-import { checkIfWatched } from '../helpers/firebaseUtils.js';
+import { checkIfRated } from '../helpers/firebaseUtils.js';
 import { getType, formatTitle, getImageSrc } from '../helpers/mediaUtils.js';
 import StarCard from './StarCard';
 
 export default function CardRated({ show }) {
-  const [isWatched, setIsWatched] = useState(false);
-  const [watchedDocId, setWatchedDocId] = useState(null);
+  const [isRated, setIsRated] = useState(false);
+  const [ratedDocId, setRatedDocId] = useState(null);
 
   const type = getType(show.media_type, show.title, show.name);
   const title = show?.title || show?.name || 'Untitled';
@@ -23,7 +23,7 @@ export default function CardRated({ show }) {
   const showId = show.show_id ? show.show_id : show.id;
 
   useEffect(() => {
-    checkIfWatched(showId, setIsWatched, setWatchedDocId);
+    checkIfRated(showId, setIsRated, setRatedDocId);
   }, [showId]);
 
   return (

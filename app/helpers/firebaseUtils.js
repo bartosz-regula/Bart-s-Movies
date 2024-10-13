@@ -1,5 +1,6 @@
 import { db } from '../config/firebase';
-import { collection, addDoc, deleteDoc, doc, query, where, onSnapshot } from 'firebase/firestore';
+import { collection, addDoc, deleteDoc, doc, query, where, onSnapshot, getDocs } from 'firebase/firestore';
+
 import { serverTimestamp } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 
@@ -7,8 +8,8 @@ const getUserFavoritesCollectionRef = (userIdentifier) => {
   return collection(db, `users/${userIdentifier}/favorites`);
 };
 
-const getUserWatchedCollectionRef = (userIdentifier) => {
-  return collection(db, `users/${userIdentifier}/watched`);
+const getUserRatedCollectionRef = (userIdentifier) => {
+  return collection(db, `users/${userIdentifier}/rated`);
 };
 
 const getUserIdentifier = () => {
@@ -40,21 +41,21 @@ export const checkIfFavorite = (showId, setIsFavorite, setFavoriteDocId) => {
   return () => unsubscribe();
 };
 
-export const checkIfWatched = (showId, setIsWatched, setWatchedDocId) => {
+export const checkIfRated = (showId, setIsRated, setRatedDocId) => {
   const userIdentifier = getUserIdentifier();
   if (!userIdentifier || !showId) return;
 
-  const watchedCollectionRef = getUserWatchedCollectionRef(userIdentifier);
-  const q = query(watchedCollectionRef, where('show_id', '==', showId));
+  const ratedCollectionRef = getUserRatedCollectionRef(userIdentifier);
+  const q = query(ratedCollectionRef, where('show_id', '==', showId));
 
   const unsubscribe = onSnapshot(q, (querySnapshot) => {
     if (!querySnapshot.empty) {
       const docId = querySnapshot.docs[0].id;
-      setIsWatched(true);
-      setWatchedDocId(docId);
+      setIsRated(true);
+      setRatedDocId(docId);
     } else {
-      setIsWatched(false);
-      setWatchedDocId(null);
+      setIsRated(false);
+      setRatedDocId(null);
     }
   });
 
@@ -73,10 +74,18 @@ export const addToFavorites = async (
   setFavoriteDocId
 ) => {
   const userIdentifier = getUserIdentifier();
-  if (!userIdentifier || isFavorite) return;
+  if (!userIdentifier) return;
+
+  const favoritesCollectionRef = getUserFavoritesCollectionRef(userIdentifier);
+  const q = query(favoritesCollectionRef, where('show_id', '==', showId));
+  const querySnapshot = await getDocs(q);
+
+  if (!querySnapshot.empty) {
+    console.log('This movie is already in favorites.');
+    return;
+  }
 
   try {
-    const favoritesCollectionRef = getUserFavoritesCollectionRef(userIdentifier);
     const dataToAdd = {
       releaseDate: year,
       vote: vote,
@@ -96,7 +105,7 @@ export const addToFavorites = async (
   }
 };
 
-export const addToWatched = async (
+export const addToRated = async (
   show,
   type,
   year,
@@ -104,15 +113,23 @@ export const addToWatched = async (
   rating,
   imageSrc,
   showId,
-  isWatched,
-  setIsWacthed,
-  setWatchedDocId
+  isRated,
+  setIsRated,
+  setRatedDocId
 ) => {
   const userIdentifier = getUserIdentifier();
-  if (!userIdentifier || isWatched) return;
+  if (!userIdentifier) return;
+
+  const ratedCollectionRef = getUserRatedCollectionRef(userIdentifier);
+  const q = query(ratedCollectionRef, where('show_id', '==', showId));
+  const querySnapshot = await getDocs(q);
+
+  if (!querySnapshot.empty) {
+    console.log('This movie is already in rated.');
+    return;
+  }
 
   try {
-    const watchedCollectionRef = getUserWatchedCollectionRef(userIdentifier);
     const dataToAdd = {
       rating: rating,
       poster: imageSrc,
@@ -125,11 +142,11 @@ export const addToWatched = async (
       ...(show?.name ? { name: show.name } : {}),
     };
 
-    const docRef = await addDoc(watchedCollectionRef, dataToAdd);
-    setIsWacthed(true);
-    setWatchedDocId(docRef.id);
+    const docRef = await addDoc(ratedCollectionRef, dataToAdd);
+    setIsRated(true);
+    setRatedDocId(docRef.id);
   } catch (err) {
-    console.error('Error adding to watched:', err);
+    console.error('Error adding to rated:', err);
   }
 };
 
@@ -147,16 +164,16 @@ export const removeFromFavorites = async (favoriteDocId, setIsFavorite, setFavor
   }
 };
 
-export const removeFromWatched = async (watchedDocId, setIsWatched, setWatchedDocId) => {
+export const removeFromRated = async (ratedDocId, setIsRated, setRatedDocId) => {
   const userIdentifier = getUserIdentifier();
-  if (!userIdentifier || !watchedDocId) return;
+  if (!userIdentifier || !ratedDocId) return;
 
   try {
-    const watchedCollectionRef = getUserWatchedCollectionRef(userIdentifier);
-    await deleteDoc(doc(watchedCollectionRef, watchedDocId));
-    setIsWatched(false);
-    setWatchedDocId(null);
+    const ratedCollectionRef = getUserRatedCollectionRef(userIdentifier);
+    await deleteDoc(doc(ratedCollectionRef, ratedDocId));
+    setIsRated(false);
+    setRatedDocId(null);
   } catch (err) {
-    console.error('Error removing from watched:', err);
+    console.error('Error removing from rated:', err);
   }
 };

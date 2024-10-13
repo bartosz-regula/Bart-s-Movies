@@ -12,7 +12,7 @@ export default function Navbar() {
       <NavbarItem title="Movies" param="/movies" />
       <NavbarItem title="Series" param="/series" />
       <NavbarItem title="Favorites" param="/favorites" />
-      <NavbarItem title="Watched" param="/watched" />
+      <NavbarItem title="Rated" param="/rated" />
 
       <SearchBox />
     </div>

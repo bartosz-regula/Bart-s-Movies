@@ -10,18 +10,18 @@ import StarRating from './StarRating';
 import { getType } from '../helpers/mediaUtils';
 import {
   checkIfFavorite,
-  checkIfWatched,
+  checkIfRated,
   addToFavorites,
-  addToWatched,
+  addToRated,
   removeFromFavorites,
-  removeFromWatched,
+  removeFromRated,
 } from '../helpers/firebaseUtils';
 
 export default function ShowDetails({ show, cast }) {
   const [isFavorite, setIsFavorite] = useState(false);
   const [favoriteDocId, setFavoriteDocId] = useState(null);
-  const [isWatched, setIsWatched] = useState(false);
-  const [watchedDocId, setWatchedDocId] = useState(null);
+  const [isRated, setIsRated] = useState(false);
+  const [ratedDocId, setRatedDocId] = useState(null);
   const [rating, setRating] = useState(0);
 
   const imageSrc = show.poster_path ? `https://image.tmdb.org/t/p/w300${show.poster_path}` : DEFAULT_SHOW_IMAGE;
@@ -52,23 +52,23 @@ export default function ShowDetails({ show, cast }) {
   }, [showId]);
 
   useEffect(() => {
-    checkIfWatched(showId, setIsWatched, setWatchedDocId);
+    checkIfRated(showId, setIsRated, setRatedDocId);
   }, [showId]);
 
   const handleAddToFavorites = () => {
     addToFavorites(show, type, year, vote, imageSrc, showId, isFavorite, setIsFavorite, setFavoriteDocId);
   };
 
-  const handleAddToWatched = () => {
-    addToWatched(show, type, year, vote, rating, imageSrc, showId, isWatched, setIsWatched, setWatchedDocId);
+  const handleAddToRated = () => {
+    addToRated(show, type, year, vote, rating, imageSrc, showId, isRated, setIsRated, setRatedDocId);
   };
 
   const handleRemoveFromFavorites = () => {
     removeFromFavorites(favoriteDocId, setIsFavorite, setFavoriteDocId);
   };
 
-  const handleRemoveFromWatched = () => {
-    removeFromWatched(watchedDocId, setIsWatched, setWatchedDocId);
+  const handleRemoveFromRated = () => {
+    removeFromRated(ratedDocId, setIsRated, setRatedDocId);
   };
 
   return (
@@ -100,13 +100,22 @@ export default function ShowDetails({ show, cast }) {
           />
           <p>⭐️ {vote}</p>
         </div>
-        {!isWatched ? (
-          <>
+        {!isRated ? (
+          <div className={styles.rating_container}>
             <StarRating rating={rating} setRating={setRating} />
-            {rating !== 0 && <button onClick={handleAddToWatched}>Mark as watched</button>}
-          </>
+            {rating !== 0 && (
+              <button className={`${styles.btn} ${styles.btn_add}`} onClick={handleAddToRated}>
+                ADD TO RATED
+              </button>
+            )}
+          </div>
         ) : (
-          <p>No rating</p>
+          <div className={styles.rating_container}>
+            <p>You rated this title ⭐️{rating} </p>
+            <button className={`${styles.btn} ${styles.btn_remove}`} onClick={handleRemoveFromRated}>
+              Remove from rated
+            </button>
+          </div>
         )}
 
         <h3 className={styles.tagline}>{tagline}</h3>
@@ -128,11 +137,11 @@ export default function ShowDetails({ show, cast }) {
               <strong>Runtime:</strong> {runtime}
             </li>
             <li>
-              <strong>Language:</strong>
+              <strong>Language: </strong>
               {formatList(show.spoken_languages, (language) => language.name)}
             </li>
             <li>
-              <strong>Production:</strong>
+              <strong>Production: </strong>
               {formatList(show.production_countries, (country) => country.name)}
             </li>
           </ul>
@@ -147,7 +156,7 @@ export default function ShowDetails({ show, cast }) {
               <strong>Vote Count:</strong> {show.vote_count || 'N/A'}
             </li>
             <li>
-              <strong>Entities:</strong>
+              <strong>Entities: </strong>
               {formatList(show.production_companies, (company) => company.name)}
             </li>
           </ul>
