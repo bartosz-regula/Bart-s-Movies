@@ -2,6 +2,7 @@ import PersonDetails from '@/app/components/PersonDetails';
 import PersonFilmography from '@/app/components/PersonFilmography';
 import PersonImages from '@/app/components/PersonImages';
 import PersonSeries from '@/app/components/PersonSeries';
+import ProtectedRoute from '@/app/components/ProtectedRoute';
 import { fetchData } from '@/app/helpers/fetchData';
 
 export default async function Page({ params }) {
@@ -21,11 +22,11 @@ export default async function Page({ params }) {
   };
 
   return (
-    <div style={backgroundStyles}>
+    <ProtectedRoute style={backgroundStyles}>
       <PersonDetails person={personDetails} />
       <PersonFilmography movies={filmographyData.cast} />
       <PersonSeries series={seriesData.cast} />
       <PersonImages images={imagesData} />
-    </div>
+    </ProtectedRoute>
   );
 }

@@ -6,6 +6,7 @@ import ShowDetails from '@/app/components/ShowDetails';
 import ShowImages from '@/app/components/ShowImages';
 import ShowVideos from '@/app/components/ShowVideos';
 import { fetchData } from '@/app/helpers/fetchData';
+import ProtectedRoute from '@/app/components/ProtectedRoute';
 
 export default function Page({ params }) {
   const showId = params.id;
@@ -47,12 +48,12 @@ export default function Page({ params }) {
   return (
     <div style={backgroundStyles}>
       {showData && castData && imagesData && videosData && (
-        <>
+        <ProtectedRoute>
           <ShowDetails show={showData} cast={castData} />
           <ShowCast cast={castData} />
           <ShowImages images={imagesData.backdrops} />
           <ShowVideos videos={videosData} />
-        </>
+        </ProtectedRoute>
       )}
     </div>
   );

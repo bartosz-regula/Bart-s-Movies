@@ -3,16 +3,17 @@
 import { auth, googleProvider } from '../config/firebase';
 import { createUserWithEmailAndPassword, signInWithPopup, signOut } from 'firebase/auth';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function Auth() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  console.log(auth?.currentUser?.photoURL);
+  const router = useRouter();
 
   const signIn = async () => {
     try {
       await createUserWithEmailAndPassword(auth, email, password);
+      router.push('/');
     } catch (err) {
       console.error(err);
     }
@@ -21,6 +22,7 @@ export default function Auth() {
   const signInWithGoogle = async () => {
     try {
       await signInWithPopup(auth, googleProvider);
+      router.push('/');
     } catch (err) {
       console.error(err);
     }

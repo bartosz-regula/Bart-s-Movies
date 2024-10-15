@@ -5,6 +5,7 @@ import Card from './Card';
 import { useState } from 'react';
 import { useFetchExploreMore } from '../hooks/useFetchExploreMore';
 import { useScrollTop } from '../hooks/useScrollTop.js';
+import ProtectedRoute from './ProtectedRoute';
 
 export default function ExploreMore({ showType }) {
   const [page, setPage] = useState(1);
@@ -19,7 +20,7 @@ export default function ExploreMore({ showType }) {
   };
 
   return (
-    <div className={styles.container}>
+    <ProtectedRoute className={styles.container}>
       {movies.map((movie) => (
         <Card key={movie.id} show={movie} />
       ))}
@@ -29,6 +30,6 @@ export default function ExploreMore({ showType }) {
           Up
         </button>
       )}
-    </div>
+    </ProtectedRoute>
   );
 }

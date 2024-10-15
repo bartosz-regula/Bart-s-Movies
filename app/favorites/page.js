@@ -1,11 +1,11 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Auth from '../components/Auth';
 import { db } from '../config/firebase';
 import { collection, query, orderBy, onSnapshot } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 import Card from '../components/Card';
+import ProtectedRoute from '../components/ProtectedRoute';
 
 const getUserIdentifier = () => {
   const auth = getAuth();
@@ -48,13 +48,9 @@ export default function Page() {
     }
   }, [user]);
 
-  if (!user) {
-    return <Auth />;
-  }
-
   return (
-    <div>
+    <ProtectedRoute>
       {movieList.length > 0 ? movieList.map((movie) => <Card key={movie.id} show={movie} />) : <p>No movies found</p>}
-    </div>
+    </ProtectedRoute>
   );
 }
