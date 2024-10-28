@@ -38,7 +38,6 @@
   margin-top: 2rem;
   margin-right: 1.2rem;
   padding: 0.5rem 1rem 0.5rem 1rem;
-  /* background-color: red; */
 }
 .btn {
   background: none;
@@ -56,7 +55,6 @@
 }
 
 .btn_container:hover {
-  /* background: red; */
   color: var(--black);
 }
 

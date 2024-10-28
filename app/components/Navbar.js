@@ -26,13 +26,13 @@ export default function Navbar() {
       <NavbarItem title="Series" param="/series" />
       <NavbarItem title="Favorites" param="/favorites" />
       <NavbarItem title="Rated" param="/rated" />
+      <NavbarItem title="Login" param="/login" />
 
       <div>
-        {/* Wyświetlanie aktualnie zalogowanego użytkownika */}
         {currentUser ? (
-          <p>Logged in as: {currentUser.displayName || currentUser.email}</p> // Wyświetla nazwę lub email użytkownika.
+          <p>Logged in as: {currentUser.displayName || currentUser.email}</p> //
         ) : (
-          <p>Not logged in</p> // Komunikat, gdy użytkownik nie jest zalogowany.
+          <p>Not logged in</p>
         )}
       </div>
       <SearchBox />
