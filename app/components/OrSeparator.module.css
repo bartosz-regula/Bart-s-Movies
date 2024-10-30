@@ -1,0 +1,16 @@
+.or {
+  display: flex;
+  align-items: center;
+  color: #ccc;
+  font-weight: bold;
+  margin-top: 1.6rem;
+}
+
+.or::before,
+.or::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background-color: #ccc;
+  margin: 0 8px;
+}

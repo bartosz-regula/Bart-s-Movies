@@ -1,0 +1,38 @@
+.forgot_password {
+  font-weight: bold;
+  margin: 1.2rem 0 1rem 0;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+  display: block;
+}
+
+.forgot_password:hover {
+  text-decoration: underline;
+}
+
+.btn_signIn {
+  background: #fff;
+  color: #000;
+  border: none;
+  border: 2px solid transparent;
+}
+
+.btn_google {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: 1px solid var(--white);
+  color: var(--white);
+}
+
+.btn_google_icon {
+  position: absolute;
+  left: 50px;
+  font-size: 20px;
+  color: var(--white);
+}
+
+.btn_test_login {
+  background-color: #ffd814;
+}

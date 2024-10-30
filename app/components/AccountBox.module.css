@@ -1,0 +1,12 @@
+.account_box {
+  width: 40rem;
+  border-radius: 8px;
+  padding: 30px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(6px);
+}
+
+.logo {
+  margin: 1rem 0 4rem 0;
+}

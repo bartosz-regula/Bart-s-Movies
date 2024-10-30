@@ -1,0 +1,23 @@
+.btn_signUp {
+  margin-top: 3.2rem !important;
+  background: #fff;
+  color: #000;
+  border: none;
+  border: 2px solid transparent;
+}
+
+.btn_google {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: 1px solid var(--white);
+  color: var(--white);
+}
+
+.btn_google_icon {
+  position: absolute;
+  left: 50px;
+  font-size: 20px;
+  color: var(--white);
+}

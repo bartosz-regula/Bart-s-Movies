@@ -1,0 +1,15 @@
+.container {
+  margin-top: 1.2rem;
+}
+
+.paragraph {
+  letter-spacing: 0.6px;
+}
+.action {
+  font-weight: bold;
+  /* color: rgb(208, 229, 238); */
+}
+
+.action:hover {
+  text-decoration: underline;
+}

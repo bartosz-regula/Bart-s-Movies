@@ -1,0 +1,25 @@
+.input {
+  border: none;
+  outline: none;
+  background: transparent;
+  border-bottom: 2px solid #ccc;
+  color: white;
+  padding-bottom: 8px;
+  width: 100%;
+  font-size: 1.6rem;
+  padding-left: 0.5rem;
+}
+
+.input::placeholder {
+  color: #ccc;
+  font-size: 1.6rem;
+}
+
+.input_error {
+  border-bottom: 2px solid #ff000083;
+}
+
+.error_message {
+  color: red;
+  margin-top: 0.5rem;
+}

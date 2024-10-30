@@ -26,7 +26,7 @@ export default function Navbar() {
       <NavbarItem title="Series" param="/series" />
       <NavbarItem title="Favorites" param="/favorites" />
       <NavbarItem title="Rated" param="/rated" />
-      <NavbarItem title="Login" param="/login" />
+      <NavbarItem title="Login" param="/sign-in" />
 
       <div>
         {currentUser ? (
