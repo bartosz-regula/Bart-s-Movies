@@ -16,6 +16,7 @@ import OrSeparator from '../components/OrSeparator';
 import AccountActionParagraph from '../components/AccountActionParagraph';
 import Link from 'next/link';
 import AccountHeader from '../components/AccountHeader';
+import Auth from '../components/Auth2';
 
 export default function Page() {
   const [email, setEmail] = useState('');
@@ -114,6 +115,7 @@ export default function Page() {
           FOR TEST LOGIN PLEASE CLICK HERE
         </AccountButton>
       </div>
+      <Auth></Auth>
     </AccountContainer>
   );
 }

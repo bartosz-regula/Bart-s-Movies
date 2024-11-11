@@ -1,3 +1,8 @@
+.container {
+  display: flex;
+  justify-content: center;
+}
+
 .search_bar {
   height: 4.5rem;
   background: rgba(255, 255, 255, 0.2);
@@ -8,6 +13,8 @@
   padding: 10px 20px;
   backdrop-filter: blur(4px) saturate(180%);
   margin-top: 2.5rem;
+  /* max-width: 55rem; */
+  min-width: 45rem;
 }
 
 .search_bar input {

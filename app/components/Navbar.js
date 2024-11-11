@@ -22,6 +22,7 @@ export default function Navbar() {
       <Link href="/">
         <h2>LOGO</h2>
       </Link>
+      <NavbarItem title="Search" param="/search" />
       <NavbarItem title="Movies" param="/movies" />
       <NavbarItem title="Series" param="/series" />
       <NavbarItem title="Favorites" param="/favorites" />
@@ -35,7 +36,7 @@ export default function Navbar() {
           <p>Not logged in</p>
         )}
       </div>
-      <SearchBox />
+      {/* <SearchBox /> */}
     </div>
   );
 }

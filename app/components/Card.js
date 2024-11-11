@@ -9,10 +9,9 @@ import Heart from './Heart';
 import { checkIfFavorite, addToFavorites, removeFromFavorites } from '../helpers/firebaseUtils';
 import { getType, formatTitle, getImageSrc } from '../helpers/mediaUtils';
 
-export default function Card({ show }) {
+export default function Card({ show, className }) {
   const [isFavorite, setIsFavorite] = useState(false);
   const [favoriteDocId, setFavoriteDocId] = useState(null);
-
 
   const type = getType(show.media_type, show.title, show.name);
   const title = show?.title || show?.name || 'Untitled';
@@ -37,7 +36,7 @@ export default function Card({ show }) {
   };
 
   return (
-    <div className={styles.card}>
+    <div className={`${styles.card} ${className}`}>
       <Link href={`/${type}/${showId}`}>
         <Image src={imageSrc} className={styles.img} width={215} height={330} alt={title} />
         <p className={styles.title}>{truncatedTitle}</p>
@@ -56,12 +55,14 @@ export default function Card({ show }) {
           </div>
         )}
       </Link>
-      <Heart
-        handleAddToFavorites={handleAddToFavorites}
-        handleRemoveFromFavorites={handleRemoveFromFavorites}
-        isFavorite={isFavorite}
-        className={styles.heart}
-      />
+      {!show.known_for && (
+        <Heart
+          handleAddToFavorites={handleAddToFavorites}
+          handleRemoveFromFavorites={handleRemoveFromFavorites}
+          isFavorite={isFavorite}
+          className={styles.heart}
+        />
+      )}
     </div>
   );
 }

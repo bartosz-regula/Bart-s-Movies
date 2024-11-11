@@ -6,6 +6,7 @@ import { collection, query, orderBy, onSnapshot } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 import CardRated from '../components/CardRated';
 import ProtectedRoute from '../components/ProtectedRoute';
+import CardContainer from '../components/CardContainer';
 
 const getUserIdentifier = () => {
   const auth = getAuth();
@@ -50,11 +51,13 @@ export default function Page() {
 
   return (
     <ProtectedRoute>
-      {movieList.length > 0 ? (
-        movieList.map((movie) => <CardRated key={movie.id} show={movie} />)
-      ) : (
-        <p>No movies found</p>
-      )}
+      <CardContainer>
+        {movieList.length > 0 ? (
+          movieList.map((movie) => <CardRated key={movie.id} show={movie} />)
+        ) : (
+          <p>No movies found</p>
+        )}
+      </CardContainer>
     </ProtectedRoute>
   );
 }
