@@ -29,6 +29,14 @@ export const signUpWithEmailAndPassword = async (email, password) => {
   }
 };
 
+export const logout = async () => {
+  try {
+    await signOut(auth);
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 export const resetPassword = async (resetEmail) => {
   try {
     await sendPasswordResetEmail(auth, resetEmail);
