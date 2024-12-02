@@ -1,10 +1,5 @@
-import CardContainer from '@/app/components/CardContainer';
 import ExploreMore from '../../components/ExploreMore';
 
 export default function Page() {
-  return (
-    <CardContainer>
-      <ExploreMore showType="/tv/top_rated" />
-    </CardContainer>
-  );
+  return <ExploreMore showType="/tv/top_rated" />;
 }

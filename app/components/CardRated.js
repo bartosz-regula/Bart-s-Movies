@@ -9,7 +9,7 @@ import { checkIfRated } from '../helpers/firebaseUtils.js';
 import { getType, formatTitle, getImageSrc } from '../helpers/mediaUtils.js';
 import StarCard from './StarCard';
 
-export default function CardRated({ show }) {
+export default function CardRated({ show, className }) {
   const [isRated, setIsRated] = useState(false);
   const [ratedDocId, setRatedDocId] = useState(null);
 
@@ -27,7 +27,7 @@ export default function CardRated({ show }) {
   }, [showId]);
 
   return (
-    <div className={styles.card}>
+    <div className={`${styles.card} ${className}`}>
       <Link href={`/${type}/${showId}`}>
         <Image src={imageSrc} className={styles.img} width={215} height={330} alt={title} />
         <p className={styles.title}>{truncatedTitle}</p>

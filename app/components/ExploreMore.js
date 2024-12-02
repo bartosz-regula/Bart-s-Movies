@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { useFetchExploreMore } from '../hooks/useFetchExploreMore';
 import { useScrollTop } from '../hooks/useScrollTop.js';
 import ProtectedRoute from './ProtectedRoute';
+import CardContainer from './CardContainer';
 
 export default function ExploreMore({ showType }) {
   const [page, setPage] = useState(1);
@@ -20,16 +21,18 @@ export default function ExploreMore({ showType }) {
   };
 
   return (
-    <ProtectedRoute className={styles.container}>
-      {movies.map((movie) => (
-        <Card key={movie.id} show={movie} />
-      ))}
+    <ProtectedRoute>
+      <CardContainer>
+        {movies.map((movie) => (
+          <Card key={movie.id} show={movie} className={styles.card} />
+        ))}
 
-      {isVisible && (
-        <button className={styles.button_up} onClick={scrollToTop}>
-          Up
-        </button>
-      )}
+        {isVisible && (
+          <button className={styles.button_up} onClick={scrollToTop}>
+            Up
+          </button>
+        )}
+      </CardContainer>
     </ProtectedRoute>
   );
 }

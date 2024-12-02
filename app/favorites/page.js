@@ -7,6 +7,7 @@ import { getAuth } from 'firebase/auth';
 import Card from '../components/Card';
 import ProtectedRoute from '../components/ProtectedRoute';
 import CardContainer from '../components/CardContainer';
+import styles from './page.module.css';
 
 const getUserIdentifier = () => {
   const auth = getAuth();
@@ -52,7 +53,11 @@ export default function Page() {
   return (
     <ProtectedRoute>
       <CardContainer>
-        {movieList.length > 0 ? movieList.map((movie) => <Card key={movie.id} show={movie} />) : <p>No movies found</p>}
+        {movieList.length > 0 ? (
+          movieList.map((movie) => <Card key={movie.id} show={movie} className={styles.card} />)
+        ) : (
+          <p>No movies found</p>
+        )}
       </CardContainer>
     </ProtectedRoute>
   );

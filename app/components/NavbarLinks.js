@@ -11,7 +11,7 @@ import Image from 'next/image';
 
 const navItems = [
   { title: 'Home', param: '/', icon: <HomeOutlinedIcon fontSize="inherit" /> },
-  { title: 'Movies', param: '/movies', icon: <LocalMoviesIcon fontSize="inherit" /> },
+  { title: 'Movies', param: '/movie', icon: <LocalMoviesIcon fontSize="inherit" /> },
   { title: 'Series', param: '/series', icon: <MovieFilterOutlinedIcon fontSize="inherit" /> },
   { title: 'Favorites', param: '/favorites', icon: <FavoriteBorderIcon fontSize="inherit" /> },
   { title: 'Rated', param: '/rated', icon: <StarBorderIcon fontSize="inherit" /> },
