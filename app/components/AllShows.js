@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import CardContainer from '../components/CardContainer';
 import Card from '../components/Card';
 import FilterSelector from '../components/FilterSelector';
-import styles from '../components/AllShowes.module.css';
+import styles from '../components/AllShows.module.css';
 
 export default function Page({ type, category, header }) {
   const [items, setItems] = useState([]);

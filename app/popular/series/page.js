@@ -1,5 +1,5 @@
 import ExploreMore from '../../components/ExploreMore';
 
 export default function Page() {
-  return <ExploreMore showType="/trending/tv/day" />;
+  return <ExploreMore showType="/trending/tv/day" header="Popular Series" />;
 }

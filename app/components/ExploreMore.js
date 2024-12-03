@@ -8,7 +8,7 @@ import { useScrollTop } from '../hooks/useScrollTop.js';
 import ProtectedRoute from './ProtectedRoute';
 import CardContainer from './CardContainer';
 
-export default function ExploreMore({ showType }) {
+export default function ExploreMore({ showType, header }) {
   const [page, setPage] = useState(1);
   const { movies, loading, totalPages } = useFetchExploreMore(showType, page);
   const { isVisible } = useScrollTop({ loading, page, totalPages, setPage });
@@ -22,6 +22,7 @@ export default function ExploreMore({ showType }) {
 
   return (
     <ProtectedRoute>
+      <h2 className={styles.header}>{header}</h2>
       <CardContainer>
         {movies.map((movie) => (
           <Card key={movie.id} show={movie} className={styles.card} />
