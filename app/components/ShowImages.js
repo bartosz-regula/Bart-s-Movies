@@ -67,7 +67,8 @@ export default function ShowImages({ images }) {
   }, [activeImage]);
 
   return (
-    <>
+    <div className={styles.container}>
+      <h2 className={styles.header}>Posters</h2>
       <ul className={styles.images_container} ref={containerRef}>
         {showButtons && (
           <button className={`${styles.btn} ${styles.btn_left}`} onClick={handleLeftClick}>
@@ -103,6 +104,6 @@ export default function ShowImages({ images }) {
           handlePrevImage={() => handlePrevImage(images, activeImage, setActiveImage)}
         />
       )}
-    </>
+    </div>
   );
 }

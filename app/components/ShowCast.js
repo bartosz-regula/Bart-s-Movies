@@ -34,37 +34,40 @@ export default function ShowCast({ cast }) {
   }, [cast]);
 
   return (
-    <div className={styles.cast_container} ref={containerRef}>
-      {showButtons && (
-        <button className={`${styles.btn} ${styles.btn_left}`} onClick={handleLeftClick}>
-          &lt;
-        </button>
-      )}
-      {cast.cast.map((person) => (
-        <Link href={`/person/${person.id}`} key={person.id} className={styles.person_box}>
-          <Image
-            src={person.profile_path ? `https://image.tmdb.org/t/p/w300${person.profile_path}` : DEFAULT_PERSON_IMAGE}
-            className={styles.person_img}
-            alt={person.name}
-            width={170}
-            height={230}
-          />
+    <div className={styles.container}>
+      <h2 className={styles.header}>Cast</h2>
+      <div className={styles.cast_container} ref={containerRef}>
+        {showButtons && (
+          <button className={`${styles.btn} ${styles.btn_left}`} onClick={handleLeftClick}>
+            &lt;
+          </button>
+        )}
+        {cast.cast.map((person) => (
+          <Link href={`/person/${person.id}`} key={person.id} className={styles.person_box}>
+            <Image
+              src={person.profile_path ? `https://image.tmdb.org/t/p/w300${person.profile_path}` : DEFAULT_PERSON_IMAGE}
+              className={styles.person_img}
+              alt={person.name}
+              width={170}
+              height={230}
+            />
 
-          <strong>{person.name}</strong>
-          <p>{person.character}</p>
-          {person.roles && person.roles.length > 0 && (
-            <>
-              <p>{person.roles[0].character}</p>
-              <p>{person.roles[0].episode_count} Episodes</p>
-            </>
-          )}
-        </Link>
-      ))}
-      {showButtons && (
-        <button className={`${styles.btn} ${styles.btn_right}`} onClick={handleRightClick}>
-          &gt;
-        </button>
-      )}
+            <strong>{person.name}</strong>
+            <p>{person.character}</p>
+            {person.roles && person.roles.length > 0 && (
+              <>
+                <p>{person.roles[0].character}</p>
+                <p>{person.roles[0].episode_count} Episodes</p>
+              </>
+            )}
+          </Link>
+        ))}
+        {showButtons && (
+          <button className={`${styles.btn} ${styles.btn_right}`} onClick={handleRightClick}>
+            &gt;
+          </button>
+        )}
+      </div>
     </div>
   );
 }

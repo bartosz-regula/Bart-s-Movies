@@ -53,7 +53,8 @@ export default function ShowVideos({ videos }) {
   }, [activeVideo, videos]);
 
   return (
-    <>
+    <div className={styles.container}>
+      <h2 className={styles.header}>Videos</h2>
       <div className={styles.videos_container} ref={containerRef}>
         {showButtons && (
           <button className={`${styles.btn} ${styles.btn_left}`} onClick={handleLeftClick}>
@@ -72,7 +73,7 @@ export default function ShowVideos({ videos }) {
                 title={video.name}
               ></iframe>
             </div>
-            <h3>{video.name.length > 40 ? video.name.slice(0, 40) + '...' : video.name}</h3>
+            <p className={styles.video_name}>{video.name.length > 40 ? video.name.slice(0, 40) + '...' : video.name}</p>
           </div>
         ))}
         {showButtons && (
@@ -83,6 +84,6 @@ export default function ShowVideos({ videos }) {
       </div>
 
       {activeVideo !== null && <ModalVideo videos={videos} activeVideo={activeVideo} closeModal={closeModal} />}
-    </>
+    </div>
   );
 }

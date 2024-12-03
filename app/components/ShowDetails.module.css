@@ -134,8 +134,9 @@
 }
 
 .details_container li {
-  margin-top: 2rem;
+  margin-top: 1.4rem;
   color: rgb(198, 198, 198);
+  line-height: 1.8rem;
 }
 
 .details_container strong {

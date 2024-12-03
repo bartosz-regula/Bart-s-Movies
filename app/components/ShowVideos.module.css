@@ -1,15 +1,29 @@
+.container {
+  margin: 6rem auto 0 auto;
+  max-width: 127.9rem;
+}
+.header {
+  font-size: 2.1rem;
+  text-align: center;
+}
+
 .videos_container {
   display: flex;
   overflow-x: scroll;
-  max-width: 127.9rem;
-  margin: 5rem auto 0 auto;
   text-align: center;
+  margin-top: 2.2rem;
 }
 
 .video {
   margin-right: 2.54rem;
   margin-bottom: 5rem;
   cursor: pointer;
+}
+
+.video_name {
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  /* font-weight: 600; */
 }
 
 .iframeContainer {
@@ -44,4 +58,3 @@
 .videos_container:hover .btn_right {
   opacity: 1;
 }
-
