@@ -1,5 +1,5 @@
-export const categoryOptions = {
-  movieGenres: [
+export const categoryOptionsMovies = {
+  genres: [
     { id: 28, name: 'Action' },
     { id: 12, name: 'Adventure' },
     { id: 16, name: 'Animation' },
@@ -21,7 +21,6 @@ export const categoryOptions = {
     { id: 37, name: 'Western' },
   ],
   countries: [
-    // { code: '', name: 'All' },
     { code: 'AR', name: 'Argentina' },
     { code: 'AU', name: 'Australia' },
     { code: 'BR', name: 'Brazil' },
@@ -46,7 +45,6 @@ export const categoryOptions = {
   releaseYears: [...Array.from({ length: 100 }, (_, i) => new Date().getFullYear() - i)],
 
   sortOptions: [
-    // { value: '', label: 'All' },
     { value: 'vote_average.desc', label: 'Rating (High to Low)' },
     { value: 'vote_average.asc', label: 'Rating (Low to High)' },
     { value: 'popularity.desc', label: 'Popularity (High to Low)' },
