@@ -52,7 +52,7 @@ export default function ShowDetails({ show, cast }) {
   }, [showId]);
 
   useEffect(() => {
-    checkIfRated(showId, setIsRated, setRatedDocId);
+    checkIfRated(showId, setIsRated, setRatedDocId, setRating);
   }, [showId]);
 
   const handleAddToFavorites = () => {
@@ -111,9 +111,8 @@ export default function ShowDetails({ show, cast }) {
           </div>
         ) : (
           <div className={styles.rating_container}>
-            <p>You rated this title ⭐️{rating} </p>
             <button className={`${styles.btn} ${styles.btn_remove}`} onClick={handleRemoveFromRated}>
-              Remove from rated
+              Remove from rated <span className={styles.rating}>⭐️{rating}</span>
             </button>
           </div>
         )}

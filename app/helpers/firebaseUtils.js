@@ -41,7 +41,9 @@ export const checkIfFavorite = (showId, setIsFavorite, setFavoriteDocId) => {
   return () => unsubscribe();
 };
 
-export const checkIfRated = (showId, setIsRated, setRatedDocId) => {
+
+
+export const checkIfRated = (showId, setIsRated, setRatedDocId, setRating) => {
   const userIdentifier = getUserIdentifier();
   if (!userIdentifier || !showId) return;
 
@@ -53,9 +55,20 @@ export const checkIfRated = (showId, setIsRated, setRatedDocId) => {
       const docId = querySnapshot.docs[0].id;
       setIsRated(true);
       setRatedDocId(docId);
+      const rating = querySnapshot.docs[0].data().rating;
+      if (typeof setRating === 'function') {
+        setRating(rating || 0);
+      } else {
+        console.error('setRating nie jest funkcją');
+      }
     } else {
       setIsRated(false);
       setRatedDocId(null);
+      if (typeof setRating === 'function') {
+        setRating(0);
+      } else {
+        console.error('setRating nie jest funkcją');
+      }
     }
   });
 

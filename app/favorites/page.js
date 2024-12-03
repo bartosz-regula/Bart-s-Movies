@@ -52,6 +52,7 @@ export default function Page() {
 
   return (
     <ProtectedRoute>
+      <h2 className={styles.header}>Favorites</h2>
       <CardContainer>
         {movieList.length > 0 ? (
           movieList.map((movie) => <Card key={movie.id} show={movie} className={styles.card} />)

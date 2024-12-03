@@ -98,6 +98,10 @@
   transform: scale(0.95);
 }
 
+.rating {
+  font-size: 1.5rem;
+}
+
 .tagline {
   margin-top: 2rem;
   font-weight: 100;

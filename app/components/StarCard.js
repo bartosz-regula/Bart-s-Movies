@@ -13,9 +13,9 @@ export default function StarCard({ number, className }) {
       >
         <defs>
           <linearGradient id="blackGoldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" style={{ stopColor: '#000000', stopOpacity: 1 }} /> {/* Czarny */}
-            <stop offset="50%" style={{ stopColor: '#FFD700', stopOpacity: 1 }} /> {/* Złoty */}
-            <stop offset="100%" style={{ stopColor: '#8B0000', stopOpacity: 1 }} /> {/* Ciemny złoty */}
+            <stop offset="0%" style={{ stopColor: '#000000', stopOpacity: 1 }} />
+            <stop offset="50%" style={{ stopColor: '#FFD700', stopOpacity: 1 }} />
+            <stop offset="100%" style={{ stopColor: '#8B0000', stopOpacity: 1 }} />
           </linearGradient>
         </defs>
 
@@ -37,6 +37,8 @@ export default function StarCard({ number, className }) {
           fill="white"
           fontWeight="1000"
           letterSpacing="-2"
+          stroke="#000080"
+          strokeWidth="1"
         >
           {number}
         </text>

@@ -1,6 +1,5 @@
 'use client';
 import { useState, useEffect } from 'react';
-import Auth from '../components/Auth_TEST';
 import { db } from '../config/firebase';
 import { collection, query, orderBy, onSnapshot } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
@@ -21,6 +20,7 @@ const getUserIdentifier = () => {
 export default function Page() {
   const [movieList, setMovieList] = useState([]);
   const [user, setUser] = useState(null);
+  const [rating, setRating] = useState(0); // Dodajemy stan dla oceny
 
   useEffect(() => {
     const auth = getAuth();
@@ -52,9 +52,13 @@ export default function Page() {
 
   return (
     <ProtectedRoute>
+      <h2 className={styles.header}>Rated by you</h2>
+
       <CardContainer>
         {movieList.length > 0 ? (
-          movieList.map((movie) => <CardRated key={movie.id} show={movie} className={styles.card} />)
+          movieList.map((movie) => (
+            <CardRated key={movie.id} show={movie} className={styles.card} setRating={setRating} />
+          ))
         ) : (
           <p>No movies found</p>
         )}
