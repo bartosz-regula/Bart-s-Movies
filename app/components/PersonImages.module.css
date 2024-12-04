@@ -3,8 +3,17 @@
   margin: 0 auto;
   margin-top: 4rem;
   padding: 1rem 0;
-  display: flex;
   overflow-x: scroll;
+}
+
+.header {
+  text-align: center;
+  font-size: 2.1rem;
+}
+
+.container_images {
+  display: flex;
+  margin-top: 2.2rem;
 }
 
 .hiddenOverflow {
