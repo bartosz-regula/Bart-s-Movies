@@ -7,18 +7,12 @@ import { useFetchExploreMore } from '../hooks/useFetchExploreMore';
 import { useScrollTop } from '../hooks/useScrollTop.js';
 import ProtectedRoute from './ProtectedRoute';
 import CardContainer from './CardContainer';
+import ButtonTop from './ButtonTop';
 
 export default function ExploreMore({ showType, header }) {
   const [page, setPage] = useState(1);
   const { movies, loading, totalPages } = useFetchExploreMore(showType, page);
   const { isVisible } = useScrollTop({ loading, page, totalPages, setPage });
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
-  };
 
   return (
     <ProtectedRoute>
@@ -28,11 +22,7 @@ export default function ExploreMore({ showType, header }) {
           <Card key={movie.id} show={movie} className={styles.card} />
         ))}
 
-        {isVisible && (
-          <button className={styles.button_up} onClick={scrollToTop}>
-            Up
-          </button>
-        )}
+        {isVisible && <ButtonTop />}
       </CardContainer>
     </ProtectedRoute>
   );

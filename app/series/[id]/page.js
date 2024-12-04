@@ -7,6 +7,7 @@ import ShowImages from '@/app/components/ShowImages';
 import ShowVideos from '@/app/components/ShowVideos';
 import { fetchData } from '@/app/helpers/fetchData';
 import ProtectedRoute from '@/app/components/ProtectedRoute';
+import ScrollToTopButton from '@/app/components/ScrollToTopButton';
 
 export default function Page({ params }) {
   const showId = params.id;
@@ -53,6 +54,7 @@ export default function Page({ params }) {
           <ShowCast cast={castData} />
           <ShowImages images={imagesData.backdrops} />
           <ShowVideos videos={videosData} />
+          <ScrollToTopButton />
         </ProtectedRoute>
       )}
     </div>

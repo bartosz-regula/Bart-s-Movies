@@ -3,6 +3,7 @@ import PersonFilmography from '@/app/components/PersonFilmography';
 import PersonImages from '@/app/components/PersonImages';
 import PersonSeries from '@/app/components/PersonSeries';
 import ProtectedRoute from '@/app/components/ProtectedRoute';
+import ScrollToTopButton from '@/app/components/ScrollToTopButton';
 import { fetchData } from '@/app/helpers/fetchData';
 
 export default async function Page({ params }) {
@@ -27,6 +28,7 @@ export default async function Page({ params }) {
       <PersonFilmography movies={filmographyData.cast} />
       <PersonSeries series={seriesData.cast} />
       <PersonImages images={imagesData} />
+      <ScrollToTopButton />
     </ProtectedRoute>
   );
 }

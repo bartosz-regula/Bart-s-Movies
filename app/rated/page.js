@@ -7,6 +7,7 @@ import CardRated from '../components/CardRated';
 import ProtectedRoute from '../components/ProtectedRoute';
 import CardContainer from '../components/CardContainer';
 import styles from './page.module.css';
+import ScrollToTopButton from '../components/ScrollToTopButton';
 
 const getUserIdentifier = () => {
   const auth = getAuth();
@@ -20,7 +21,7 @@ const getUserIdentifier = () => {
 export default function Page() {
   const [movieList, setMovieList] = useState([]);
   const [user, setUser] = useState(null);
-  const [rating, setRating] = useState(0); // Dodajemy stan dla oceny
+  const [rating, setRating] = useState(0);
 
   useEffect(() => {
     const auth = getAuth();
@@ -63,6 +64,7 @@ export default function Page() {
           <p>No movies found</p>
         )}
       </CardContainer>
+      <ScrollToTopButton />
     </ProtectedRoute>
   );
 }

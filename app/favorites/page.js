@@ -8,6 +8,7 @@ import Card from '../components/Card';
 import ProtectedRoute from '../components/ProtectedRoute';
 import CardContainer from '../components/CardContainer';
 import styles from './page.module.css';
+import ScrollToTopButton from '../components/ScrollToTopButton';
 
 const getUserIdentifier = () => {
   const auth = getAuth();
@@ -60,6 +61,8 @@ export default function Page() {
           <p>No movies found</p>
         )}
       </CardContainer>
+
+      <ScrollToTopButton />
     </ProtectedRoute>
   );
 }

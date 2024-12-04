@@ -1,10 +1,12 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import { useScrollTop } from '../hooks/useScrollTop';
 import CardContainer from '../components/CardContainer';
 import Card from '../components/Card';
 import FilterSelector from '../components/FilterSelector';
 import styles from '../components/AllShows.module.css';
+import ButtonTop from './ButtonTop';
 
 export default function Page({ type, category, header }) {
   const [items, setItems] = useState([]);
@@ -15,8 +17,11 @@ export default function Page({ type, category, header }) {
   const [releaseYear, setReleaseYear] = useState('');
   const [sortOption, setSortOption] = useState('');
   const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
 
   const isFetching = useRef(false);
+
+  const { isVisible } = useScrollTop({ loading, page, totalPages, setPage });
 
   useEffect(() => {
     setItems([]);
@@ -51,7 +56,6 @@ export default function Page({ type, category, header }) {
         .filter(Boolean)
         .join('&');
 
-      console.log('Query params:', queryParams);
       try {
         setLoading(true);
         const response = await fetch(`${baseUrl}/discover/${type}?api_key=${apiKey}&${queryParams}&page=${page}`);
@@ -62,6 +66,7 @@ export default function Page({ type, category, header }) {
 
         const data = await response.json();
         setItems((prevItems) => [...prevItems, ...data.results]);
+        setTotalPages(data.total_pages);
         setLoading(false);
         isFetching.current = false;
       } catch (err) {
@@ -73,21 +78,9 @@ export default function Page({ type, category, header }) {
 
     fetchItems();
   }, [selectedGenre, selectedCountry, releaseYear, sortOption, page]);
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.innerHeight + document.documentElement.scrollTop >= document.documentElement.offsetHeight - 100) {
-        setPage((prevPage) => (isFetching.current ? prevPage : prevPage + 1));
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
 
   return (
-    <div>
+    <div className={styles.container}>
       <div className={styles.filter_container}>
         <h2 className={styles.header}>{header}</h2>
         <div>
@@ -136,6 +129,8 @@ export default function Page({ type, category, header }) {
           <Card key={item.id} show={item} className={styles.card}></Card>
         ))}
       </CardContainer>
+
+      {isVisible && <ButtonTop />}
     </div>
   );
 }
