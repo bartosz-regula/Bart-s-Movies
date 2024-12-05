@@ -8,6 +8,7 @@ import ProtectedRoute from '../components/ProtectedRoute';
 import CardContainer from '../components/CardContainer';
 import styles from './page.module.css';
 import ScrollToTopButton from '../components/ScrollToTopButton';
+import NoTitlesAdded from '../components/NoTitlesAdded';
 
 const getUserIdentifier = () => {
   const auth = getAuth();
@@ -53,17 +54,18 @@ export default function Page() {
 
   return (
     <ProtectedRoute>
-      <h2 className={styles.header}>Rated by you</h2>
-
-      <CardContainer>
-        {movieList.length > 0 ? (
-          movieList.map((movie) => (
-            <CardRated key={movie.id} show={movie} className={styles.card} setRating={setRating} />
-          ))
-        ) : (
-          <p>No movies found</p>
-        )}
-      </CardContainer>
+      {movieList.length > 0 ? (
+        <>
+          <h2 className={styles.header}>Favorites</h2>
+          <CardContainer>
+            {movieList.map((movie) => (
+              <CardRated key={movie.id} show={movie} className={styles.card} setRating={setRating} />
+            ))}
+          </CardContainer>
+        </>
+      ) : (
+        <NoTitlesAdded text="Your Rated list is empty. Why don't you add something in here? " />
+      )}
       <ScrollToTopButton />
     </ProtectedRoute>
   );
