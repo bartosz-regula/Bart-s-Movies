@@ -7,6 +7,7 @@ import Card from '../components/Card';
 import FilterSelector from '../components/FilterSelector';
 import styles from '../components/AllShows.module.css';
 import ButtonTop from './ButtonTop';
+import Loading from '../loading';
 
 export default function Page({ type, category, header }) {
   const [items, setItems] = useState([]);
@@ -122,7 +123,7 @@ export default function Page({ type, category, header }) {
         </div>
       </div>
 
-      {loading && <p>Loading...</p>}
+      {loading && <Loading />}
       {error && <p>{error}</p>}
       <CardContainer>
         {items.map((item) => (

@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { auth } from '../config/firebase';
+import Loading from '../loading';
 
 export default function ProtectedRoute({ children }) {
   const router = useRouter();
@@ -23,7 +24,7 @@ export default function ProtectedRoute({ children }) {
   }, [router]);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <Loading />;
   }
 
   return <>{isLoggedIn && children}</>;

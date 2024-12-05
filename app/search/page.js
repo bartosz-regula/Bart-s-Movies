@@ -8,6 +8,7 @@ import styles from './page.module.css';
 import FilterSelector from '../components/FilterSelector';
 import { categoryOptionsSearch } from '../resources/catgoryOptionsSearch';
 import ButtonTop from '../components/ButtonTop';
+import Loading from '../loading';
 
 const SearchPage = () => {
   const [query, setQuery] = useState('');
@@ -132,7 +133,7 @@ const SearchPage = () => {
             {filteredResults.map((show) => (
               <Card key={show.id} show={show} className={styles.card} />
             ))}
-            {loading && <p>Loading...</p>}
+            {loading && <Loading />}
           </CardContainer>
         </div>
       )}

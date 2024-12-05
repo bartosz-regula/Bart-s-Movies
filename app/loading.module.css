@@ -1,0 +1,12 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 75vh;
+  width: 100vw;
+}
+
+.spinner {
+  margin-top: 2.6rem;
+}

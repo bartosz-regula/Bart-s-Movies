@@ -8,6 +8,7 @@ import ModalVideo from './ModalVideo';
 import Link from 'next/link';
 import { AiFillYoutube } from 'react-icons/ai';
 import { checkIfFavorite, addToFavorites, removeFromFavorites } from '../helpers/firebaseUtils';
+import Loading from '../loading';
 
 export default function Hero() {
   const [movies, setMovies] = useState([]);
@@ -110,7 +111,7 @@ export default function Hero() {
   };
 
   if (movies.length === 0) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   return (
