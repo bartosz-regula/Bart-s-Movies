@@ -8,14 +8,19 @@ import LoginIcon from '@mui/icons-material/Login';
 import { logout } from '../components/Auth';
 import { NavbarLinks } from './NavbarLinks';
 import { UserMenu } from './NavbarUser';
+import Spinner from './Spinner';
 
 export default function Navbar() {
   const [currentUser, setCurrentUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   const user = currentUser ? (currentUser.displayName ? currentUser.displayName.split(' ')[0] : currentUser.email) : '';
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => setCurrentUser(user));
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setCurrentUser(user);
+      setIsLoading(false);
+    });
     return () => unsubscribe();
   }, []);
 
@@ -23,7 +28,9 @@ export default function Navbar() {
     <nav className={styles.navbar}>
       <NavbarLinks />
 
-      {currentUser ? (
+      {isLoading ? (
+        <Spinner className={styles.spinner} />
+      ) : currentUser ? (
         <UserMenu user={user} logout={logout} />
       ) : (
         <NavbarItem
