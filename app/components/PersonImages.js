@@ -10,6 +10,9 @@ import { handleScroll } from '../helpers/handleScroll';
 import { handleImageClick, handleNextImage, handlePrevImage } from '../helpers/imageHandlers';
 
 export default function PersonImages({ images }) {
+  if (!images?.profiles?.length) {
+    return null;
+  }
   const containerRef = useRef(null);
   const [activeImage, setActiveImage] = useState(null);
   const [showButtons, setShowButtons] = useState(false);

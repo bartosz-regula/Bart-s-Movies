@@ -9,6 +9,9 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 import checkButtonsVisibility from '../helpers/checkButtonsVisibility';
 
 export default function PersonShowContainer({ show, header }) {
+  if (!show?.length) {
+    return null;
+  }
   const containerRef = useRef(null);
   const [showButtons, setShowButtons] = useState(false);
 

@@ -10,6 +10,9 @@ import checkButtonsVisibility from '../helpers/checkButtonsVisibility';
 import { DEFAULT_PERSON_IMAGE } from '../utilities/config.js';
 
 export default function ShowCast({ cast }) {
+  if (!cast?.cast?.length) {
+    return null;
+  }
   const containerRef = useRef(null);
   const [showButtons, setShowButtons] = useState(false);
 

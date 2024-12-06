@@ -11,6 +11,7 @@
   max-width: 137rem;
   color: var(--white);
 }
+
 .show_list {
   display: flex;
   overflow-x: auto;

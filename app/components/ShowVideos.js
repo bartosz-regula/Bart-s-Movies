@@ -8,6 +8,9 @@ import handleKeyPress from '../helpers/handleKeyPress';
 import ModalVideo from './ModalVideo';
 
 export default function ShowVideos({ videos }) {
+  if (!videos?.length) {
+    return null;
+  }
   const containerRef = useRef(null);
   const [activeVideo, setActiveVideo] = useState(null);
   const [showButtons, setShowButtons] = useState(false);
