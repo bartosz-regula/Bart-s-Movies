@@ -8,10 +8,12 @@ import { DEFAULT_SHOW_IMAGE } from '../utilities/config.js';
 import Heart from './Heart';
 import { checkIfFavorite, addToFavorites, removeFromFavorites } from '../helpers/firebaseUtils';
 import { getType, formatTitle, getImageSrc } from '../helpers/mediaUtils';
+import Spinner from './Spinner';
 
 export default function Card({ show, className }) {
   const [isFavorite, setIsFavorite] = useState(false);
   const [favoriteDocId, setFavoriteDocId] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   const type = getType(show.media_type, show.title, show.name);
   const title = show?.title || show?.name || 'Untitled';
@@ -35,10 +37,24 @@ export default function Card({ show, className }) {
     removeFromFavorites(favoriteDocId, setIsFavorite, setFavoriteDocId);
   };
 
+  const handleImageLoad = () => {
+    setIsLoading(false); // Set isLoading to false when the image is loaded
+  };
+
   return (
     <div className={`${styles.card} ${className}`}>
       <Link href={`/${type}/${showId}`}>
-        <Image src={imageSrc} className={styles.img} width={215} height={330} alt={title} />
+        <div className={styles.image_container}>
+          {isLoading && <Spinner className={styles.spinner} />}
+          <Image
+            src={imageSrc}
+            className={styles.img}
+            width={215}
+            height={330}
+            alt={title}
+            onLoadingComplete={handleImageLoad} // When image is loaded
+          />
+        </div>
         <p className={styles.title}>{truncatedTitle}</p>
 
         {show.known_for ? (
