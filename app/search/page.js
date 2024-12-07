@@ -119,7 +119,9 @@ const SearchPage = () => {
         <div className={styles.card_container}>
           {!loading && query !== '' && results.length !== 0 && (
             <div className={styles.header_container}>
-              <h2 className={styles.header}>Search Results for: {query}</h2>
+              <h2 className={styles.header}>
+                Search Results for: <span>"{query}"</span>
+              </h2>
               <FilterSelector
                 label="Filter by"
                 options={categoryOptionsSearch.sortOptions}
@@ -155,7 +157,8 @@ const SearchPage = () => {
       {!loading && query !== '' && results.length === 0 && (
         <div className={styles.start_typing_container}>
           <Image src="/barts-movies-high-resolution-logo-transparent (6) copy.png" width={200} height={70} />
-          <h2>No movies, series, or persons found for: {query}</h2>
+          <h2>No movies, series, or persons found for:</h2>
+          <p>"{query}"</p>
         </div>
       )}
     </div>

@@ -63,7 +63,7 @@ export default function Page() {
           </CardContainer>
         </>
       ) : (
-        <NoTitlesAdded text="Your Favorites list is empty. Why don't you add something in here? " />
+        <NoTitlesAdded header="Your Favorites list is empty." paragraph="Why don't you add something in here?" />
       )}
 
       <ScrollToTopButton />

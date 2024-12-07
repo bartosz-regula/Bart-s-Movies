@@ -6,6 +6,16 @@
   height: 75vh;
 }
 
-.header {
-  margin-top: 2.6rem;
+.container h2 {
+  margin-top: 2.4rem;
+  font-size: 2.6rem;
+  background: linear-gradient(to right, #ff7eb9, #3a8dff);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.container p {
+  margin-top: 1.4rem;
+  font-size: 1.6rem;
+  font-weight: bold;
 }

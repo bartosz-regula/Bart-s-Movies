@@ -64,7 +64,7 @@ export default function Page() {
           </CardContainer>
         </>
       ) : (
-        <NoTitlesAdded text="Your Rated list is empty. Why don't you add something in here? " />
+        <NoTitlesAdded header="Your Rated list is empty." paragraph=" Why don't you add something in here?" />
       )}
       <ScrollToTopButton />
     </ProtectedRoute>
