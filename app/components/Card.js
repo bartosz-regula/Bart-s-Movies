@@ -38,7 +38,7 @@ export default function Card({ show, className }) {
   };
 
   const handleImageLoad = () => {
-    setIsLoading(false); // Set isLoading to false when the image is loaded
+    setIsLoading(false);
   };
 
   return (
@@ -52,7 +52,7 @@ export default function Card({ show, className }) {
             width={215}
             height={330}
             alt={title}
-            onLoadingComplete={handleImageLoad} // When image is loaded
+            onLoadingComplete={handleImageLoad}
           />
         </div>
         <p className={styles.title}>{truncatedTitle}</p>

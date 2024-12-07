@@ -8,6 +8,7 @@ import ShowVideos from '@/app/components/ShowVideos';
 import { fetchData } from '@/app/helpers/fetchData';
 import ProtectedRoute from '@/app/components/ProtectedRoute';
 import ScrollToTopButton from '@/app/components/ScrollToTopButton';
+import NotFound from '@/app/not-found';
 
 export default function Page({ params }) {
   const showId = params.id;
@@ -15,6 +16,10 @@ export default function Page({ params }) {
   const [castData, setCastData] = useState(null);
   const [imagesData, setImagesData] = useState(null);
   const [videosData, setVideosData] = useState(null);
+
+  if (isNaN(Number(showId))) {
+    return NotFound();
+  }
 
   useEffect(() => {
     const fetchDataAsync = async () => {

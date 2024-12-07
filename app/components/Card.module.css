@@ -56,7 +56,16 @@
   top: 1.8rem;
   right: 0.6rem;
   cursor: pointer;
-  transition: transform 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    opacity 0.8s ease;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.card:hover .heart {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .heart:hover {

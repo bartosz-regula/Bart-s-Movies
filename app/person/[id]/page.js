@@ -5,9 +5,14 @@ import PersonSeries from '@/app/components/PersonSeries';
 import ProtectedRoute from '@/app/components/ProtectedRoute';
 import ScrollToTopButton from '@/app/components/ScrollToTopButton';
 import { fetchData } from '@/app/helpers/fetchData';
+import NotFound from '@/app/not-found';
 
 export default async function Page({ params }) {
   const showId = params.id;
+
+  if (isNaN(Number(showId))) {
+    return NotFound();
+  }
 
   const [personDetails, filmographyData, seriesData, imagesData] = await Promise.all([
     fetchData(`/person/${showId}`),
