@@ -15,6 +15,7 @@ export default function Page({ params }) {
   const [castData, setCastData] = useState(null);
   const [imagesData, setImagesData] = useState(null);
   const [videosData, setVideosData] = useState(null);
+  const [providersData, setProvidersData] = useState(null);
 
   if (isNaN(Number(showId))) {
     return NotFound();
@@ -22,17 +23,19 @@ export default function Page({ params }) {
 
   useEffect(() => {
     const fetchDataAsync = async () => {
-      const [show, cast, images, videos] = await Promise.all([
+      const [show, cast, images, videos, providers] = await Promise.all([
         fetchData(`/movie/${showId}`),
         fetchData(`/movie/${showId}/credits`),
         fetchData(`/movie/${showId}/images`),
         fetchData(`/movie/${showId}/videos`),
+        fetchData(`/movie/${showId}/watch/providers`),
       ]);
 
       setShowData(show);
       setCastData(cast);
       setImagesData(images);
       setVideosData(videos);
+      setProvidersData(providers);
     };
 
     fetchDataAsync();
@@ -48,7 +51,7 @@ export default function Page({ params }) {
     <div style={backgroundStyles}>
       {showData && castData && imagesData && videosData && (
         <ProtectedRoute>
-          <ShowDetails show={showData} cast={castData} />
+          <ShowDetails show={showData} cast={castData} providers={providersData} />
           <ShowCast cast={castData} />
           <ShowImages images={imagesData.backdrops} />
           <ShowVideos videos={videosData} />

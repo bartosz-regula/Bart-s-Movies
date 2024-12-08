@@ -126,7 +126,8 @@
 }
 
 .details_container {
-  max-width: 70rem;
+  max-width: 80rem;
+  gap: 4rem;
   margin-top: 2rem;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -141,4 +142,9 @@
 
 .details_container strong {
   color: white;
+}
+
+.providers {
+  display: flex;
+  gap: 1rem;
 }

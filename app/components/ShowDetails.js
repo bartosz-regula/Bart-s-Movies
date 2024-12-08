@@ -17,7 +17,7 @@ import {
   removeFromRated,
 } from '../helpers/firebaseUtils';
 
-export default function ShowDetails({ show, cast }) {
+export default function ShowDetails({ show, cast, providers }) {
   const [isFavorite, setIsFavorite] = useState(false);
   const [favoriteDocId, setFavoriteDocId] = useState(null);
   const [isRated, setIsRated] = useState(false);
@@ -32,11 +32,8 @@ export default function ShowDetails({ show, cast }) {
   const year = release ? new Date(release).getFullYear() : 'N/A';
   const overview = show.overview ? show.overview : `We don't have an overview for ${show.title} yet.`;
   const tagline = show.tagline || '';
-  const runtime = show.runtime
-    ? `${show.runtime} min`
-    : show.episode_run_time?.[0]
-      ? `${show.episode_run_time[0]} min`
-      : 'N/A';
+
+  const runtime = show.runtime;
 
   const director =
     cast.crew.find((person) => person.job === 'Director')?.name ||
@@ -46,6 +43,12 @@ export default function ShowDetails({ show, cast }) {
   const vote = show.vote_average && show.vote_average.toFixed(1) !== '0.0' ? show.vote_average.toFixed(1) : 'N/A';
 
   const showId = show.show_id ? show.show_id : show.id;
+
+  const region = 'PL';
+
+  // Check if providers data exists before trying to access it
+  const streamingProviders = providers?.results?.[region]?.flatrate || [];
+  const buyProviders = providers?.results?.[region]?.buy || [];
 
   useEffect(() => {
     checkIfFavorite(showId, setIsFavorite, setFavoriteDocId);
@@ -132,18 +135,39 @@ export default function ShowDetails({ show, cast }) {
                 <strong>Number of seasons:</strong> {numberOfSeasons}
               </li>
             )}
-            <li>
-              <strong>Runtime:</strong> {runtime}
-            </li>
+            {runtime && (
+              <li>
+                <strong>Runtime:</strong> {runtime} min
+              </li>
+            )}
             <li>
               <strong>Language: </strong>
               {formatList(show.spoken_languages, (language) => language.name)}
             </li>
             <li>
               <strong>Production: </strong>
-              {formatList(show.production_countries, (country) => country.name)}
+              {formatList(show.production_countries.slice(0, 4), (country) => country.name)}
+            </li>
+            <li>
+              <strong>Available on streaming: </strong>
+              {streamingProviders.length === 0 && 'Currently unavailable'}
+
+              <ul className={styles.providers}>
+                {streamingProviders.length > 0 &&
+                  streamingProviders.map((provider) => (
+                    <li key={provider.provider_id}>
+                      <Image
+                        src={`https://image.tmdb.org/t/p/original/${provider.logo_path}`}
+                        alt={provider.provider_name}
+                        width={40}
+                        height={40}
+                      />
+                    </li>
+                  ))}
+              </ul>
             </li>
           </ul>
+
           <ul>
             <li>
               <strong>Release Date:</strong> {release}
@@ -156,7 +180,24 @@ export default function ShowDetails({ show, cast }) {
             </li>
             <li>
               <strong>Entities: </strong>
-              {formatList(show.production_companies, (company) => company.name)}
+              {formatList(show.production_companies.slice(0, 2), (company) => company.name)}
+            </li>
+            <li>
+              <strong>Available for Buy/Rent: </strong>
+              {buyProviders.length === 0 && 'Currently unavailable'}
+              <ul className={styles.providers}>
+                {buyProviders.length > 0 &&
+                  buyProviders.map((provider) => (
+                    <li key={provider.provider_id}>
+                      <Image
+                        src={`https://image.tmdb.org/t/p/original/${provider.logo_path}`}
+                        alt={provider.provider_name}
+                        width={40}
+                        height={40}
+                      />
+                    </li>
+                  ))}
+              </ul>
             </li>
           </ul>
         </div>
