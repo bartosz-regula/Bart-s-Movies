@@ -17,9 +17,9 @@ export default function Page({ params }) {
   const [videosData, setVideosData] = useState(null);
   const [providersData, setProvidersData] = useState(null);
 
-  if (isNaN(Number(showId))) {
-    return NotFound();
-  }
+  //   if (isNaN(Number(showId))) {
+  //     return NotFound();
+  //   }
 
   useEffect(() => {
     const fetchDataAsync = async () => {

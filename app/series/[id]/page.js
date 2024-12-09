@@ -18,10 +18,6 @@ export default function Page({ params }) {
   const [videosData, setVideosData] = useState(null);
   const [providersData, setProvidersData] = useState(null);
 
-  if (isNaN(Number(showId))) {
-    return NotFound();
-  }
-
   useEffect(() => {
     const fetchDataAsync = async () => {
       try {
@@ -53,7 +49,9 @@ export default function Page({ params }) {
     backgroundSize: 'cover',
     backgroundBlendMode: 'multiply',
   };
-
+  if (isNaN(Number(showId))) {
+    return NotFound();
+  }
   return (
     <div style={backgroundStyles}>
       {showData && castData && imagesData && videosData && (

@@ -1,6 +1,14 @@
 import styles from './ModalImage.module.css';
 
-export default function ModalImage({ images, activeImage, closeModal, handleNextImage, handlePrevImage }) {
+export default function ModalImage({
+  images,
+  activeImage,
+  totalImages,
+  currentIndex,
+  closeModal,
+  handleNextImage,
+  handlePrevImage,
+}) {
   return (
     <div className={styles.modal_container}>
       <div className={styles.modal_background} onClick={closeModal}></div>
@@ -13,6 +21,9 @@ export default function ModalImage({ images, activeImage, closeModal, handleNext
           className={styles.modal_image}
           alt={`Active Image ${activeImage}`}
         />
+        <div className={styles.modal_number}>
+          {currentIndex + 1} / {totalImages}
+        </div>
       </div>
       <button className={styles.modal_btn} onClick={handleNextImage}>
         &gt;

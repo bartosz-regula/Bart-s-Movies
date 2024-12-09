@@ -46,7 +46,6 @@ export default function ShowDetails({ show, cast, providers }) {
 
   const region = 'PL';
 
-  // Check if providers data exists before trying to access it
   const streamingProviders = providers?.results?.[region]?.flatrate || [];
   const buyProviders = providers?.results?.[region]?.buy || [];
 

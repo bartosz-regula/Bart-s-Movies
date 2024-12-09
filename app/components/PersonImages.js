@@ -101,6 +101,8 @@ export default function PersonImages({ images }) {
         <ModalImage
           images={images.profiles}
           activeImage={activeImage}
+          totalImages={images.profiles ? images.profiles.length : images.length} // Dynamiczne ustawienie totalImages
+          currentIndex={activeImage}
           closeModal={() => setActiveImage(null)}
           handleNextImage={() => handleNextImage(images.profiles, activeImage, setActiveImage)}
           handlePrevImage={() => handlePrevImage(images.profiles, activeImage, setActiveImage)}
