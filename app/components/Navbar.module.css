@@ -9,6 +9,7 @@
   color: var(--white);
   z-index: 100;
   position: relative;
+  z-index: 89;
 }
 
 .spinner {

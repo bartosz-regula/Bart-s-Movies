@@ -8,6 +8,7 @@ import handleKeyPress from '../helpers/handleKeyPress';
 import checkButtonsVisibility from '../helpers/checkButtonsVisibility';
 import { handleScroll } from '../helpers/handleScroll';
 import { handleImageClick, handleNextImage, handlePrevImage } from '../helpers/imageHandlers';
+import { disableScroll } from '../helpers/disableScroll'; //
 
 export default function PersonImages({ images }) {
   if (!images?.profiles?.length) {
@@ -67,6 +68,13 @@ export default function PersonImages({ images }) {
         containerRef.current.classList.remove(styles.hiddenOverflow);
       }
     }
+  }, [activeImage]);
+
+  useEffect(() => {
+    disableScroll(activeImage !== null);
+    return () => {
+      disableScroll(false);
+    };
   }, [activeImage]);
 
   return (

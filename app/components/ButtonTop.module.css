@@ -2,7 +2,7 @@
   position: fixed;
   right: 2%;
   bottom: 2%;
-  z-index: 9999;
+  z-index: 90;
   font-size: 1.2rem;
   color: hsl(0, 0%, 100%);
   border: none;

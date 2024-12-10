@@ -6,6 +6,7 @@ import checkButtonsVisibility from '../helpers/checkButtonsVisibility';
 import { useState, useEffect, useRef, useCallback } from 'react';
 import handleKeyPress from '../helpers/handleKeyPress';
 import ModalVideo from './ModalVideo';
+import { disableScroll } from '../helpers/disableScroll';
 
 export default function ShowVideos({ videos }) {
   //   if (!videos?.length) {
@@ -54,6 +55,13 @@ export default function ShowVideos({ videos }) {
       window.removeEventListener('keydown', keyPressHandler);
     };
   }, [activeVideo, videos]);
+
+  useEffect(() => {
+    disableScroll(activeVideo !== null);
+    return () => {
+      disableScroll(false);
+    };
+  }, [activeVideo]);
 
   return (
     <div className={styles.container}>
