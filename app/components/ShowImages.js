@@ -102,8 +102,8 @@ export default function ShowImages({ images }) {
         <ModalImage
           images={images}
           activeImage={activeImage}
-          totalImages={images.length} // Przekazanie liczby dostępnych obrazów
-          currentIndex={activeImage} // Przekazanie numeru obecnie wyświetlanego obrazu
+          totalImages={images.length}
+          currentIndex={activeImage}
           closeModal={() => setActiveImage(null)}
           handleNextImage={() => handleNextImage(images, activeImage, setActiveImage)}
           handlePrevImage={() => handlePrevImage(images, activeImage, setActiveImage)}

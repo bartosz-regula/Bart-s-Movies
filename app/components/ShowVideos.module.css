@@ -18,12 +18,16 @@
   margin-right: 2.54rem;
   margin-bottom: 5rem;
   cursor: pointer;
+  /* width: 100.9rem; */
+}
+
+.videos_container .video:last-child {
+  margin-right: 0;
 }
 
 .video_name {
   margin-top: 1rem;
   font-size: 1.2rem;
-  /* font-weight: 600; */
 }
 
 .iframeContainer {
