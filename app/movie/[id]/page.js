@@ -8,6 +8,7 @@ import { fetchData } from '@/app/helpers/fetchData';
 import ProtectedRoute from '@/app/components/ProtectedRoute';
 import ScrollToTopButton from '@/app/components/ScrollToTopButton';
 import NotFound from '@/app/not-found';
+import Loading from '@/app/loading';
 
 export default function Page({ params }) {
   const showId = params.id;
@@ -16,30 +17,40 @@ export default function Page({ params }) {
   const [imagesData, setImagesData] = useState(null);
   const [videosData, setVideosData] = useState(null);
   const [providersData, setProvidersData] = useState(null);
-
-  if (isNaN(Number(showId))) {
-    return NotFound();
-  }
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchDataAsync = async () => {
-      const [show, cast, images, videos, providers] = await Promise.all([
-        fetchData(`/movie/${showId}`),
-        fetchData(`/movie/${showId}/credits`),
-        fetchData(`/movie/${showId}/images`),
-        fetchData(`/movie/${showId}/videos`),
-        fetchData(`/movie/${showId}/watch/providers`),
-      ]);
+      try {
+        const [show, cast, images, videos, providers] = await Promise.all([
+          fetchData(`/movie/${showId}`),
+          fetchData(`/movie/${showId}/credits`),
+          fetchData(`/movie/${showId}/images`),
+          fetchData(`/movie/${showId}/videos`),
+          fetchData(`/movie/${showId}/watch/providers`),
+        ]);
 
-      setShowData(show);
-      setCastData(cast);
-      setImagesData(images);
-      setVideosData(videos);
-      setProvidersData(providers);
+        setShowData(show);
+        setCastData(cast);
+        setImagesData(images);
+        setVideosData(videos);
+        setProvidersData(providers);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
     };
 
     fetchDataAsync();
   }, [showId]);
+
+  if (loading) {
+    return <Loading />;
+  }
+
+  if (!showData || !castData || !imagesData || !videosData || !castData.crew) {
+    return <NotFound />;
+  }
 
   const backgroundStyles = {
     backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 1)), url(https://image.tmdb.org/t/p/w1280${showData?.backdrop_path})`,

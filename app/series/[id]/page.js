@@ -9,6 +9,7 @@ import { fetchData } from '@/app/helpers/fetchData';
 import ProtectedRoute from '@/app/components/ProtectedRoute';
 import ScrollToTopButton from '@/app/components/ScrollToTopButton';
 import NotFound from '@/app/not-found';
+import Loading from '@/app/loading';
 
 export default function Page({ params }) {
   const showId = params.id;
@@ -17,6 +18,7 @@ export default function Page({ params }) {
   const [imagesData, setImagesData] = useState(null);
   const [videosData, setVideosData] = useState(null);
   const [providersData, setProvidersData] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchDataAsync = async () => {
@@ -34,6 +36,7 @@ export default function Page({ params }) {
         setImagesData(images);
         setVideosData(videos);
         setProvidersData(providers);
+        setLoading(false);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -42,6 +45,13 @@ export default function Page({ params }) {
     fetchDataAsync();
   }, [showId]);
 
+  if (loading) {
+    return <Loading />;
+  }
+
+  if (!showData || !castData || !imagesData || !videosData) {
+    return <NotFound />;
+  }
   const backgroundStyles = {
     backgroundImage: showData
       ? `linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 1)), url(https://image.tmdb.org/t/p/w1280${showData.backdrop_path})`

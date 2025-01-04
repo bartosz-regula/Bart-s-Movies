@@ -21,6 +21,10 @@ export default async function Page({ params }) {
     fetchData(`/person/${showId}/images`),
   ]);
 
+  if (!personDetails || !personDetails.name || !filmographyData || !seriesData || !imagesData) {
+    return <NotFound />;
+  }
+
   const backgroundStyles = {
     backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 1)), url(https://image.tmdb.org/t/p/w1280${personDetails.profile_path})`,
     backgroundSize: 'contain',

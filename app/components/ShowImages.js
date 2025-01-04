@@ -123,7 +123,7 @@ import handleKeyPress from '../helpers/handleKeyPress';
 import checkButtonsVisibility from '../helpers/checkButtonsVisibility';
 import { handleScroll } from '../helpers/handleScroll';
 import { handleImageClick, handleNextImage, handlePrevImage } from '../helpers/imageHandlers';
-import { disableScroll } from '../helpers/disableScroll'; //
+import { disableScroll } from '../helpers/disableScroll';
 
 export default function ShowImages({ images }) {
   if (!images?.length) {
