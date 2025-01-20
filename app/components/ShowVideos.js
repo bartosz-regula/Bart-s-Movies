@@ -9,9 +9,6 @@ import ModalVideo from './ModalVideo';
 import { disableScroll } from '../helpers/disableScroll';
 
 export default function ShowVideos({ videos }) {
-  //   if (!videos?.length) {
-  //     return null;
-  //   }
   const containerRef = useRef(null);
   const [activeVideo, setActiveVideo] = useState(null);
   const [showButtons, setShowButtons] = useState(false);
@@ -84,7 +81,9 @@ export default function ShowVideos({ videos }) {
                 title={video.name}
               ></iframe>
             </div>
-            <p className={styles.video_name}>{video.name.length > 40 ? video.name.slice(0, 40) + '...' : video.name}</p>
+            <p className={styles.video_name} title={video.name}>
+              {video.name.length > 40 ? video.name.slice(0, 40) + '...' : video.name}
+            </p>
           </div>
         ))}
         {showButtons && (

@@ -7,7 +7,9 @@ const ScrollToTopButton = () => {
   const [isScrolled, setIsScrolled] = useState(false);
 
   const handleScroll = () => {
-    if (window.scrollY > 200) {
+    const distanceFromBottom = document.documentElement.scrollHeight - window.scrollY - window.innerHeight;
+
+    if (window.scrollY > 200 && distanceFromBottom > 200) {
       setIsScrolled(true);
     } else {
       setIsScrolled(false);
