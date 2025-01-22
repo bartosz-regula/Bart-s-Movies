@@ -23,6 +23,17 @@ const SearchPage = () => {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
   const pageRef = useRef(currentPage);
 
+  useEffect(() => {
+    const savedQuery = localStorage.getItem('searchQuery');
+    if (savedQuery) {
+      setQuery(savedQuery);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('searchQuery', query);
+  }, [query]);
+
   const fetchMovies = useCallback(
     async (page = 1) => {
       if (!query) {

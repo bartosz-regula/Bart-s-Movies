@@ -1,6 +1,12 @@
+'use client';
 import ShowCase from './ShowCase';
+import { useEffect } from 'react';
 
 export default function MainSection() {
+  useEffect(() => {
+    localStorage.removeItem('searchQuery');
+  }, []);
+
   return (
     <main>
       <ShowCase type="movie/popular" title="Popular Movies" route="/popular/movies" />
