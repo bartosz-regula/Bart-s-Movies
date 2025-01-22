@@ -3,6 +3,10 @@
   margin: 6rem auto 0 auto;
 }
 
+.justify_content {
+  justify-content: center;
+}
+
 .container h2 {
   text-align: center;
   font-size: 2.1rem;

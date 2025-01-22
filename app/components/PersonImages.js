@@ -80,7 +80,10 @@ export default function PersonImages({ images }) {
   return (
     <div className={styles.container}>
       <h2 className={styles.header}>Posters</h2>
-      <ul className={styles.container_images} ref={containerRef}>
+      <ul
+        className={`${styles.container_images} ${images.profiles.length < 3 ? styles.justify_content : ''}`}
+        ref={containerRef}
+      >
         {showButtons && (
           <button className={`${styles.btn} ${styles.btn_left}`} onClick={handleLeftClick}>
             &lt;

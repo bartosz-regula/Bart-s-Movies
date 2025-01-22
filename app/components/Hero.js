@@ -139,7 +139,13 @@ export default function Hero() {
             <div className={styles.text_container}>
               <Link href={`/movie/${movie.id}`}>
                 <h1>{movie.title}</h1>
-                <p>{movie.overview ? movie.overview : `We don't have an overview for ${movie.title} yet.`}</p>
+                <p>
+                  {movie.overview
+                    ? movie.overview.length > 300
+                      ? `${movie.overview.slice(0, movie.overview.slice(0, 300).lastIndexOf(' '))}...`
+                      : movie.overview
+                    : `We don't have an overview for ${movie.title} yet.`}
+                </p>
               </Link>
               <div className={styles.buttons_container}>
                 <span className={styles.btn_trailer_container}>

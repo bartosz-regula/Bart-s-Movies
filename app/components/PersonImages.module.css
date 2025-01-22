@@ -16,6 +16,10 @@
   margin-top: 2.2rem;
 }
 
+.justify_content {
+  justify-content: center;
+}
+
 .hiddenOverflow {
   overflow: hidden;
 }

@@ -9,6 +9,10 @@ import ModalVideo from './ModalVideo';
 import { disableScroll } from '../helpers/disableScroll';
 
 export default function ShowVideos({ videos }) {
+  if (!videos?.results.length) {
+    return null;
+  }
+
   const containerRef = useRef(null);
   const [activeVideo, setActiveVideo] = useState(null);
   const [showButtons, setShowButtons] = useState(false);
@@ -62,8 +66,11 @@ export default function ShowVideos({ videos }) {
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.header}>Videos</h2>
-      <div className={styles.videos_container} ref={containerRef}>
+      <h2 className={styles.header}>Videos </h2>
+      <div
+        className={`${styles.videos_container} ${videos.results.length < 3 ? styles.justify_content : ''}`}
+        ref={containerRef}
+      >
         {showButtons && (
           <button className={`${styles.btn} ${styles.btn_left}`} onClick={handleLeftClick}>
             &lt;

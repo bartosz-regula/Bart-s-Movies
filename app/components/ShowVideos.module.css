@@ -14,11 +14,14 @@
   margin-top: 2.2rem;
 }
 
+.justify_content {
+  justify-content: center;
+}
+
 .video {
   margin-right: 2.54rem;
   margin-bottom: 5rem;
   cursor: pointer;
-  /* width: 100.9rem; */
 }
 
 .videos_container .video:last-child {

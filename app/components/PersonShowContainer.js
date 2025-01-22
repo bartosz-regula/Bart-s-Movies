@@ -38,7 +38,7 @@ export default function PersonShowContainer({ show, header }) {
   return (
     <div className={styles.container}>
       <h2 className={styles.header}>{header}</h2>
-      <ul ref={containerRef}>
+      <ul className={show.length < 6 ? styles.justify_content : ''} ref={containerRef}>
         {showButtons && (
           <button className={`${styles.btn} ${styles.btn_left}`} onClick={handleLeftClick}>
             &lt;

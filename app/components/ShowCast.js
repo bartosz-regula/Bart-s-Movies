@@ -39,7 +39,10 @@ export default function ShowCast({ cast }) {
   return (
     <div className={styles.container}>
       <h2 className={styles.header}>Cast</h2>
-      <div className={styles.cast_container} ref={containerRef}>
+      <div
+        className={`${styles.cast_container} ${cast.cast.length < 6 ? styles.justify_content : ''}`}
+        ref={containerRef}
+      >
         {showButtons && (
           <button className={`${styles.btn} ${styles.btn_left}`} onClick={handleLeftClick}>
             &lt;
