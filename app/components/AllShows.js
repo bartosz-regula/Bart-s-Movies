@@ -10,19 +10,36 @@ import ButtonTop from './ButtonTop';
 import Loading from '../loading';
 
 export default function Page({ type, category, header }) {
+  const localStoragePrefix = `filters_${type}`;
+
+  const [selectedGenre, setSelectedGenre] = useState(
+    typeof window !== 'undefined' ? localStorage.getItem(`${localStoragePrefix}_selectedGenre`) || '' : ''
+  );
+  const [selectedCountry, setSelectedCountry] = useState(
+    typeof window !== 'undefined' ? localStorage.getItem(`${localStoragePrefix}_selectedCountry`) || '' : ''
+  );
+  const [releaseYear, setReleaseYear] = useState(
+    typeof window !== 'undefined' ? localStorage.getItem(`${localStoragePrefix}_releaseYear`) || '' : ''
+  );
+  const [sortOption, setSortOption] = useState(
+    typeof window !== 'undefined' ? localStorage.getItem(`${localStoragePrefix}_sortOption`) || '' : ''
+  );
+
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [selectedGenre, setSelectedGenre] = useState('');
-  const [selectedCountry, setSelectedCountry] = useState('');
-  const [releaseYear, setReleaseYear] = useState('');
-  const [sortOption, setSortOption] = useState('');
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
 
   const isFetching = useRef(false);
-
   const { isVisible } = useScrollTop({ loading, page, totalPages, setPage });
+
+  useEffect(() => {
+    localStorage.setItem(`${localStoragePrefix}_selectedGenre`, selectedGenre);
+    localStorage.setItem(`${localStoragePrefix}_selectedCountry`, selectedCountry);
+    localStorage.setItem(`${localStoragePrefix}_releaseYear`, releaseYear);
+    localStorage.setItem(`${localStoragePrefix}_sortOption`, sortOption);
+  }, [selectedGenre, selectedCountry, releaseYear, sortOption, localStoragePrefix]);
 
   useEffect(() => {
     setItems([]);
@@ -66,7 +83,7 @@ export default function Page({ type, category, header }) {
         }
 
         const data = await response.json();
-        setItems((prevItems) => [...prevItems, ...data.results]);
+        setItems((prevItems) => (page === 1 ? data.results : [...prevItems, ...data.results]));
         setTotalPages(data.total_pages);
         setLoading(false);
         isFetching.current = false;

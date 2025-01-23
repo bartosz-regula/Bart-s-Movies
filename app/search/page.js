@@ -17,22 +17,35 @@ const SearchPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [totalResults, setTotalResults] = useState(0);
-  const [filter, setFilter] = useState('all');
   const [isScrolled, setIsScrolled] = useState(false);
   const apiKey = process.env.NEXT_PUBLIC_API_KEY;
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
   const pageRef = useRef(currentPage);
+  const [filter, setFilter] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('filterSetting') || 'all';
+    }
+    return 'all';
+  });
 
   useEffect(() => {
     const savedQuery = localStorage.getItem('searchQuery');
+    const savedFilter = localStorage.getItem('filterSetting');
     if (savedQuery) {
       setQuery(savedQuery);
+    }
+    if (savedFilter) {
+      setFilter(savedFilter);
     }
   }, []);
 
   useEffect(() => {
     localStorage.setItem('searchQuery', query);
   }, [query]);
+
+  useEffect(() => {
+    localStorage.setItem('filterSetting', filter);
+  }, [filter]);
 
   const fetchMovies = useCallback(
     async (page = 1) => {
