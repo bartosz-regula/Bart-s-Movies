@@ -81,33 +81,46 @@ export default function Page() {
     testAccountCredentials(setEmail, setPassword);
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      handleEmailSignIn();
+    }
+  };
+
   return (
     <AccountContainer>
-      <AccountBox>
-        <>
-          <EmailInput value={email} onChange={handleEmailChange} error={emailError} />
-          <PasswordInput
-            value={password}
-            onChange={handlePasswordChange}
-            error={passwordError}
-            placeholder="Password"
-          />
-        </>
-        <Link href="/forgot-password" className={styles.forgot_password}>
-          Forgot password?
-        </Link>
-        <AccountButton className={styles.btn_signIn} onClick={handleEmailSignIn}>
-          Sign In
-        </AccountButton>
-        <OrSeparator />
-        <AccountButton className={styles.btn_google} onClick={handleGoogleSignIn}>
-          <FcGoogle className={styles.btn_google_icon} /> Sign In with Google
-        </AccountButton>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleEmailSignIn();
+        }}
+      >
+        <AccountBox>
+          <>
+            <EmailInput value={email} onChange={handleEmailChange} error={emailError} />
+            <PasswordInput
+              value={password}
+              onChange={handlePasswordChange}
+              error={passwordError}
+              placeholder="Password"
+            />
+          </>
+          <Link href="/forgot-password" className={styles.forgot_password}>
+            Forgot password?
+          </Link>
+          <AccountButton type="submit" className={styles.btn_signIn}>
+            Sign In
+          </AccountButton>
+          <OrSeparator />
+          <AccountButton className={styles.btn_google} onClick={handleGoogleSignIn}>
+            <FcGoogle className={styles.btn_google_icon} /> Sign In with Google
+          </AccountButton>
 
-        <AccountActionParagraph link={'/sign-up'} actionText={'SignUp'}>
-          Don't have an account?
-        </AccountActionParagraph>
-      </AccountBox>
+          <AccountActionParagraph link={'/sign-up'} actionText={'SignUp'}>
+            Don't have an account?
+          </AccountActionParagraph>
+        </AccountBox>
+      </form>
       <div>
         <AccountButton className={styles.btn_test_login} onClick={handleTestAccountSignIn}>
           FOR TEST LOGIN PLEASE CLICK HERE

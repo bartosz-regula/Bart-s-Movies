@@ -134,9 +134,13 @@ export default function ShowDetails({ show, cast, providers }) {
                 <strong>Number of seasons:</strong> {numberOfSeasons}
               </li>
             )}
-            {runtime && (
+            {runtime ? (
               <li>
                 <strong>Runtime:</strong> {runtime} min
+              </li>
+            ) : (
+              <li>
+                <strong>Runtime:</strong> N/A
               </li>
             )}
             <li>
@@ -169,7 +173,7 @@ export default function ShowDetails({ show, cast, providers }) {
 
           <ul>
             <li>
-              <strong>Release Date:</strong> {release}
+              <strong>Release Date:</strong> {release || 'N/A'}
             </li>
             <li>
               <strong>Popularity:</strong> {show.popularity || 'N/A'}

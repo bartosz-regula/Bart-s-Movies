@@ -3,6 +3,8 @@
   padding-top: 15rem;
   max-width: 120rem;
   display: flex;
+  min-height: 73rem;
+  min-height: 100vh;
 }
 
 .text_container {

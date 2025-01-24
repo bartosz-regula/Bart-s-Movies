@@ -1,5 +1,6 @@
 .container {
   position: relative;
+  min-height: calc(100vh - 328px);
 }
 
 .filter_container {
