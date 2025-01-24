@@ -10,6 +10,7 @@ import ProtectedRoute from '@/app/components/ProtectedRoute';
 import ScrollToTopButton from '@/app/components/ScrollToTopButton';
 import NotFound from '@/app/not-found';
 import Loading from '@/app/loading';
+import { DEFAULT_SHOW_BACKGROUND } from '@/app/utilities/config';
 
 export default function Page({ params }) {
   const showId = params.id;
@@ -53,12 +54,15 @@ export default function Page({ params }) {
     return <NotFound />;
   }
   const backgroundStyles = {
-    backgroundImage: showData
+    backgroundImage: showData?.backdrop_path
       ? `linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 1)), url(https://image.tmdb.org/t/p/w1280${showData.backdrop_path})`
-      : 'none',
+      : `linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.6)), url(${DEFAULT_SHOW_BACKGROUND})`,
     backgroundSize: 'cover',
-    backgroundBlendMode: 'multiply',
+    backgroundAttachment: 'fixed',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
   };
+
   if (isNaN(Number(showId))) {
     return NotFound();
   }

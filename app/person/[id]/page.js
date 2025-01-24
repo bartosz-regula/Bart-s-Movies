@@ -6,6 +6,7 @@ import ProtectedRoute from '@/app/components/ProtectedRoute';
 import ScrollToTopButton from '@/app/components/ScrollToTopButton';
 import { fetchData } from '@/app/helpers/fetchData';
 import NotFound from '@/app/not-found';
+import { DEFAULT_PERSON_BACKGROUND } from '@/app/utilities/config';
 
 export default async function Page({ params }) {
   const showId = params.id;
@@ -26,18 +27,24 @@ export default async function Page({ params }) {
   }
 
   const backgroundStyles = {
-    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 1)), url(https://image.tmdb.org/t/p/w1280${personDetails.profile_path})`,
-    backgroundSize: 'contain',
-    backgroundBlendMode: 'multiply',
+    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.6)), url(${DEFAULT_PERSON_BACKGROUND})`,
+    backgroundSize: 'cover',
+    backgroundAttachment: !personDetails ? 'fixed' : 'scroll',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
   };
 
   return (
-    <ProtectedRoute style={backgroundStyles}>
-      <PersonDetails person={personDetails} />
-      <PersonFilmography movies={filmographyData.cast} />
-      <PersonSeries series={seriesData.cast} />
-      <PersonImages images={imagesData} />
-      <ScrollToTopButton />
-    </ProtectedRoute>
+    <div style={backgroundStyles}>
+      {personDetails && personDetails.name && filmographyData && seriesData && imagesData && (
+        <ProtectedRoute>
+          <PersonDetails person={personDetails} />
+          <PersonFilmography movies={filmographyData.cast} />
+          <PersonSeries series={seriesData.cast} />
+          <PersonImages images={imagesData} />
+          <ScrollToTopButton />
+        </ProtectedRoute>
+      )}
+    </div>
   );
 }

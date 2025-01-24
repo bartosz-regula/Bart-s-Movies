@@ -16,7 +16,7 @@
 .tmdb_container {
   display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: flex-start;
   gap: 1.2rem;
   font-weight: bold;
   font-size: 1.6rem;

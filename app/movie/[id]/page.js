@@ -9,6 +9,7 @@ import ProtectedRoute from '@/app/components/ProtectedRoute';
 import ScrollToTopButton from '@/app/components/ScrollToTopButton';
 import NotFound from '@/app/not-found';
 import Loading from '@/app/loading';
+import { DEFAULT_SHOW_BACKGROUND } from '@/app/utilities/config';
 
 export default function Page({ params }) {
   const showId = params.id;
@@ -53,11 +54,15 @@ export default function Page({ params }) {
   }
 
   const backgroundStyles = {
-    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 1)), url(https://image.tmdb.org/t/p/w1280${showData?.backdrop_path})`,
-    backgroundSize: 'contain',
-    backgroundBlendMode: 'multiply',
-  };
+    backgroundImage: showData?.backdrop_path
+      ? `linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 1)), url(https://image.tmdb.org/t/p/w1280${showData.backdrop_path})`
+      : `linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.5)), url(${DEFAULT_SHOW_BACKGROUND})`,
 
+    backgroundSize: 'cover',
+    backgroundAttachment: 'fixed',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+  };
   return (
     <div style={backgroundStyles}>
       {showData && castData && imagesData && videosData && (
