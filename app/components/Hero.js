@@ -6,6 +6,8 @@ import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import ModalVideo from './ModalVideo';
 import Link from 'next/link';
+import handleKeyPress from '../helpers/handleKeyPress';
+
 import { AiFillYoutube } from 'react-icons/ai';
 import { checkIfFavorite, addToFavorites, removeFromFavorites } from '../helpers/firebaseUtils';
 import Loading from '../loading';
@@ -20,6 +22,18 @@ export default function Hero() {
   const closeModal = () => {
     setActiveVideo(null);
   };
+
+  useEffect(() => {
+    const keyPressHandler = (event) => {
+      handleKeyPress(event, activeVideo, closeModal);
+    };
+
+    window.addEventListener('keydown', keyPressHandler);
+
+    return () => {
+      window.removeEventListener('keydown', keyPressHandler);
+    };
+  }, [activeVideo]);
 
   const handleVideoClick = async (index) => {
     setActiveVideo(null);

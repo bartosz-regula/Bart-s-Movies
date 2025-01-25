@@ -4,6 +4,9 @@
   padding: 8px 20px;
   cursor: pointer;
   transition: 0.3s ease;
+  min-width: 33.8rem;
   width: 100%;
   margin-top: 1.6rem;
+  height: 3.6rem;
+  transition: all 0.3s ease;
 }

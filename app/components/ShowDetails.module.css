@@ -4,7 +4,7 @@
   max-width: 120rem;
   display: flex;
   min-height: 73rem;
-  min-height: 100vh;
+  /* min-height: 100vh; */
 }
 
 .text_container {
@@ -16,7 +16,7 @@
 .title {
   font-size: 3.8rem;
   font-weight: 600;
-  margin-top: 1.2rem;
+  /* margin-top: 1.2rem; */
 }
 
 .year {

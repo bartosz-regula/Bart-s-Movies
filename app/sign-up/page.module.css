@@ -6,6 +6,11 @@
   border: 2px solid transparent;
 }
 
+.btn_signUp:hover {
+  box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.7);
+  border: 1px solid white;
+}
+
 .btn_google {
   display: flex;
   align-items: center;
@@ -13,6 +18,10 @@
   background: none;
   border: 1px solid var(--white);
   color: var(--white);
+}
+
+.btn_google:hover {
+  box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.7);
 }
 
 .btn_google_icon {
