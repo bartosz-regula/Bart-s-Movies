@@ -51,25 +51,32 @@ export default function Page() {
 
   return (
     <AccountContainer>
-      <AccountBox>
-        {!isEmailSent ? (
-          <>
-            <AccountHeader>Forgot password?</AccountHeader>
-            <EmailInput value={resetEmail} onChange={handleEmailChange} error={emailError} />
-            <AccountButton className={styles.btn_reset} onClick={handleResetPassword}>
-              Reset Password
-            </AccountButton>
-            <AccountActionParagraph link={'/sign-in'} actionText={'Sign In'}>
-              Remember your password?
-            </AccountActionParagraph>
-          </>
-        ) : (
-          <>
-            <AccountHeader>We've sent a password reset link to your email.</AccountHeader>
-            <AccountButton onClick={handleGoSignIn}>OK</AccountButton>
-          </>
-        )}
-      </AccountBox>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleResetPassword();
+        }}
+      >
+        <AccountBox>
+          {!isEmailSent ? (
+            <>
+              <AccountHeader>Forgot password?</AccountHeader>
+              <EmailInput value={resetEmail} onChange={handleEmailChange} error={emailError} />
+              <AccountButton className={styles.btn_reset} onClick={handleResetPassword}>
+                Reset Password
+              </AccountButton>
+              <AccountActionParagraph link={'/sign-in'} actionText={'Sign In'}>
+                Remember your password?
+              </AccountActionParagraph>
+            </>
+          ) : (
+            <>
+              <AccountHeader>We've sent a password reset link to your email.</AccountHeader>
+              <AccountButton onClick={handleGoSignIn}>OK</AccountButton>
+            </>
+          )}
+        </AccountBox>
+      </form>
     </AccountContainer>
   );
 }

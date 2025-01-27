@@ -7,6 +7,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import handleKeyPress from '../helpers/handleKeyPress';
 import ModalVideo from './ModalVideo';
 import { disableScroll } from '../helpers/disableScroll';
+import Spinner from './Spinner';
 
 export default function ShowVideos({ videos }) {
   if (!videos?.results.length) {
@@ -16,6 +17,7 @@ export default function ShowVideos({ videos }) {
   const containerRef = useRef(null);
   const [activeVideo, setActiveVideo] = useState(null);
   const [showButtons, setShowButtons] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleVideoClick = (index) => {
     setActiveVideo(index);
@@ -64,6 +66,10 @@ export default function ShowVideos({ videos }) {
     };
   }, [activeVideo]);
 
+  const handleImageLoad = () => {
+    setIsLoading(false);
+  };
+
   return (
     <div className={styles.container}>
       <h2 className={styles.header}>Videos </h2>
@@ -78,6 +84,7 @@ export default function ShowVideos({ videos }) {
         )}
         {videos.results.map((video, index) => (
           <div key={video.id} className={styles.video} onClick={() => handleVideoClick(index)}>
+            {isLoading && <Spinner className={styles.spinner} />}
             <div className={styles.iframeContainer}>
               <iframe
                 width="408"
@@ -85,6 +92,7 @@ export default function ShowVideos({ videos }) {
                 src={`https://www.youtube.com/embed/${video.key}`}
                 frameBorder="0"
                 allowFullScreen
+                onLoad={handleImageLoad}
                 title={video.name}
               ></iframe>
             </div>

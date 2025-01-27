@@ -9,6 +9,7 @@ import checkButtonsVisibility from '../helpers/checkButtonsVisibility';
 import { handleScroll } from '../helpers/handleScroll';
 import { handleImageClick, handleNextImage, handlePrevImage } from '../helpers/imageHandlers';
 import { disableScroll } from '../helpers/disableScroll';
+import Spinner from './Spinner';
 
 export default function PersonImages({ images }) {
   if (!images?.profiles?.length) {
@@ -17,6 +18,7 @@ export default function PersonImages({ images }) {
   const containerRef = useRef(null);
   const [activeImage, setActiveImage] = useState(null);
   const [showButtons, setShowButtons] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleLeftClick = useCallback(() => {
     handleScroll(containerRef.current, 'left', 1020);
@@ -77,11 +79,15 @@ export default function PersonImages({ images }) {
     };
   }, [activeImage]);
 
+  const handleImageLoad = () => {
+    setIsLoading(false);
+  };
+
   return (
     <div className={styles.container}>
       <h2 className={styles.header}>Posters</h2>
       <ul
-        className={`${styles.container_images} ${images.profiles.length < 3 ? styles.justify_content : ''}`}
+        className={`${styles.container_images} ${images.profiles.length < 6 ? styles.justify_content : ''}`}
         ref={containerRef}
       >
         {showButtons && (
@@ -91,6 +97,7 @@ export default function PersonImages({ images }) {
         )}
         {images.profiles.map((image, index) => (
           <li key={index}>
+            {isLoading && <Spinner className={styles.spinner} />}
             <Image
               className={styles.image}
               src={`https://image.tmdb.org/t/p/w300${image.file_path}`}
@@ -98,6 +105,7 @@ export default function PersonImages({ images }) {
               height={270}
               onClick={() => handleImageClick(index, setActiveImage)}
               alt={`Image ${index}`}
+              onLoadingComplete={handleImageLoad}
             />
           </li>
         ))}

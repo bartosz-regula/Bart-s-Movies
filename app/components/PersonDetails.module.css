@@ -54,3 +54,9 @@
   font-size: 1.4rem;
   color: var(--grey);
 }
+
+.spinner {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+}

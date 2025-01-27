@@ -16,6 +16,7 @@ import {
   removeFromFavorites,
   removeFromRated,
 } from '../helpers/firebaseUtils';
+import Spinner from './Spinner';
 
 export default function ShowDetails({ show, cast, providers }) {
   const [isFavorite, setIsFavorite] = useState(false);
@@ -23,6 +24,7 @@ export default function ShowDetails({ show, cast, providers }) {
   const [isRated, setIsRated] = useState(false);
   const [ratedDocId, setRatedDocId] = useState(null);
   const [rating, setRating] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
   const imageSrc = show.poster_path ? `https://image.tmdb.org/t/p/w300${show.poster_path}` : DEFAULT_SHOW_IMAGE;
   const type = getType(show.media_type, show.title, show.name);
@@ -72,14 +74,20 @@ export default function ShowDetails({ show, cast, providers }) {
   const handleRemoveFromRated = () => {
     removeFromRated(ratedDocId, setIsRated, setRatedDocId);
   };
+  const handleImageLoad = () => {
+    setIsLoading(false);
+  };
 
   return (
     <div className={styles.show_details}>
       <div>
+        {isLoading && <Spinner className={styles.spinner} />}
+
         <Image
           src={imageSrc}
           width={300}
           height={450}
+          onLoadingComplete={handleImageLoad}
           alt={show.profile_path ? truncatedTitle : 'No Poster Available'}
         />
       </div>
@@ -134,15 +142,16 @@ export default function ShowDetails({ show, cast, providers }) {
                 <strong>Number of seasons:</strong> {numberOfSeasons}
               </li>
             )}
-            {runtime ? (
-              <li>
-                <strong>Runtime:</strong> {runtime} min
-              </li>
-            ) : (
-              <li>
-                <strong>Runtime:</strong> N/A
-              </li>
-            )}
+            {show.title &&
+              (runtime ? (
+                <li>
+                  <strong>Runtime:</strong> {runtime} min
+                </li>
+              ) : (
+                <li>
+                  <strong>Runtime:</strong> N/A
+                </li>
+              ))}
             <li>
               <strong>Language: </strong>
               {formatList(show.spoken_languages, (language) => language.name)}

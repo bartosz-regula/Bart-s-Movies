@@ -4,7 +4,6 @@
   max-width: 120rem;
   display: flex;
   min-height: 73rem;
-  /* min-height: 100vh; */
 }
 
 .text_container {
@@ -16,7 +15,6 @@
 .title {
   font-size: 3.8rem;
   font-weight: 600;
-  /* margin-top: 1.2rem; */
 }
 
 .year {
@@ -149,4 +147,10 @@
 .providers {
   display: flex;
   gap: 1rem;
+}
+
+.spinner {
+  position: absolute;
+  left: 45%;
+  top: 40%;
 }

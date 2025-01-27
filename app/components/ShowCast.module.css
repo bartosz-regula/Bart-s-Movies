@@ -63,3 +63,8 @@
 .cast_container:hover .btn_right {
   opacity: 1;
 }
+
+.spinner {
+  position: absolute;
+  top: 40%;
+}

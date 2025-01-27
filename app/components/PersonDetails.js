@@ -4,9 +4,11 @@ import { useState } from 'react';
 import Image from 'next/image';
 import styles from './PersonDetails.module.css';
 import { DEFAULT_PERSON_IMAGE } from '../utilities/config.js';
+import Spinner from './Spinner';
 
 export default function PersonDetails({ person }) {
   const [showFullBiography, setShowFullBiography] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const name = person.name;
   const known_for = person.known_for_department ? person.known_for_department : 'N/A';
@@ -18,14 +20,22 @@ export default function PersonDetails({ person }) {
   const biography = biographyFull.split('\n\n');
   const biographyToShow = showFullBiography ? biography : biography.slice(0, 2);
 
+  const handleImageLoad = () => {
+    setIsLoading(false);
+  };
+
   return (
     <div className={styles.container}>
-      <Image
-        src={person.profile_path ? `https://image.tmdb.org/t/p/w300${person.profile_path}` : DEFAULT_PERSON_IMAGE}
-        alt={person.profile_path ? person.name : 'No Poster Available'}
-        width={300}
-        height={450}
-      />
+      <div>
+        {isLoading && <Spinner className={styles.spinner} />}
+        <Image
+          src={person.profile_path ? `https://image.tmdb.org/t/p/w300${person.profile_path}` : DEFAULT_PERSON_IMAGE}
+          alt={person.profile_path ? person.name : 'No Poster Available'}
+          width={300}
+          height={450}
+          onLoadingComplete={handleImageLoad}
+        />
+      </div>
 
       <div className={styles.text_container}>
         <h2 className={styles.person_name}>{name}</h2>

@@ -9,6 +9,7 @@ import checkButtonsVisibility from '../helpers/checkButtonsVisibility';
 import { handleScroll } from '../helpers/handleScroll';
 import { handleImageClick, handleNextImage, handlePrevImage } from '../helpers/imageHandlers';
 import { disableScroll } from '../helpers/disableScroll';
+import Spinner from './Spinner';
 
 export default function ShowImages({ images }) {
   if (!images?.length) {
@@ -17,6 +18,7 @@ export default function ShowImages({ images }) {
   const containerRef = useRef(null);
   const [activeImage, setActiveImage] = useState(null);
   const [showButtons, setShowButtons] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleLeftClick = useCallback(() => {
     handleScroll(containerRef.current, 'left', 976.5);
@@ -67,6 +69,10 @@ export default function ShowImages({ images }) {
     };
   }, [activeImage]);
 
+  const handleImageLoad = () => {
+    setIsLoading(false);
+  };
+
   return (
     <div className={styles.container}>
       <h2 className={styles.header}>Posters</h2>
@@ -81,6 +87,7 @@ export default function ShowImages({ images }) {
         )}
         {images.map((image, index) => (
           <li key={index}>
+            {isLoading && <Spinner className={styles.spinner} />}
             <Image
               key={index}
               className={styles.images}
@@ -88,6 +95,7 @@ export default function ShowImages({ images }) {
               alt={`Image ${index}`}
               width={301}
               height={170}
+              onLoadingComplete={handleImageLoad}
               onClick={() => handleImageClick(index, setActiveImage)}
             />
           </li>

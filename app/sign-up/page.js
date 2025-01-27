@@ -98,34 +98,41 @@ export default function Page() {
 
   return (
     <AccountContainer>
-      <AccountBox>
-        <AccountHeader className={styles.header}>Create an Account</AccountHeader>
-        <EmailInput value={email} onChange={handleEmailChange} error={emailError} placeholder="Email" />
-        <PasswordInput
-          value={password}
-          onChange={handlePasswordChange}
-          error={passwordError}
-          placeholder="Password"
-          validationMessage="Password must be at least 8 characters long."
-        />
-        <PasswordInput
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          error={confirmPasswordError}
-          placeholder="Confirm Password"
-        />
-        <AccountButton className={styles.btn_signUp} onClick={handleSignUp}>
-          Sign Up
-        </AccountButton>
-        <OrSeparator />
-        <AccountButton className={styles.btn_google} onClick={handleGoogleSignIn}>
-          <FcGoogle className={styles.btn_google_icon} />
-          Sign Up with Google
-        </AccountButton>
-        <AccountActionParagraph link={'/sign-in'} actionText="SignIn">
-          Already have an account?
-        </AccountActionParagraph>
-      </AccountBox>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSignUp();
+        }}
+      >
+        <AccountBox>
+          <AccountHeader className={styles.header}>Create an Account</AccountHeader>
+          <EmailInput value={email} onChange={handleEmailChange} error={emailError} placeholder="Email" />
+          <PasswordInput
+            value={password}
+            onChange={handlePasswordChange}
+            error={passwordError}
+            placeholder="Password"
+            validationMessage="Password must be at least 8 characters long."
+          />
+          <PasswordInput
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            error={confirmPasswordError}
+            placeholder="Confirm Password"
+          />
+          <AccountButton className={styles.btn_signUp} onClick={handleSignUp}>
+            Sign Up
+          </AccountButton>
+          <OrSeparator />
+          <AccountButton className={styles.btn_google} onClick={handleGoogleSignIn}>
+            <FcGoogle className={styles.btn_google_icon} />
+            Sign Up with Google
+          </AccountButton>
+          <AccountActionParagraph link={'/sign-in'} actionText="SignIn">
+            Already have an account?
+          </AccountActionParagraph>
+        </AccountBox>
+      </form>
     </AccountContainer>
   );
 }

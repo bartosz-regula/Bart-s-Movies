@@ -81,12 +81,6 @@ export default function Page() {
     testAccountCredentials(setEmail, setPassword);
   };
 
-  const handleKeyDown = (e) => {
-    if (e.key === 'Enter') {
-      handleEmailSignIn();
-    }
-  };
-
   return (
     <AccountContainer>
       <form

@@ -7,6 +7,7 @@ import { handleScroll } from '../helpers/handleScroll';
 import { DEFAULT_SHOW_IMAGE } from '../utilities/config.js';
 import { useState, useRef, useEffect, useCallback } from 'react';
 import checkButtonsVisibility from '../helpers/checkButtonsVisibility';
+import Spinner from './Spinner';
 
 export default function PersonShowContainer({ show, header }) {
   if (!show?.length) {
@@ -14,6 +15,7 @@ export default function PersonShowContainer({ show, header }) {
   }
   const containerRef = useRef(null);
   const [showButtons, setShowButtons] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleLeftClick = useCallback(() => {
     handleScroll(containerRef.current, 'left', 1020);
@@ -35,6 +37,10 @@ export default function PersonShowContainer({ show, header }) {
     };
   }, [show]);
 
+  const handleImageLoad = () => {
+    setIsLoading(false);
+  };
+
   return (
     <div className={styles.container}>
       <h2 className={styles.header}>{header}</h2>
@@ -52,7 +58,15 @@ export default function PersonShowContainer({ show, header }) {
           return (
             <li key={item.id}>
               <Link href={`/${type}/${item.id}`}>
-                <Image src={imageUrl} alt={title ? title : 'No Poster Available'} width={180} height={260} />
+                {isLoading && <Spinner className={styles.spinner} />}
+
+                <Image
+                  src={imageUrl}
+                  alt={title ? title : 'No Poster Available'}
+                  width={180}
+                  height={260}
+                  onLoadingComplete={handleImageLoad}
+                />
                 <h3>{title.length > 24 ? title.slice(0, 24) + '...' : title}</h3>
               </Link>
             </li>

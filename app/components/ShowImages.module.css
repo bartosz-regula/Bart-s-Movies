@@ -53,3 +53,9 @@
 .images_container:hover .btn_right {
   opacity: 1;
 }
+
+.spinner {
+  position: absolute;
+  left: 40%;
+  top: 50%;
+}

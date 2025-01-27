@@ -8,6 +8,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import checkButtonsVisibility from '../helpers/checkButtonsVisibility';
 
 import { DEFAULT_PERSON_IMAGE } from '../utilities/config.js';
+import Spinner from './Spinner';
 
 export default function ShowCast({ cast }) {
   if (!cast?.cast?.length) {
@@ -15,6 +16,7 @@ export default function ShowCast({ cast }) {
   }
   const containerRef = useRef(null);
   const [showButtons, setShowButtons] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleLeftClick = useCallback(() => {
     handleScroll(containerRef.current, 'left', 990);
@@ -36,6 +38,10 @@ export default function ShowCast({ cast }) {
     };
   }, [cast]);
 
+  const handleImageLoad = () => {
+    setIsLoading(false);
+  };
+
   return (
     <div className={styles.container}>
       <h2 className={styles.header}>Cast</h2>
@@ -50,12 +56,15 @@ export default function ShowCast({ cast }) {
         )}
         {cast.cast.map((person) => (
           <Link href={`/person/${person.id}`} key={person.id} className={styles.person_box}>
+            {isLoading && <Spinner className={styles.spinner} />}
+
             <Image
               src={person.profile_path ? `https://image.tmdb.org/t/p/w300${person.profile_path}` : DEFAULT_PERSON_IMAGE}
               className={styles.person_img}
               alt={person.name}
               width={170}
               height={230}
+              onLoadingComplete={handleImageLoad}
             />
 
             <strong>{person.name}</strong>
