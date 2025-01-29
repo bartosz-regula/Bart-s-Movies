@@ -98,15 +98,17 @@ export default function PersonImages({ images }) {
         {images.profiles.map((image, index) => (
           <li key={index}>
             {isLoading && <Spinner className={styles.spinner} />}
-            <Image
-              className={styles.image}
-              src={`https://image.tmdb.org/t/p/w300${image.file_path}`}
-              width={180}
-              height={270}
-              onClick={() => handleImageClick(index, setActiveImage)}
-              alt={`Image ${index}`}
-              onLoadingComplete={handleImageLoad}
-            />
+            <div className={styles.image_container}>
+              <Image
+                className={styles.image}
+                src={`https://image.tmdb.org/t/p/w300${image.file_path}`}
+                width={180}
+                height={260}
+                onClick={() => handleImageClick(index, setActiveImage)}
+                alt={`Image ${index}`}
+                onLoadingComplete={handleImageLoad}
+              />
+            </div>
           </li>
         ))}
         {showButtons && (

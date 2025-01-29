@@ -17,8 +17,23 @@ export default function PersonDetails({ person }) {
   const birth_place = person.place_of_birth ? person.place_of_birth : 'N/A';
   const biographyFull = person.biography ? person.biography : `We don't have a biography for ${person.name} yet.`;
   const deathday = person.deathday;
+  const MAX_CHAR_COUNT = 1000;
   const biography = biographyFull.split('\n\n');
-  const biographyToShow = showFullBiography ? biography : biography.slice(0, 2);
+
+  const getBiographyToShow = (biography, maxCharCount) => {
+    const firstTwo = biography.slice(0, 2).join('\n\n');
+    const firstThree = biography.slice(0, 3).join('\n\n');
+
+    if (firstTwo.length <= maxCharCount) {
+      if (firstThree.length <= maxCharCount) {
+        return biography.slice(0, 4);
+      }
+      return biography.slice(0, 3);
+    }
+    return biography.slice(0, 2);
+  };
+
+  const biographyToShow = showFullBiography ? biography : getBiographyToShow(biography, MAX_CHAR_COUNT);
 
   const handleImageLoad = () => {
     setIsLoading(false);

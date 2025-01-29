@@ -88,16 +88,18 @@ export default function ShowImages({ images }) {
         {images.map((image, index) => (
           <li key={index}>
             {isLoading && <Spinner className={styles.spinner} />}
-            <Image
-              key={index}
-              className={styles.images}
-              src={`https:image.tmdb.org/t/p/w300${image.file_path}`}
-              alt={`Image ${index}`}
-              width={301}
-              height={170}
-              onLoadingComplete={handleImageLoad}
-              onClick={() => handleImageClick(index, setActiveImage)}
-            />
+            <div className={styles.image_box}>
+              <Image
+                key={index}
+                className={styles.image}
+                src={`https:image.tmdb.org/t/p/w300${image.file_path}`}
+                alt={`Image ${index}`}
+                width={301}
+                height={170}
+                onLoad={handleImageLoad}
+                onClick={() => handleImageClick(index, setActiveImage)}
+              />
+            </div>
           </li>
         ))}
         {showButtons && (

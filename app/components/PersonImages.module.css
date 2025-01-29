@@ -14,6 +14,7 @@
 .container_images {
   display: flex;
   margin-top: 2.2rem;
+  overflow-x: scroll;
 }
 
 .justify_content {
@@ -24,11 +25,26 @@
   overflow: hidden;
 }
 
-.image {
+.image_container {
   margin-right: 2.4rem;
+  max-width: 19rem;
+  overflow: hidden;
+}
+
+.image_container:hover {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.image {
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.image:hover {
+  transform: scale(1.05);
 }
 
 .btn {
@@ -43,6 +59,7 @@
   transition: all 400ms ease-in-out;
   background-color: var(--black-transparent);
   opacity: 0;
+  z-index: 1;
 }
 
 .btn_left {
@@ -51,7 +68,7 @@
 }
 .btn_right {
   right: 0;
-  margin-left: -5.9rem;
+  margin-left: -5.8rem;
 }
 
 .container:hover .btn_left,

@@ -20,10 +20,22 @@
   overflow: hidden;
 }
 
-.images {
+.image_box {
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.image {
   margin-right: 2.45rem;
-  border: 0.1px solid white;
   cursor: pointer;
+  transition: transform 0.3s ease;
+  border-radius: 10px;
+}
+
+.image:hover {
+  transform: scale(1.05);
+  border: none;
+  border-radius: 10px;
 }
 
 .btn {
@@ -38,6 +50,7 @@
   transition: all 400ms ease-in-out;
   background-color: var(--black-transparent);
   opacity: 0;
+  z-index: 1;
 }
 
 .btn_left {

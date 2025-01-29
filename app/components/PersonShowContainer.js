@@ -59,15 +59,16 @@ export default function PersonShowContainer({ show, header }) {
             <li key={item.id}>
               <Link href={`/${type}/${item.id}`}>
                 {isLoading && <Spinner className={styles.spinner} />}
-
-                <Image
-                  src={imageUrl}
-                  alt={title ? title : 'No Poster Available'}
-                  width={180}
-                  height={260}
-                  onLoadingComplete={handleImageLoad}
-                />
-                <h3>{title.length > 24 ? title.slice(0, 24) + '...' : title}</h3>
+                <div className={styles.image_container}>
+                  <Image
+                    className={styles.image}
+                    src={imageUrl}
+                    alt={title ? title : 'No Poster Available'}
+                    width={180}
+                    height={260}
+                    onLoadingComplete={handleImageLoad}
+                  />
+                </div>
               </Link>
             </li>
           );

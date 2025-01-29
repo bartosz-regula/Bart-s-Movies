@@ -13,6 +13,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 }
 
 .spinner {
@@ -26,6 +27,11 @@
   border-top: 0.01px solid var(--grey-darker);
   border-left: 0.01px solid var(--grey-darker);
   border-right: 0.01px solid var(--grey-darker);
+  transition: transform 0.3s ease;
+}
+
+.img:hover {
+  transform: scale(1.05);
 }
 
 .title {
@@ -58,7 +64,7 @@
   cursor: pointer;
   transition:
     transform 0.2s ease,
-    opacity 0.2s ease;
+    opacity 1.2s ease;
   opacity: 0;
   pointer-events: none;
 }

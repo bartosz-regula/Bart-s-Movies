@@ -26,19 +26,32 @@
   text-align: center;
 }
 
-.person_img {
-  margin-bottom: 1rem;
+.img_container {
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+  overflow: hidden;
 }
+
+.person_img {
+  transition: transform 0.3s ease;
+}
+
+.person_img:hover {
+  transform: scale(1.05);
+}
+
 .person_box p {
   margin-top: 0.5rem;
   color: var(--grey);
 }
 
+.name_box {
+  margin-top: 1rem;
+}
+
 .btn {
   top: 0px;
-  max-height: 23rem;
+  max-height: 23.2rem;
   color: var(--white);
   font-size: 3rem;
   border: none;
@@ -48,6 +61,7 @@
   transition: all 400ms ease-in-out;
   background-color: var(--black-transparent);
   opacity: 0;
+  z-index: 1;
 }
 
 .btn_left {

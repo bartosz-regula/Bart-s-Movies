@@ -57,24 +57,28 @@ export default function ShowCast({ cast }) {
         {cast.cast.map((person) => (
           <Link href={`/person/${person.id}`} key={person.id} className={styles.person_box}>
             {isLoading && <Spinner className={styles.spinner} />}
-
-            <Image
-              src={person.profile_path ? `https://image.tmdb.org/t/p/w300${person.profile_path}` : DEFAULT_PERSON_IMAGE}
-              className={styles.person_img}
-              alt={person.name}
-              width={170}
-              height={230}
-              onLoadingComplete={handleImageLoad}
-            />
-
-            <strong>{person.name}</strong>
-            <p>{person.character}</p>
-            {person.roles && person.roles.length > 0 && (
-              <>
-                <p>{person.roles[0].character}</p>
-                <p>{person.roles[0].episode_count} Episodes</p>
-              </>
-            )}
+            <div className={styles.img_container}>
+              <Image
+                src={
+                  person.profile_path ? `https://image.tmdb.org/t/p/w300${person.profile_path}` : DEFAULT_PERSON_IMAGE
+                }
+                className={styles.person_img}
+                alt={person.name}
+                width={170}
+                height={230}
+                onLoad={handleImageLoad}
+              />
+            </div>
+            <div className={styles.name_box}>
+              <strong>{person.name}</strong>
+              <p>{person.character}</p>
+              {person.roles && person.roles.length > 0 && (
+                <>
+                  <p>{person.roles[0].character}</p>
+                  <p>{person.roles[0].episode_count} Episodes</p>
+                </>
+              )}
+            </div>
           </Link>
         ))}
         {showButtons && (

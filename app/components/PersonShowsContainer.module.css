@@ -27,6 +27,18 @@
   margin-top: 1rem;
 }
 
+.image_container {
+  overflow: hidden;
+}
+
+.image {
+  transition: transform 0.3s ease;
+}
+
+.image:hover {
+  transform: scale(1.05);
+}
+
 .btn {
   top: 0px;
   max-height: 26rem;
@@ -39,6 +51,7 @@
   transition: all 400ms ease-in-out;
   background-color: var(--black-transparent);
   opacity: 0;
+  z-index: 1;
 }
 
 .btn_left {
