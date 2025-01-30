@@ -10,6 +10,7 @@ import CardContainer from '../components/CardContainer';
 import styles from './page.module.css';
 import ScrollToTopButton from '../components/ScrollToTopButton';
 import NoTitlesAdded from '../components/NoTitlesAdded';
+
 const getUserIdentifier = () => {
   const auth = getAuth();
   const user = auth.currentUser;

@@ -8,6 +8,8 @@ import { DEFAULT_SHOW_IMAGE } from '../utilities/config.js';
 import Heart from './Heart';
 import StarRating from './StarRating';
 import { getType } from '../helpers/mediaUtils';
+import { notify } from '../helpers/notify';
+
 import {
   checkIfFavorite,
   checkIfRated,
@@ -61,21 +63,41 @@ export default function ShowDetails({ show, cast, providers }) {
 
   const handleAddToFavorites = () => {
     addToFavorites(show, type, year, vote, imageSrc, showId, isFavorite, setIsFavorite, setFavoriteDocId);
+    notifyAddFavorites();
   };
 
   const handleAddToRated = () => {
     addToRated(show, type, year, vote, rating, imageSrc, showId, isRated, setIsRated, setRatedDocId);
+    notifyAddTorated();
   };
 
   const handleRemoveFromFavorites = () => {
     removeFromFavorites(favoriteDocId, setIsFavorite, setFavoriteDocId);
+    notifyRemoveFavorites();
   };
 
   const handleRemoveFromRated = () => {
     removeFromRated(ratedDocId, setIsRated, setRatedDocId);
+    notifyRemoveFromrated();
   };
   const handleImageLoad = () => {
     setIsLoading(false);
+  };
+
+  const notifyAddFavorites = () => {
+    notify('Added To Favorites', 'success');
+  };
+
+  const notifyRemoveFavorites = () => {
+    notify('Removed From Favorites', 'error');
+  };
+
+  const notifyAddTorated = () => {
+    notify('Added To Rated', 'success');
+  };
+
+  const notifyRemoveFromrated = () => {
+    notify('Removed From Rated', 'error');
   };
 
   return (

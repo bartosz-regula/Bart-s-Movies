@@ -7,6 +7,7 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import ModalVideo from './ModalVideo';
 import Link from 'next/link';
 import handleKeyPress from '../helpers/handleKeyPress';
+import { notify } from '../helpers/notify';
 
 import { AiFillYoutube } from 'react-icons/ai';
 import { checkIfFavorite, addToFavorites, removeFromFavorites } from '../helpers/firebaseUtils';
@@ -82,6 +83,10 @@ export default function Hero() {
     fetchMovies();
   }, []);
 
+  const notifyAddFavorites = () => {
+    notify('Added To Favorites', 'success');
+  };
+
   const handleAddToFavorites = (index) => {
     const movie = movies[index];
     const type = 'movie';
@@ -103,6 +108,11 @@ export default function Hero() {
       (status) => setIsFavorite((prevState) => ({ ...prevState, [movie.id]: status })),
       (docId) => setFavoriteDocId((prevState) => ({ ...prevState, [movie.id]: docId }))
     );
+    notifyAddFavorites();
+  };
+
+  const notifyRemoveFavorites = () => {
+    notify('Removed From Favorites', 'error');
   };
 
   const handleRemoveFromFavorites = (index) => {
@@ -121,6 +131,7 @@ export default function Hero() {
           return newState;
         });
       });
+      notifyRemoveFavorites();
     }
   };
 

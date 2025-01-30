@@ -9,6 +9,7 @@ import Heart from './Heart';
 import { checkIfFavorite, addToFavorites, removeFromFavorites } from '../helpers/firebaseUtils';
 import { getType, formatTitle, getImageSrc } from '../helpers/mediaUtils';
 import Spinner from './Spinner';
+import { notify } from '../helpers/notify';
 
 export default function Card({ show, className }) {
   const [isFavorite, setIsFavorite] = useState(false);
@@ -31,14 +32,24 @@ export default function Card({ show, className }) {
 
   const handleAddToFavorites = () => {
     addToFavorites(show, type, year, vote, imageSrc, showId, isFavorite, setIsFavorite, setFavoriteDocId);
+    notifyAddFavorites();
   };
 
   const handleRemoveFromFavorites = () => {
     removeFromFavorites(favoriteDocId, setIsFavorite, setFavoriteDocId);
+    notifyRemoveFavorites();
   };
 
   const handleImageLoad = () => {
     setIsLoading(false);
+  };
+
+  const notifyAddFavorites = () => {
+    notify('Added To Favorites', 'success');
+  };
+
+  const notifyRemoveFavorites = () => {
+    notify('Removed From Favorites', 'error');
   };
 
   return (

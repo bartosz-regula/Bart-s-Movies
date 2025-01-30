@@ -1,6 +1,7 @@
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 import '@/app/globals.css';
+import Toaster from './components/Toaster';
 
 export const metadata = {
   title: `Bart's Movies - Your Movie Database`,
@@ -17,6 +18,7 @@ export default function RootLayout({ children }) {
         <Navbar />
         {children}
         <Footer />
+        <Toaster />
       </body>
     </html>
   );
