@@ -1,15 +1,16 @@
-import { toast } from 'react-toastify';
+import { toast, Zoom } from 'react-toastify';
 
 export const notify = (message, type = 'success') => {
   const options = {
     position: 'top-center',
-    autoClose: 2000,
+    autoClose: 1200,
     hideProgressBar: false,
     closeOnClick: false,
     pauseOnHover: false,
     draggable: false,
     progress: undefined,
     theme: 'dark',
+    transition: Zoom,
   };
 
   if (type === 'success') {

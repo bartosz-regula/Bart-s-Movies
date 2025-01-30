@@ -10,11 +10,14 @@ import { checkIfFavorite, addToFavorites, removeFromFavorites } from '../helpers
 import { getType, formatTitle, getImageSrc } from '../helpers/mediaUtils';
 import Spinner from './Spinner';
 import { notify } from '../helpers/notify';
+import { getAuth } from 'firebase/auth';
+import { useRouter } from 'next/navigation';
 
 export default function Card({ show, className }) {
   const [isFavorite, setIsFavorite] = useState(false);
   const [favoriteDocId, setFavoriteDocId] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const router = useRouter();
 
   const type = getType(show.media_type, show.title, show.name);
   const title = show?.title || show?.name || 'Untitled';
@@ -26,13 +29,24 @@ export default function Card({ show, className }) {
 
   const showId = show.show_id ? show.show_id : show.id;
 
+  const auth = getAuth();
+  const user = auth.currentUser;
+
   useEffect(() => {
-    checkIfFavorite(showId, setIsFavorite, setFavoriteDocId);
-  }, [showId]);
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        checkIfFavorite(showId, setIsFavorite, setFavoriteDocId);
+      } else {
+        setIsFavorite(false);
+      }
+    });
+
+    return () => unsubscribe();
+  }, [showId, auth]);
 
   const handleAddToFavorites = () => {
     addToFavorites(show, type, year, vote, imageSrc, showId, isFavorite, setIsFavorite, setFavoriteDocId);
-    notifyAddFavorites();
+    notifyAddFavorites('Added To Favorites', 'success');
   };
 
   const handleRemoveFromFavorites = () => {
