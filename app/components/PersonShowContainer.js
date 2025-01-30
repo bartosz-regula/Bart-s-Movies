@@ -17,6 +17,8 @@ export default function PersonShowContainer({ show, header }) {
   const [showButtons, setShowButtons] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
+  const vote = show?.vote_average ? show.vote_average.toFixed(1) : show?.vote || 'N/A';
+
   const handleLeftClick = useCallback(() => {
     handleScroll(containerRef.current, 'left', 1020);
   }, []);
@@ -69,6 +71,7 @@ export default function PersonShowContainer({ show, header }) {
                     onLoadingComplete={handleImageLoad}
                   />
                 </div>
+                <p className={styles.title}>{title}</p>
               </Link>
             </li>
           );

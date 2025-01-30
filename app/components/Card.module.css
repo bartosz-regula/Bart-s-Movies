@@ -40,6 +40,11 @@
   margin-bottom: 1rem;
   text-align: center;
   color: var(--white);
+  transition: color 0.3s;
+}
+
+.title:hover {
+  color: var(--aqua);
 }
 
 .details_show_container {

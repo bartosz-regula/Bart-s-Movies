@@ -45,8 +45,23 @@
 .btn_test_login {
   background-color: #ffd814;
   border: 1px solid #ffd814;
+  opacity: 0;
+  visibility: hidden;
+  animation: fadeIn 0.5s ease-in-out forwards;
+  animation-delay: 2s;
 }
 
 .btn_test_login:hover {
   box-shadow: 0px 0px 20px rgba(255, 216, 20, 0.7);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    visibility: hidden;
+  }
+  to {
+    opacity: 1;
+    visibility: visible;
+  }
 }

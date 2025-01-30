@@ -24,10 +24,21 @@
 }
 
 .biography_container button {
-  margin-top: 1rem;
+  font-size: 1.4rem;
+  margin-left: 1rem;
   background-color: transparent;
   color: white;
-  border-bottom: 1px solid white;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: #3a8dff;
+  transition: color 0.3s;
+}
+
+.biography_container button:hover {
+  color: var(--aqua);
 }
 
 .biography_container strong {
@@ -37,6 +48,7 @@
 .biography_container p {
   margin-top: 1.2rem;
   color: var(--grey);
+  line-height: 1.4;
 }
 
 .details_container {

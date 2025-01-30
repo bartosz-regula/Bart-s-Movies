@@ -54,14 +54,14 @@ export default function Page() {
   return (
     <ProtectedRoute>
       {movieList.length > 0 ? (
-        <>
-          <h2 className={styles.header}>Favorites</h2>
+        <div className={styles.container}>
+          <h2 className={styles.header}>My Favorites List</h2>
           <CardContainer>
             {movieList.map((movie) => (
               <Card key={movie.id} show={movie} className={styles.card} />
             ))}
           </CardContainer>
-        </>
+        </div>
       ) : (
         <NoTitlesAdded header="Your Favorites list is empty." paragraph="Why don't you add something in here?" />
       )}

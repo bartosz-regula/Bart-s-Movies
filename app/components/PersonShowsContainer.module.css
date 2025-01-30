@@ -39,6 +39,18 @@
   transform: scale(1.05);
 }
 
+.title {
+  margin-top: 1rem;
+  font-weight: bold;
+  font-size: 1.3rem;
+  transition: color 0.3s;
+  line-height: 1.2;
+}
+
+.title:hover {
+  color: var(--aqua);
+}
+
 .btn {
   top: 0px;
   max-height: 26rem;

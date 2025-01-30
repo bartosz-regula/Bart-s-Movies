@@ -12,6 +12,28 @@
   color: var(--white);
 }
 
+.explore {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--grey);
+  transition:
+    transform 0.3s ease-in-out,
+    color 0.3s ease-in-out,
+    background 0.3s ease-in-out;
+}
+
+.explore:hover {
+  transform: scale(1.05);
+  background: linear-gradient(to right, #ff7eb9, #3a8dff);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.explore:not(:hover) {
+  color: var(--grey);
+  transition: color 0s;
+}
+
 .show_list {
   display: flex;
   overflow-x: auto;

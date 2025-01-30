@@ -45,6 +45,14 @@
   color: var(--grey);
 }
 
+.person_box strong {
+  transition: color 0.3s;
+}
+
+.person_box strong:hover {
+  color: var(--aqua);
+}
+
 .name_box {
   margin-top: 1rem;
 }

@@ -1,6 +1,10 @@
-.header {
+.container {
   margin-top: 8rem;
-  margin-left: 3rem;
+  min-height: calc(100vh - 285px);
+}
+
+.header {
+  margin-left: 2.5rem;
 }
 .card {
   margin-right: 0;

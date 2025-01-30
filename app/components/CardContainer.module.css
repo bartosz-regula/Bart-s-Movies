@@ -4,4 +4,5 @@
   align-items: center;
   justify-items: center;
   color: #ffffff;
+  /* min-height: calc(100vh - 210px); */
 }
