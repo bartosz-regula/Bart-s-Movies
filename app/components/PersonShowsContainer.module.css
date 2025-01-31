@@ -16,11 +16,13 @@
   display: flex;
   overflow-x: scroll;
   margin-top: 2.2rem;
+  cursor: grabbing;
 }
 
 .container li {
   margin-right: 2.4rem;
   text-align: center;
+  position: relative;
 }
 
 .container h3 {
@@ -66,6 +68,10 @@
   z-index: 1;
 }
 
+.btn_edge {
+  opacity: 0 !important;
+}
+
 .btn_left {
   left: 0;
   margin-left: -3.7rem;
@@ -82,5 +88,6 @@
 
 .spinner {
   position: absolute;
-  top: 50%;
+  left: 40%;
+  top: 35%;
 }

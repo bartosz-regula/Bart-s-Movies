@@ -259,7 +259,7 @@ export default function PersonDetails({ person }) {
 
   return (
     <div className={styles.container}>
-      <div>
+      <div className={styles.image_container}>
         {isLoading && <Spinner className={styles.spinner} />}
         <Image
           src={person.profile_path ? `https://image.tmdb.org/t/p/w300${person.profile_path}` : DEFAULT_PERSON_IMAGE}
@@ -274,7 +274,7 @@ export default function PersonDetails({ person }) {
         <h2 className={styles.person_name}>{name}</h2>
         <div className={styles.biography_container}>
           <strong>Biography</strong>
-          <div
+          <div className={styles.biography}
             ref={contentRef}
             style={{
               height: showFullBiography ? `${contentHeight}px` : 'auto',

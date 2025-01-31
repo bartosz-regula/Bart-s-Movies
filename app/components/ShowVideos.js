@@ -18,6 +18,7 @@ export default function ShowVideos({ videos }) {
   const [activeVideo, setActiveVideo] = useState(null);
   const [showButtons, setShowButtons] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [edgeReached, setEdgeReached] = useState({ left: false, right: false });
 
   const handleVideoClick = (index) => {
     setActiveVideo(index);
@@ -35,17 +36,39 @@ export default function ShowVideos({ videos }) {
     handleScroll(containerRef.current, 'right', 869);
   }, []);
 
+  const checkEdge = () => {
+    const container = containerRef.current;
+    const isAtStart = container.scrollLeft === 0;
+    const margin = 1;
+    const isAtEnd = container.scrollLeft + container.clientWidth >= container.scrollWidth - margin;
+    setEdgeReached({
+      left: isAtStart,
+      right: isAtEnd,
+    });
+  };
+
   useEffect(() => {
     checkButtonsVisibility(containerRef, setShowButtons);
 
     const resizeHandler = () => checkButtonsVisibility(containerRef, setShowButtons);
 
     window.addEventListener('resize', resizeHandler);
+    checkEdge();
 
     return () => {
       window.removeEventListener('resize', resizeHandler);
     };
   }, [videos]);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    const handleScrollEvent = () => {
+      checkEdge();
+    };
+
+    container.addEventListener('scroll', handleScrollEvent);
+    return () => container.removeEventListener('scroll', handleScrollEvent);
+  }, []);
 
   useEffect(() => {
     const keyPressHandler = (event) => {
@@ -78,7 +101,10 @@ export default function ShowVideos({ videos }) {
         ref={containerRef}
       >
         {showButtons && (
-          <button className={`${styles.btn} ${styles.btn_left}`} onClick={handleLeftClick}>
+          <button
+            className={`${styles.btn} ${styles.btn_left} ${edgeReached.left ? styles.btn_edge : ''}`}
+            onClick={handleLeftClick}
+          >
             &lt;
           </button>
         )}
@@ -102,7 +128,10 @@ export default function ShowVideos({ videos }) {
           </div>
         ))}
         {showButtons && (
-          <button className={`${styles.btn} ${styles.btn_right}`} onClick={handleRightClick}>
+          <button
+            className={`${styles.btn} ${styles.btn_right} ${edgeReached.right ? styles.btn_edge : ''}`}
+            onClick={handleRightClick}
+          >
             &gt;
           </button>
         )}

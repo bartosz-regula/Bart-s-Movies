@@ -17,6 +17,7 @@ export default function ShowCast({ cast }) {
   const containerRef = useRef(null);
   const [showButtons, setShowButtons] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [edgeReached, setEdgeReached] = useState({ left: false, right: false }); //toooooo
 
   const handleLeftClick = useCallback(() => {
     handleScroll(containerRef.current, 'left', 990);
@@ -26,17 +27,39 @@ export default function ShowCast({ cast }) {
     handleScroll(containerRef.current, 'right', 990);
   }, []);
 
+  const checkEdge = () => {
+    const container = containerRef.current;
+    const isAtStart = container.scrollLeft === 0;
+    const margin = 1;
+    const isAtEnd = container.scrollLeft + container.clientWidth >= container.scrollWidth - margin;
+    setEdgeReached({
+      left: isAtStart,
+      right: isAtEnd,
+    });
+  };
+
   useEffect(() => {
     checkButtonsVisibility(containerRef, setShowButtons);
 
     const resizeHandler = () => checkButtonsVisibility(containerRef, setShowButtons);
 
     window.addEventListener('resize', resizeHandler);
+    checkEdge(); // check the edge on load
 
     return () => {
       window.removeEventListener('resize', resizeHandler);
     };
   }, [cast]);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    const handleScrollEvent = () => {
+      checkEdge();
+    };
+
+    container.addEventListener('scroll', handleScrollEvent);
+    return () => container.removeEventListener('scroll', handleScrollEvent);
+  }, []);
 
   const handleImageLoad = () => {
     setIsLoading(false);
@@ -50,7 +73,10 @@ export default function ShowCast({ cast }) {
         ref={containerRef}
       >
         {showButtons && (
-          <button className={`${styles.btn} ${styles.btn_left}`} onClick={handleLeftClick}>
+          <button
+            className={`${styles.btn} ${styles.btn_left} ${edgeReached.left ? styles.btn_edge : ''}`}
+            onClick={handleLeftClick}
+          >
             &lt;
           </button>
         )}
@@ -82,7 +108,10 @@ export default function ShowCast({ cast }) {
           </Link>
         ))}
         {showButtons && (
-          <button className={`${styles.btn} ${styles.btn_right}`} onClick={handleRightClick}>
+          <button
+            className={`${styles.btn} ${styles.btn_right} ${edgeReached.right ? styles.btn_edge : ''}`}
+            onClick={handleRightClick}
+          >
             &gt;
           </button>
         )}

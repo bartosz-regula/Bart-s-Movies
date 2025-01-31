@@ -5,6 +5,10 @@
   max-width: 120rem;
 }
 
+.imsge_container {
+  position: relative;
+}
+
 .text_container {
   margin-left: 4rem;
   width: 100%;
@@ -69,6 +73,6 @@
 
 .spinner {
   position: absolute;
-  left: 50%;
+  left: 45%;
   top: 50%;
 }

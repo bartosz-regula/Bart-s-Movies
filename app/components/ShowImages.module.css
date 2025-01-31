@@ -20,6 +20,10 @@
   overflow: hidden;
 }
 
+.container li {
+  position: relative;
+}
+
 .image_box {
   overflow: hidden;
   border-radius: 10px;
@@ -51,6 +55,10 @@
   background-color: var(--black-transparent);
   opacity: 0;
   z-index: 1;
+}
+
+.btn_edge {
+  opacity: 0 !important;
 }
 
 .btn_left {

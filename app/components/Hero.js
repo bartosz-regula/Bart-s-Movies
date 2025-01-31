@@ -7,8 +7,9 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import ModalVideo from './ModalVideo';
 import Link from 'next/link';
 import handleKeyPress from '../helpers/handleKeyPress';
+import { getAuth } from 'firebase/auth';
+import { useRouter } from 'next/navigation';
 import { notify } from '../helpers/notify';
-
 import { AiFillYoutube } from 'react-icons/ai';
 import { checkIfFavorite, addToFavorites, removeFromFavorites } from '../helpers/firebaseUtils';
 import Loading from '../loading';
@@ -19,6 +20,9 @@ export default function Hero() {
   const [videos, setVideos] = useState([]);
   const [isFavorite, setIsFavorite] = useState({});
   const [favoriteDocId, setFavoriteDocId] = useState({});
+  const router = useRouter();
+  const auth = getAuth();
+  const user = auth.currentUser;
 
   const closeModal = () => {
     setActiveVideo(null);
@@ -60,34 +64,49 @@ export default function Hero() {
       );
       const data = await res.json();
       setMovies(data.results);
-
-      data.results.forEach((movie) => {
-        checkIfFavorite(
-          movie.id,
-          (status) => {
-            setIsFavorite((prevState) => ({
-              ...prevState,
-              [movie.id]: status,
-            }));
-          },
-          (docId) => {
-            setFavoriteDocId((prevState) => ({
-              ...prevState,
-              [movie.id]: docId,
-            }));
-          }
-        );
-      });
     }
 
     fetchMovies();
   }, []);
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        movies.forEach((movie) => {
+          checkIfFavorite(
+            movie.id,
+            (status) => {
+              setIsFavorite((prevState) => ({
+                ...prevState,
+                [movie.id]: status,
+              }));
+            },
+            (docId) => {
+              setFavoriteDocId((prevState) => ({
+                ...prevState,
+                [movie.id]: docId,
+              }));
+            }
+          );
+        });
+      } else {
+        setIsFavorite({});
+        setFavoriteDocId({});
+      }
+    });
+
+    return () => unsubscribe();
+  }, [movies, auth]);
 
   const notifyAddFavorites = () => {
     notify('Added To Favorites', 'success');
   };
 
   const handleAddToFavorites = (index) => {
+    if (!user) {
+      router.push('/sign-in');
+      return;
+    }
     const movie = movies[index];
     const type = 'movie';
     const year = movie.release_date ? movie.release_date.split('-')[0] : 'Unknown';

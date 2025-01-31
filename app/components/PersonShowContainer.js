@@ -13,9 +13,11 @@ export default function PersonShowContainer({ show, header }) {
   if (!show?.length) {
     return null;
   }
+
   const containerRef = useRef(null);
   const [showButtons, setShowButtons] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [edgeReached, setEdgeReached] = useState({ left: false, right: false });
 
   const vote = show?.vote_average ? show.vote_average.toFixed(1) : show?.vote || 'N/A';
 
@@ -27,17 +29,39 @@ export default function PersonShowContainer({ show, header }) {
     handleScroll(containerRef.current, 'right', 1020);
   }, []);
 
+  const checkEdge = () => {
+    const container = containerRef.current;
+    const isAtStart = container.scrollLeft === 0;
+    const margin = 1;
+    const isAtEnd = container.scrollLeft + container.clientWidth >= container.scrollWidth - margin;
+    setEdgeReached({
+      left: isAtStart,
+      right: isAtEnd,
+    });
+  };
+
   useEffect(() => {
     checkButtonsVisibility(containerRef, setShowButtons);
 
     const resizeHandler = () => checkButtonsVisibility(containerRef, setShowButtons);
 
     window.addEventListener('resize', resizeHandler);
+    checkEdge();
 
     return () => {
       window.removeEventListener('resize', resizeHandler);
     };
   }, [show]);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    const handleScrollEvent = () => {
+      checkEdge();
+    };
+
+    container.addEventListener('scroll', handleScrollEvent);
+    return () => container.removeEventListener('scroll', handleScrollEvent);
+  }, []);
 
   const handleImageLoad = () => {
     setIsLoading(false);
@@ -48,7 +72,10 @@ export default function PersonShowContainer({ show, header }) {
       <h2 className={styles.header}>{header}</h2>
       <ul className={show.length < 6 ? styles.justify_content : ''} ref={containerRef}>
         {showButtons && (
-          <button className={`${styles.btn} ${styles.btn_left}`} onClick={handleLeftClick}>
+          <button
+            className={`${styles.btn} ${styles.btn_left} ${edgeReached.left ? styles.btn_edge : ''}`}
+            onClick={handleLeftClick}
+          >
             &lt;
           </button>
         )}
@@ -77,7 +104,10 @@ export default function PersonShowContainer({ show, header }) {
           );
         })}
         {showButtons && (
-          <button className={`${styles.btn} ${styles.btn_right}`} onClick={handleRightClick}>
+          <button
+            className={`${styles.btn} ${styles.btn_right} ${edgeReached.right ? styles.btn_edge : ''}`}
+            onClick={handleRightClick}
+          >
             &gt;
           </button>
         )}

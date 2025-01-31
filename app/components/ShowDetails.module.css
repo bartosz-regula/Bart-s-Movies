@@ -6,6 +6,10 @@
   min-height: 73rem;
 }
 
+.image_container {
+  position: relative;
+}
+
 .text_container {
   margin-left: 4rem;
   width: 100%;

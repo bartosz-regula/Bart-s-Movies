@@ -24,6 +24,11 @@ export default function Navbar() {
     return () => unsubscribe();
   }, []);
 
+  const handleLogout = async () => {
+    await logout();
+    window.location.href = '/sign-in';
+  };
+
   return (
     <nav className={styles.navbar}>
       <NavbarLinks />
@@ -31,7 +36,7 @@ export default function Navbar() {
       {isLoading ? (
         <Spinner className={styles.spinner} />
       ) : currentUser ? (
-        <UserMenu user={user} logout={logout} />
+        <UserMenu user={user} logout={handleLogout} />
       ) : (
         <NavbarItem
           title="Sign in"

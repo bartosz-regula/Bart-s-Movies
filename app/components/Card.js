@@ -18,7 +18,6 @@ export default function Card({ show, className }) {
   const [favoriteDocId, setFavoriteDocId] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
-
   const type = getType(show.media_type, show.title, show.name);
   const title = show?.title || show?.name || 'Untitled';
   const truncatedTitle = formatTitle(title);
@@ -45,8 +44,12 @@ export default function Card({ show, className }) {
   }, [showId, auth]);
 
   const handleAddToFavorites = () => {
+    if (!user) {
+      router.push('/sign-in');
+      return;
+    }
     addToFavorites(show, type, year, vote, imageSrc, showId, isFavorite, setIsFavorite, setFavoriteDocId);
-    notifyAddFavorites('Added To Favorites', 'success');
+    notifyAddFavorites();
   };
 
   const handleRemoveFromFavorites = () => {

@@ -22,6 +22,7 @@
   margin-right: 2.54rem;
   margin-bottom: 5rem;
   cursor: pointer;
+  position: relative;
 }
 
 .videos_container .video:last-child {
@@ -65,6 +66,11 @@
   transition: all 400ms ease-in-out;
   background-color: var(--black-transparent);
   opacity: 0;
+  z-index: 1;
+}
+
+.btn_edge {
+  opacity: 0 !important;
 }
 
 .btn_left {

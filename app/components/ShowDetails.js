@@ -8,6 +8,9 @@ import { DEFAULT_SHOW_IMAGE } from '../utilities/config.js';
 import Heart from './Heart';
 import StarRating from './StarRating';
 import { getType } from '../helpers/mediaUtils';
+import { getAuth } from 'firebase/auth';
+import { useRouter } from 'next/navigation';
+
 import { notify } from '../helpers/notify';
 
 import {
@@ -27,6 +30,7 @@ export default function ShowDetails({ show, cast, providers }) {
   const [ratedDocId, setRatedDocId] = useState(null);
   const [rating, setRating] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
+  const router = useRouter();
 
   const imageSrc = show.poster_path ? `https://image.tmdb.org/t/p/w300${show.poster_path}` : DEFAULT_SHOW_IMAGE;
   const type = getType(show.media_type, show.title, show.name);
@@ -36,37 +40,51 @@ export default function ShowDetails({ show, cast, providers }) {
   const year = release ? new Date(release).getFullYear() : 'N/A';
   const overview = show.overview ? show.overview : `We don't have an overview for ${show.title} yet.`;
   const tagline = show.tagline || '';
-
   const runtime = show.runtime;
-
   const director =
     cast.crew.find((person) => person.job === 'Director')?.name ||
     show.created_by?.find((person) => person.name)?.name ||
     'N/A';
   const numberOfSeasons = show.number_of_seasons;
   const vote = show.vote_average && show.vote_average.toFixed(1) !== '0.0' ? show.vote_average.toFixed(1) : 'N/A';
-
   const showId = show.show_id ? show.show_id : show.id;
-
   const region = 'PL';
-
   const streamingProviders = providers?.results?.[region]?.flatrate || [];
   const buyProviders = providers?.results?.[region]?.buy || [];
+
+  const auth = getAuth();
+  const user = auth.currentUser;
 
   useEffect(() => {
     checkIfFavorite(showId, setIsFavorite, setFavoriteDocId);
   }, [showId]);
 
   useEffect(() => {
-    checkIfRated(showId, setIsRated, setRatedDocId, setRating);
-  }, [showId]);
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        checkIfRated(showId, setIsRated, setRatedDocId, setRating);
+      } else {
+        setIsRated(false);
+      }
+    });
+
+    return () => unsubscribe();
+  }, [showId, auth]);
 
   const handleAddToFavorites = () => {
+    if (!user) {
+      router.push('/sign-in');
+      return;
+    }
     addToFavorites(show, type, year, vote, imageSrc, showId, isFavorite, setIsFavorite, setFavoriteDocId);
     notifyAddFavorites();
   };
 
   const handleAddToRated = () => {
+    if (!user) {
+      router.push('/sign-in');
+      return;
+    }
     addToRated(show, type, year, vote, rating, imageSrc, showId, isRated, setIsRated, setRatedDocId);
     notifyAddTorated();
   };
@@ -102,7 +120,7 @@ export default function ShowDetails({ show, cast, providers }) {
 
   return (
     <div className={styles.show_details}>
-      <div>
+      <div className={styles.image_container}>
         {isLoading && <Spinner className={styles.spinner} />}
 
         <Image

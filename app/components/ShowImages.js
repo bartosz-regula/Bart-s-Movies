@@ -19,6 +19,7 @@ export default function ShowImages({ images }) {
   const [activeImage, setActiveImage] = useState(null);
   const [showButtons, setShowButtons] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [edgeReached, setEdgeReached] = useState({ left: false, right: false }); //toooooo
 
   const handleLeftClick = useCallback(() => {
     handleScroll(containerRef.current, 'left', 976.5);
@@ -30,6 +31,17 @@ export default function ShowImages({ images }) {
 
   const closeModal = () => {
     setActiveImage(null);
+  };
+
+  const checkEdge = () => {
+    const container = containerRef.current;
+    const isAtStart = container.scrollLeft === 0;
+    const margin = 1;
+    const isAtEnd = container.scrollLeft + container.clientWidth >= container.scrollWidth - margin;
+    setEdgeReached({
+      left: isAtStart,
+      right: isAtEnd,
+    });
   };
 
   useEffect(() => {
@@ -54,13 +66,23 @@ export default function ShowImages({ images }) {
     checkButtonsVisibility(containerRef, setShowButtons);
 
     const resizeHandler = () => checkButtonsVisibility(containerRef, setShowButtons);
-
+    checkEdge();
     window.addEventListener('resize', resizeHandler);
 
     return () => {
       window.removeEventListener('resize', resizeHandler);
     };
   }, [images]);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    const handleScrollEvent = () => {
+      checkEdge();
+    };
+
+    container.addEventListener('scroll', handleScrollEvent);
+    return () => container.removeEventListener('scroll', handleScrollEvent);
+  }, []);
 
   useEffect(() => {
     disableScroll(activeImage !== null);
@@ -81,7 +103,10 @@ export default function ShowImages({ images }) {
         ref={containerRef}
       >
         {showButtons && (
-          <button className={`${styles.btn} ${styles.btn_left}`} onClick={handleLeftClick}>
+          <button
+            className={`${styles.btn} ${styles.btn_left} ${edgeReached.left ? styles.btn_edge : ''}`}
+            onClick={handleLeftClick}
+          >
             &lt;
           </button>
         )}
@@ -103,7 +128,10 @@ export default function ShowImages({ images }) {
           </li>
         ))}
         {showButtons && (
-          <button className={`${styles.btn} ${styles.btn_right}`} onClick={handleRightClick}>
+          <button
+            className={`${styles.btn} ${styles.btn_right} ${edgeReached.right ? styles.btn_edge : ''}`}
+            onClick={handleRightClick}
+          >
             &gt;
           </button>
         )}
