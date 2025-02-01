@@ -118,7 +118,7 @@ export default function ShowImages({ images }) {
               <Image
                 key={index}
                 className={styles.image}
-                src={`https:image.tmdb.org/t/p/w300${image.file_path}`}
+                src={`https://image.tmdb.org/t/p/w300${image.file_path}`}
                 alt={`Image ${index}`}
                 width={301}
                 height={170}
