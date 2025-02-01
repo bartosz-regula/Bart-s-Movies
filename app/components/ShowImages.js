@@ -122,7 +122,7 @@ export default function ShowImages({ images }) {
                 alt={`Image ${index}`}
                 width={301}
                 height={170}
-                onLoad={handleImageLoad}
+                onLoadingComplete={handleImageLoad}
                 onClick={() => handleImageClick(index, setActiveImage)}
               />
             </div>
