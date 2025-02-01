@@ -51,7 +51,7 @@ export default function Footer() {
         </div>
       </div>
       <div className={styles.copyright}>
-        <p>Copyright © {currentYear} by Bart's Movies, Inc. All rights reserved.</p>
+        <p>Copyright © {currentYear} by Bart&apos;s Movies, Inc. All rights reserved.</p>
       </div>
     </footer>
   );

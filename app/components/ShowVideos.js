@@ -10,10 +10,6 @@ import { disableScroll } from '../helpers/disableScroll';
 import Spinner from './Spinner';
 
 export default function ShowVideos({ videos }) {
-  if (!videos?.results.length) {
-    return null;
-  }
-
   const containerRef = useRef(null);
   const [activeVideo, setActiveVideo] = useState(null);
   const [showButtons, setShowButtons] = useState(false);
@@ -92,6 +88,10 @@ export default function ShowVideos({ videos }) {
   const handleImageLoad = () => {
     setIsLoading(false);
   };
+
+  if (!videos?.results.length) {
+    return null;
+  }
 
   return (
     <div className={styles.container}>

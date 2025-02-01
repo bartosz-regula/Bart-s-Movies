@@ -12,9 +12,6 @@ import { disableScroll } from '../helpers/disableScroll';
 import Spinner from './Spinner';
 
 export default function PersonImages({ images }) {
-  if (!images?.profiles?.length) {
-    return null;
-  }
   const containerRef = useRef(null);
   const [activeImage, setActiveImage] = useState(null);
   const [showButtons, setShowButtons] = useState(false);
@@ -106,6 +103,10 @@ export default function PersonImages({ images }) {
   const handleImageLoad = () => {
     setIsLoading(false);
   };
+
+  if (!images?.profiles?.length) {
+    return null;
+  }
 
   return (
     <div className={styles.container}>

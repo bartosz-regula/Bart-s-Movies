@@ -11,9 +11,6 @@ import { DEFAULT_PERSON_IMAGE } from '../utilities/config.js';
 import Spinner from './Spinner';
 
 export default function ShowCast({ cast }) {
-  if (!cast?.cast?.length) {
-    return null;
-  }
   const containerRef = useRef(null);
   const [showButtons, setShowButtons] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -64,6 +61,10 @@ export default function ShowCast({ cast }) {
   const handleImageLoad = () => {
     setIsLoading(false);
   };
+
+  if (!cast?.cast?.length) {
+    return null;
+  }
 
   return (
     <div className={styles.container}>

@@ -10,10 +10,6 @@ import checkButtonsVisibility from '../helpers/checkButtonsVisibility';
 import Spinner from './Spinner';
 
 export default function PersonShowContainer({ show, header }) {
-  if (!show?.length) {
-    return null;
-  }
-
   const containerRef = useRef(null);
   const [showButtons, setShowButtons] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -66,6 +62,10 @@ export default function PersonShowContainer({ show, header }) {
   const handleImageLoad = () => {
     setIsLoading(false);
   };
+
+  if (!show?.length) {
+    return null;
+  }
 
   return (
     <div className={styles.container}>

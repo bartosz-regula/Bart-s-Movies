@@ -12,9 +12,6 @@ import { disableScroll } from '../helpers/disableScroll';
 import Spinner from './Spinner';
 
 export default function ShowImages({ images }) {
-  if (!images?.length) {
-    return null;
-  }
   const containerRef = useRef(null);
   const [activeImage, setActiveImage] = useState(null);
   const [showButtons, setShowButtons] = useState(false);
@@ -94,6 +91,10 @@ export default function ShowImages({ images }) {
   const handleImageLoad = () => {
     setIsLoading(false);
   };
+
+  if (!images?.length) {
+    return null;
+  }
 
   return (
     <div className={styles.container}>

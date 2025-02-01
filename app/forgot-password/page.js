@@ -71,7 +71,7 @@ export default function Page() {
             </>
           ) : (
             <>
-              <AccountHeader>We've sent a password reset link to your email.</AccountHeader>
+              <AccountHeader>We&quot;ve sent a password reset link to your email.</AccountHeader>
               <AccountButton onClick={handleGoSignIn}>OK</AccountButton>
             </>
           )}

@@ -111,7 +111,7 @@ export default function Page() {
           </AccountButton>
 
           <AccountActionParagraph link={'/sign-up'} actionText={'SignUp'}>
-            Don't have an account?
+            Don&quot;t have an account?
           </AccountActionParagraph>
         </AccountBox>
       </form>
