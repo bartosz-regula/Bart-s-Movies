@@ -1,5 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
+import styles from './page.module.css';
 import ShowCast from '@/app/components/ShowCast';
 import ShowDetails from '@/app/components/ShowDetails';
 import ShowImages from '@/app/components/ShowImages';
@@ -65,13 +66,13 @@ export default function Page({ params }) {
   return (
     <div style={backgroundStyles}>
       {showData && castData && imagesData && videosData && (
-        <>
+        <div className={styles.container}>
           <ShowDetails show={showData} cast={castData} providers={providersData} />
           <ShowCast cast={castData} />
           <ShowImages images={imagesData.backdrops} />
           <ShowVideos videos={videosData} />
           <ScrollToTopButton />
-        </>
+        </div>
       )}
     </div>
   );

@@ -1,3 +1,4 @@
+import styles from './page.module.css';
 import PersonDetails from '@/app/components/PersonDetails';
 import PersonFilmography from '@/app/components/PersonFilmography';
 import PersonImages from '@/app/components/PersonImages';
@@ -36,13 +37,13 @@ export default async function Page({ params }) {
   return (
     <div style={backgroundStyles}>
       {personDetails && personDetails.name && filmographyData && seriesData && imagesData && (
-        <>
+        <div className={styles.container}>
           <PersonDetails person={personDetails} />
           <PersonFilmography movies={filmographyData.cast} />
           <PersonSeries series={seriesData.cast} />
           <PersonImages images={imagesData} />
           <ScrollToTopButton />
-        </>
+        </div>
       )}
     </div>
   );
