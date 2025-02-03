@@ -20,20 +20,26 @@ export default function ShowVideos({ videos }) {
     setActiveVideo(index);
   };
 
-  const closeModal = () => {
-    setActiveVideo(null);
-  };
-
   const handleLeftClick = useCallback(() => {
+    if (!containerRef.current) return; // Zabezpieczenie przed null
+
     handleScroll(containerRef.current, 'left', 869);
   }, []);
 
   const handleRightClick = useCallback(() => {
+    if (!containerRef.current) return; // Zabezpieczenie przed null
+
     handleScroll(containerRef.current, 'right', 869);
   }, []);
 
+  const closeModal = () => {
+    setActiveVideo(null);
+  };
+
   const checkEdge = () => {
     const container = containerRef.current;
+    if (!container) return; // Zabezpieczenie przed null
+
     const isAtStart = container.scrollLeft === 0;
     const margin = 1;
     const isAtEnd = container.scrollLeft + container.clientWidth >= container.scrollWidth - margin;
@@ -42,6 +48,18 @@ export default function ShowVideos({ videos }) {
       right: isAtEnd,
     });
   };
+
+  useEffect(() => {
+    const keyPressHandler = (event) => {
+      handleKeyPress(event, activeVideo, closeModal);
+    };
+
+    window.addEventListener('keydown', keyPressHandler);
+
+    return () => {
+      window.removeEventListener('keydown', keyPressHandler);
+    };
+  }, [activeVideo, videos]);
 
   useEffect(() => {
     checkButtonsVisibility(containerRef, setShowButtons);
@@ -58,6 +76,8 @@ export default function ShowVideos({ videos }) {
 
   useEffect(() => {
     const container = containerRef.current;
+    if (!container) return; // Zabezpieczenie przed null
+
     const handleScrollEvent = () => {
       checkEdge();
     };
@@ -65,18 +85,6 @@ export default function ShowVideos({ videos }) {
     container.addEventListener('scroll', handleScrollEvent);
     return () => container.removeEventListener('scroll', handleScrollEvent);
   }, []);
-
-  useEffect(() => {
-    const keyPressHandler = (event) => {
-      handleKeyPress(event, activeVideo, closeModal);
-    };
-
-    window.addEventListener('keydown', keyPressHandler);
-
-    return () => {
-      window.removeEventListener('keydown', keyPressHandler);
-    };
-  }, [activeVideo, videos]);
 
   useEffect(() => {
     disableScroll(activeVideo !== null);

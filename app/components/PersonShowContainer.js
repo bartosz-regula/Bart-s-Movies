@@ -18,15 +18,21 @@ export default function PersonShowContainer({ show, header }) {
   const vote = show?.vote_average ? show.vote_average.toFixed(1) : show?.vote || 'N/A';
 
   const handleLeftClick = useCallback(() => {
+    if (!containerRef.current) return; // Zabezpieczenie przed null
+
     handleScroll(containerRef.current, 'left', 1020);
   }, []);
 
   const handleRightClick = useCallback(() => {
+    if (!containerRef.current) return; // Zabezpieczenie przed null
+
     handleScroll(containerRef.current, 'right', 1020);
   }, []);
 
   const checkEdge = () => {
     const container = containerRef.current;
+    if (!container) return; // Zabezpieczenie przed null
+
     const isAtStart = container.scrollLeft === 0;
     const margin = 1;
     const isAtEnd = container.scrollLeft + container.clientWidth >= container.scrollWidth - margin;
@@ -51,6 +57,8 @@ export default function PersonShowContainer({ show, header }) {
 
   useEffect(() => {
     const container = containerRef.current;
+    if (!container) return; // Zabezpieczenie przed null
+
     const handleScrollEvent = () => {
       checkEdge();
     };
