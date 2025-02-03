@@ -15,8 +15,6 @@ export default function PersonShowContainer({ show, header }) {
   const [isLoading, setIsLoading] = useState(true);
   const [edgeReached, setEdgeReached] = useState({ left: false, right: false });
 
-  const vote = show?.vote_average ? show.vote_average.toFixed(1) : show?.vote || 'N/A';
-
   const handleLeftClick = useCallback(() => {
     if (!containerRef.current) return; // Zabezpieczenie przed null
 
@@ -107,6 +105,7 @@ export default function PersonShowContainer({ show, header }) {
                   />
                 </div>
                 <p className={styles.title}>{title}</p>
+                <p className={styles.charcater}>{item.character}</p>
               </Link>
             </li>
           );

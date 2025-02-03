@@ -2,7 +2,6 @@
   max-width: 120rem;
   margin: 6rem auto 0 auto;
 }
-
 .justify_content {
   justify-content: center;
 }
@@ -44,13 +43,20 @@
 .title {
   margin-top: 1rem;
   font-weight: bold;
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   transition: color 0.3s;
   line-height: 1.2;
 }
 
 .title:hover {
   color: var(--aqua);
+}
+
+.charcater {
+  margin-top: 0.3rem;
+  font-size: 1.4rem;
+  color: var(--grey);
+  line-height: 1.2;
 }
 
 .btn {
