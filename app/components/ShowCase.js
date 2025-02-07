@@ -47,8 +47,8 @@ export default function ShowCase({ type, title, route }) {
         <Loading />
       ) : (
         <>
-          <div className={styles.header}>
-            <h2>{title}</h2>
+          <div className={styles.header_container}>
+            <h2 className={styles.header}>{title}</h2>
             <Link href={route} className={styles.explore}>
               Explore More
             </Link>

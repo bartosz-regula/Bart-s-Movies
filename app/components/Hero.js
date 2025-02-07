@@ -161,7 +161,7 @@ export default function Hero() {
   return (
     <div className={styles.hero}>
       <Carousel
-        autoPlay
+        // autoPlay
         infiniteLoop
         interval={5000}
         showThumbs={false}
@@ -180,39 +180,41 @@ export default function Hero() {
               backgroundSize: 'cover',
             }}
           >
-            <div className={styles.text_container}>
-              <Link href={`/movie/${movie.id}`}>
-                <h1>{movie.title}</h1>
-                <p>
-                  {movie.overview
-                    ? movie.overview.length > 300
-                      ? `${movie.overview.slice(0, movie.overview.slice(0, 300).lastIndexOf(' '))}...`
-                      : movie.overview
-                    : `We don't have an overview for ${movie.title} yet.`}
-                </p>
-              </Link>
-              <div className={styles.buttons_container}>
-                <span className={styles.btn_trailer_container}>
-                  <AiFillYoutube size={28} />
-                  <button className={`${styles.btn_trailer} ${styles.btn}`} onClick={() => handleVideoClick(index)}>
-                    TRAILER
-                  </button>
-                </span>
-                {isFavorite[movie.id] ? (
-                  <button
-                    className={`${styles.btn_favorite} ${styles.btn}`}
-                    onClick={() => handleRemoveFromFavorites(index)}
-                  >
-                    REMOVE FROM FAVORITES
-                  </button>
-                ) : (
-                  <button
-                    className={`${styles.btn_favorite} ${styles.btn}`}
-                    onClick={() => handleAddToFavorites(index)}
-                  >
-                    ADD TO FAVORITES
-                  </button>
-                )}
+            <div className={styles.header_container}>
+              <div className={styles.text_container}>
+                <Link href={`/movie/${movie.id}`}>
+                  <h1>{movie.title}</h1>
+                  <p>
+                    {movie.overview
+                      ? movie.overview.length > 300
+                        ? `${movie.overview.slice(0, movie.overview.slice(0, 300).lastIndexOf(' '))}...`
+                        : movie.overview
+                      : `We don't have an overview for ${movie.title} yet.`}
+                  </p>
+                </Link>
+                <div className={styles.buttons_container}>
+                  <span className={styles.btn_trailer_container}>
+                    <AiFillYoutube size={28} />
+                    <button className={`${styles.btn_trailer} ${styles.btn}`} onClick={() => handleVideoClick(index)}>
+                      TRAILER
+                    </button>
+                  </span>
+                  {isFavorite[movie.id] ? (
+                    <button
+                      className={`${styles.btn_favorite} ${styles.btn}`}
+                      onClick={() => handleRemoveFromFavorites(index)}
+                    >
+                      REMOVE FROM FAVORITES
+                    </button>
+                  ) : (
+                    <button
+                      className={`${styles.btn_favorite} ${styles.btn}`}
+                      onClick={() => handleAddToFavorites(index)}
+                    >
+                      ADD TO FAVORITES
+                    </button>
+                  )}
+                </div>
               </div>
             </div>
           </div>

@@ -3,5 +3,9 @@
   grid-template-columns: repeat(6, 1fr);
   align-items: center;
   justify-items: center;
+  gap: 2rem;
   color: #ffffff;
+  max-width: 140rem;
+
+  border: 1px solid red;
 }

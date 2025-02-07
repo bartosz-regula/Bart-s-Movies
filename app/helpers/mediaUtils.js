@@ -8,7 +8,7 @@ export const getType = (mediaType, title, name) => {
 };
 
 export const formatTitle = (title) => {
-  return title.length > 24 ? title.slice(0, 24) + '...' : title;
+  return title.length > 18 ? title.slice(0, 18) + '...' : title;
 };
 
 export const getImageSrc = (mediaType, profilePath, posterPath, poster, defaultImage) => {

@@ -77,8 +77,8 @@ export default function Card({ show, className }) {
           <Image
             src={imageSrc}
             className={styles.img}
-            width={215}
-            height={330}
+            fill
+            style={{ objectFit: 'contain' }} // Poprawiona składnia
             alt={title}
             onLoadingComplete={handleImageLoad}
           />

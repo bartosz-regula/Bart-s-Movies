@@ -2,3 +2,9 @@
   display: flex;
   gap: 2.2rem;
 }
+
+@media (max-width: 1000px) {
+  .navbar_links {
+    display: none;
+  }
+}

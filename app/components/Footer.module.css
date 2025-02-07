@@ -10,7 +10,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 0 4rem;
+  margin: 0 auto;
+  max-width: 140rem;
 }
 
 .tmdb_container {
