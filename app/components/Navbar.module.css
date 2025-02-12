@@ -7,11 +7,16 @@
   max-width: 140rem;
   font-size: 1.6rem;
   color: var(--white);
-  z-index: 100;
   position: relative;
   z-index: 89;
 }
 
 .spinner {
   margin-right: 7rem;
+}
+
+@media (max-width: 960px) {
+  .navbar {
+    display: none;
+  }
 }

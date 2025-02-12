@@ -49,3 +49,25 @@
   opacity: 1;
   padding-top: 0.6rem;
 }
+
+@media (max-width: 1150px) {
+  .navbar_item_title {
+    display: none;
+  }
+
+  .user_arrow {
+    display: none;
+  }
+
+  .sign_out {
+    left: -50px;
+    width: 11.5rem;
+  }
+
+  .navbar_user {
+    margin-right: 2rem;
+  }
+}
+
+@media (max-width: 960px) {
+}

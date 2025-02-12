@@ -30,7 +30,12 @@ export const UserMenu = ({ user, logout }) => {
   return (
     <div className={styles.navbar_user} onClick={toggleMenu} ref={menuRef}>
       <div className={styles.user_container}>
-        <NavbarItem title={user} param="" icon={<AccountCircleIcon fontSize="inherit" />} />
+        <NavbarItem
+          classNameTitle={styles.navbar_item_title}
+          title={user}
+          param=""
+          icon={<AccountCircleIcon fontSize="inherit" />}
+        />
         <span className={styles.user_arrow}>
           {isOpen ? <ArrowDropUpIcon fontSize="inherit" /> : <ArrowDropDownIcon fontSize="inherit" />}
         </span>

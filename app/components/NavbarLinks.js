@@ -24,7 +24,7 @@ export const NavbarLinks = () => (
       <Image src="/barts-movies-high-resolution-logo-transparent (6) copy.png" width={125} height={42} alt="Logo" />
     </Link>
     {navItems.map((item, index) => (
-      <NavbarItem key={index} title={item.title} param={item.param} icon={item.icon} />
+      <NavbarItem className={styles.navbar_item} key={index} title={item.title} param={item.param} icon={item.icon} />
     ))}
   </div>
 );

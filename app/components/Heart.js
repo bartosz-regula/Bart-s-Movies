@@ -1,5 +1,3 @@
-import styles from './Heart.module.css';
-
 export default function Heart({ isFavorite, className, handleAddToFavorites, handleRemoveFromFavorites }) {
   const handleHeartClick = (event) => {
     event.stopPropagation();

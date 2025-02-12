@@ -1,0 +1,45 @@
+.container {
+  display: none;
+  padding: 1.2rem 2.2rem 0 2.2rem;
+}
+
+@media (max-width: 960px) {
+  .container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .img_container {
+    z-index: 89;
+  }
+
+  .links_container {
+    display: flex;
+    gap: 1rem;
+    z-index: 89;
+  }
+
+  .user_icon {
+    position: relative;
+  }
+
+  .sign_out {
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    transform: scaleY(0);
+    transform-origin: top;
+    opacity: 0;
+    padding-top: 0;
+    transition:
+      transform 0.5s ease,
+      padding-top 0.5s ease,
+      opacity 0.3s ease;
+  }
+
+  .sign_out.open {
+    transform: scaleY(1);
+    opacity: 1;
+    padding-top: 0.6rem;
+  }
+}

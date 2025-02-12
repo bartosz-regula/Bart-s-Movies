@@ -78,7 +78,7 @@ export default function Card({ show, className }) {
             src={imageSrc}
             className={styles.img}
             fill
-            style={{ objectFit: 'contain' }} // Poprawiona składnia
+            style={{ objectFit: 'contain' }}
             alt={title}
             onLoadingComplete={handleImageLoad}
           />
