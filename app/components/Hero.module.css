@@ -6,6 +6,7 @@
 
 .slide {
   min-height: 60rem;
+  /* min-height: 80rem; */
 }
 
 .header_container {
@@ -14,12 +15,12 @@
   margin-right: auto;
   text-align: left;
   border: 1px solid blue;
+  max-width: 140rem;
 }
 
 .text_container {
   margin-left: 8rem;
   max-width: 70rem;
-  border: 1px solid red;
 }
 
 .hero h1 {
@@ -83,4 +84,95 @@
 .btn_favorite:hover {
   background: none;
   color: var(--white);
+}
+
+@media (max-width: 1023px) {
+  .hero h1 {
+    font-size: 4.2rem;
+  }
+
+  .hero p {
+    font-size: 1.4rem;
+  }
+
+  .text_container {
+    max-width: 60rem;
+  }
+
+  .header_container {
+    padding-top: 25rem;
+  }
+
+  .slide {
+    min-height: 55rem;
+  }
+}
+
+@media (max-width: 920px) {
+  .slide {
+    min-height: 50rem;
+  }
+
+  .header_container {
+    padding-bottom: 5rem;
+  }
+}
+
+@media (max-width: 820px) {
+  .hero h1 {
+    font-size: 3.6rem;
+  }
+
+  /* .hero p {
+    font-size: 1.4rem;
+  } */
+
+  .btn {
+    /* background: none; */
+    /* color: var(--white); */
+    /* border: none; */
+    /* margin-left: 0.8rem; */
+    /* font-size: 1.2rem; */
+    /* font-weight: bold; */
+    /* cursor: pointer; */
+    /* transition: color 0.5s ease; */
+  }
+
+  .text_container {
+    /* margin-left: 8rem; */
+    /* margin-left: auto; */
+    /* margin-right: auto; */
+    max-width: 50rem;
+    /* border: 1px solid red; */
+  }
+
+  .slide {
+    min-height: 45rem;
+  }
+
+  .header_container {
+    padding-top: 25rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .slide {
+    background-position: center; /* Pokazuje środek obrazka */
+    /* background-size: 100% 100% !important; */
+  }
+}
+
+@media (max-width: 630px) {
+  .header_container {
+    padding-top: 5rem;
+    height: 50rem;
+    margin-bottom: 10rem;
+  }
+
+  .text_container {
+    margin-top: 30rem;
+    margin-left: auto;
+    margin-right: auto; /* max-width: 70rem; */
+    text-align: center;
+  }
 }

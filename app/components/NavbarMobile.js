@@ -41,7 +41,7 @@ export default function NavbarMobile() {
   return (
     <div className={styles.container}>
       <Link className={styles.img_container} href="/">
-        <Image src="/barts-movies-high-resolution-logo-transparent (6) copy.png" width={90} height={30} alt="Logo" />
+        <Image src="/barts-movies-high-resolution-logo-transparent (6) copy.png" width={125} height={42} alt="Logo" />
       </Link>
 
       <div className={styles.links_container}>

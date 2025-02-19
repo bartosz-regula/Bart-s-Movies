@@ -20,6 +20,10 @@ export default function Hero() {
   const [videos, setVideos] = useState([]);
   const [isFavorite, setIsFavorite] = useState({});
   const [favoriteDocId, setFavoriteDocId] = useState({});
+  const [screenWidth, setScreenWidth] = useState(630);
+
+  const maxLength = screenWidth < 630 ? 110 : 300; // 150 znaków dla małych ekranów, 300 dla większych
+
   const router = useRouter();
   const auth = getAuth();
   const user = auth.currentUser;
@@ -67,6 +71,13 @@ export default function Hero() {
     }
 
     fetchMovies();
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => setScreenWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   useEffect(() => {
@@ -171,7 +182,7 @@ export default function Hero() {
         dynamicHeight={false}
         emulateTouch={true}
       >
-        {movies.map((movie, index) => (
+        {movies.slice(0, 12).map((movie, index) => (
           <div
             key={movie.id}
             className={styles.slide}
@@ -186,8 +197,8 @@ export default function Hero() {
                   <h1>{movie.title}</h1>
                   <p>
                     {movie.overview
-                      ? movie.overview.length > 300
-                        ? `${movie.overview.slice(0, movie.overview.slice(0, 300).lastIndexOf(' '))}...`
+                      ? movie.overview.length > maxLength
+                        ? `${movie.overview.slice(0, movie.overview.slice(0, maxLength).lastIndexOf(' '))}...`
                         : movie.overview
                       : `We don't have an overview for ${movie.title} yet.`}
                   </p>
@@ -225,3 +236,140 @@ export default function Hero() {
     </div>
   );
 }
+
+// 'use client';
+//
+// import { useState, useEffect } from 'react';
+// import styles from './Hero.module.css';
+// import { Carousel } from 'react-responsive-carousel';
+// import 'react-responsive-carousel/lib/styles/carousel.min.css';
+// import ModalVideo from './ModalVideo';
+// import Link from 'next/link';
+// import handleKeyPress from '../helpers/handleKeyPress';
+// import { getAuth } from 'firebase/auth';
+// import { useRouter } from 'next/navigation';
+// import { notify } from '../helpers/notify';
+// import { AiFillYoutube } from 'react-icons/ai';
+// import { checkIfFavorite, addToFavorites, removeFromFavorites } from '../helpers/firebaseUtils';
+// import Loading from '../loading';
+// import Image from 'next/image';
+//
+// export default function Hero() {
+//   const [movies, setMovies] = useState([]);
+//   const [activeVideo, setActiveVideo] = useState(null);
+//   const [isFavorite, setIsFavorite] = useState({});
+//   const [favoriteDocId, setFavoriteDocId] = useState({});
+//   const router = useRouter();
+//   const auth = getAuth();
+//   const user = auth.currentUser;
+//
+//   const closeModal = () => {
+//     setActiveVideo(null);
+//   };
+//
+//   useEffect(() => {
+//     const keyPressHandler = (event) => {
+//       handleKeyPress(event, activeVideo, closeModal);
+//     };
+//
+//     window.addEventListener('keydown', keyPressHandler);
+//
+//     return () => {
+//       window.removeEventListener('keydown', keyPressHandler);
+//     };
+//   }, [activeVideo]);
+//
+//   const fetchMovieLogos = async (movieId) => {
+//     const res = await fetch(
+//       `${process.env.NEXT_PUBLIC_BASE_URL}/movie/${movieId}/images?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
+//     );
+//     const data = await res.json();
+//
+//     if (data.logos && data.logos.length > 0) {
+//       return `https://image.tmdb.org/t/p/original${data.logos[0].file_path}`;
+//     }
+//
+//     return null; // Brak logo
+//   };
+//
+//   useEffect(() => {
+//     async function fetchMovies() {
+//       const res = await fetch(
+//         `${process.env.NEXT_PUBLIC_BASE_URL}/movie/popular?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
+//       );
+//       const data = await res.json();
+//
+//       const moviesWithLogos = await Promise.all(
+//         data.results.map(async (movie) => {
+//           const logoUrl = await fetchMovieLogos(movie.id);
+//           return { ...movie, logo: logoUrl };
+//         })
+//       );
+//
+//       setMovies(moviesWithLogos);
+//     }
+//
+//     fetchMovies();
+//   }, []);
+//
+//   if (movies.length === 0) {
+//     return <Loading />;
+//   }
+//
+//   return (
+//     <div className={styles.hero}>
+//       <Carousel
+//         infiniteLoop
+//         interval={5000}
+//         showThumbs={false}
+//         showStatus={false}
+//         showArrows={false}
+//         swipeable={true}
+//         emulateTouch={true}
+//       >
+//         {movies.map((movie) => (
+//           <div
+//             key={movie.id}
+//             className={styles.slide}
+//             style={{
+//               backgroundImage: `linear-gradient(to top, rgba(0,0,0,1) 5%, rgba(0,0,0,0)), url(https://image.tmdb.org/t/p/w1280${movie.backdrop_path})`,
+//               backgroundSize: 'cover',
+//             }}
+//           >
+//             <div className={styles.header_container}>
+//               <div className={styles.text_container}>
+//                 <Link href={`/movie/${movie.id}`}>
+//                   {movie.logo && (
+//                     <Image
+//                       src={movie.logo}
+//                       width={50}
+//                       height={100}
+//                       alt={`${movie.title} Logo`}
+//                       className={styles.logo}
+//                     />
+//                   )}
+//                   {/* <h1>{movie.title}</h1> */}
+//                 </Link>
+//                 <p>
+//                   {movie.overview
+//                     ? movie.overview.length > 300
+//                       ? `${movie.overview.slice(0, movie.overview.slice(0, 300).lastIndexOf(' '))}...`
+//                       : movie.overview
+//                     : `We don't have an overview for ${movie.title} yet.`}
+//                 </p>
+//                 <div className={styles.buttons_container}>
+//                   <span className={styles.btn_trailer_container}>
+//                     <AiFillYoutube size={28} />
+//                     <button className={`${styles.btn_trailer} ${styles.btn}`}>TRAILER</button>
+//                   </span>
+//                 </div>
+//               </div>
+//             </div>
+//           </div>
+//         ))}
+//       </Carousel>
+//
+//       {activeVideo && <ModalVideo videos={activeVideo} closeModal={closeModal} />}
+//     </div>
+//   );
+// }
