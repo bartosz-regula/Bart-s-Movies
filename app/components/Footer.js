@@ -20,7 +20,7 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Image src="/tmdb.svg" alt="tmdb" width={160} height={50} />
+              <Image src="/tmdb.svg" alt="tmdb" width={160} height={50} layout="intrinsic" className={styles.logo} />
             </Link>
           </div>
           <p className={styles.tmdb_api_text}>

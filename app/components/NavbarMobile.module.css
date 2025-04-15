@@ -21,6 +21,7 @@
 
   .user_icon {
     position: relative;
+    font-size: 3rem;
   }
 
   .sign_out {

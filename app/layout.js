@@ -3,6 +3,8 @@ import Navbar from './components/Navbar';
 import '@/app/globals.css';
 import Toaster from './components/Toaster';
 import NavbarMobile from './components/NavbarMobile';
+import MobileNavigation from './components/MobileNavigation';
+import HamburgerMenu from './components/HamburgerMenu';
 
 export const metadata = {
   title: `Bart's Movies - Your Movie Database`,
@@ -18,6 +20,8 @@ export default function RootLayout({ children }) {
       <body>
         <Navbar />
         <NavbarMobile />
+        {/* <HamburgerMenu /> */}
+        {/* <MobileNavigation /> */}
         {children}
         <Footer />
         <Toaster />

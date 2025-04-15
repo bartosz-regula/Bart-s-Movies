@@ -20,9 +20,9 @@ export default function Hero() {
   const [videos, setVideos] = useState([]);
   const [isFavorite, setIsFavorite] = useState({});
   const [favoriteDocId, setFavoriteDocId] = useState({});
-  const [screenWidth, setScreenWidth] = useState(630);
+  const [screenWidth, setScreenWidth] = useState(0);
 
-  const maxLength = screenWidth < 630 ? 110 : 300; // 150 znaków dla małych ekranów, 300 dla większych
+  const maxLength = screenWidth < 631 ? 100 : 230; // 150 znaków dla małych ekranów, 300 dla większych
 
   const router = useRouter();
   const auth = getAuth();
@@ -31,6 +31,10 @@ export default function Hero() {
   const closeModal = () => {
     setActiveVideo(null);
   };
+
+  useEffect(() => {
+    setScreenWidth(window.innerWidth);
+  }, []);
 
   useEffect(() => {
     const keyPressHandler = (event) => {
@@ -192,39 +196,41 @@ export default function Hero() {
             }}
           >
             <div className={styles.header_container}>
-              <div className={styles.text_container}>
-                <Link href={`/movie/${movie.id}`}>
-                  <h1>{movie.title}</h1>
-                  <p>
-                    {movie.overview
-                      ? movie.overview.length > maxLength
-                        ? `${movie.overview.slice(0, movie.overview.slice(0, maxLength).lastIndexOf(' '))}...`
-                        : movie.overview
-                      : `We don't have an overview for ${movie.title} yet.`}
-                  </p>
-                </Link>
-                <div className={styles.buttons_container}>
-                  <span className={styles.btn_trailer_container}>
-                    <AiFillYoutube size={28} />
-                    <button className={`${styles.btn_trailer} ${styles.btn}`} onClick={() => handleVideoClick(index)}>
-                      TRAILER
-                    </button>
-                  </span>
-                  {isFavorite[movie.id] ? (
-                    <button
-                      className={`${styles.btn_favorite} ${styles.btn}`}
-                      onClick={() => handleRemoveFromFavorites(index)}
-                    >
-                      REMOVE FROM FAVORITES
-                    </button>
-                  ) : (
-                    <button
-                      className={`${styles.btn_favorite} ${styles.btn}`}
-                      onClick={() => handleAddToFavorites(index)}
-                    >
-                      ADD TO FAVORITES
-                    </button>
-                  )}
+              <div className={styles.test}>
+                <div className={styles.text_container}>
+                  <Link href={`/movie/${movie.id}`}>
+                    <h1>{movie.title}</h1>
+                    <p>
+                      {movie.overview
+                        ? movie.overview.length > maxLength
+                          ? `${movie.overview.slice(0, movie.overview.slice(0, maxLength).lastIndexOf(' '))}...`
+                          : movie.overview
+                        : `We don't have an overview for ${movie.title} yet.`}
+                    </p>
+                  </Link>
+                  <div className={styles.buttons_container}>
+                    <span className={styles.btn_trailer_container}>
+                      <AiFillYoutube size={28} />
+                      <button className={`${styles.btn_trailer} ${styles.btn}`} onClick={() => handleVideoClick(index)}>
+                        TRAILER
+                      </button>
+                    </span>
+                    {isFavorite[movie.id] ? (
+                      <button
+                        className={`${styles.btn_favorite} ${styles.btn}`}
+                        onClick={() => handleRemoveFromFavorites(index)}
+                      >
+                        REMOVE FROM FAVORITES
+                      </button>
+                    ) : (
+                      <button
+                        className={`${styles.btn_favorite} ${styles.btn}`}
+                        onClick={() => handleAddToFavorites(index)}
+                      >
+                        ADD TO FAVORITES
+                      </button>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
