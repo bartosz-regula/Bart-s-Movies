@@ -21,13 +21,13 @@ export default function ShowVideos({ videos }) {
   };
 
   const handleLeftClick = useCallback(() => {
-    if (!containerRef.current) return; // Zabezpieczenie przed null
+    if (!containerRef.current) return;
 
     handleScroll(containerRef.current, 'left', 869);
   }, []);
 
   const handleRightClick = useCallback(() => {
-    if (!containerRef.current) return; // Zabezpieczenie przed null
+    if (!containerRef.current) return;
 
     handleScroll(containerRef.current, 'right', 869);
   }, []);
@@ -38,7 +38,7 @@ export default function ShowVideos({ videos }) {
 
   const checkEdge = () => {
     const container = containerRef.current;
-    if (!container) return; // Zabezpieczenie przed null
+    if (!container) return;
 
     const isAtStart = container.scrollLeft === 0;
     const margin = 1;
@@ -76,7 +76,7 @@ export default function ShowVideos({ videos }) {
 
   useEffect(() => {
     const container = containerRef.current;
-    if (!container) return; // Zabezpieczenie przed null
+    if (!container) return;
 
     const handleScrollEvent = () => {
       checkEdge();
@@ -116,16 +116,15 @@ export default function ShowVideos({ videos }) {
             &lt;
           </button>
         )}
-        {videos.results.map((video, index) => (
+        {videos.results.slice(0, 6).map((video, index) => (
           <div key={video.id} className={styles.video} onClick={() => handleVideoClick(index)}>
             {isLoading && <Spinner className={styles.spinner} />}
             <div className={styles.iframeContainer}>
               <iframe
-                width="408"
-                height="200"
                 src={`https://www.youtube.com/embed/${video.key}`}
                 frameBorder="0"
                 allowFullScreen
+                controls="0"
                 onLoad={handleImageLoad}
                 title={video.name}
               ></iframe>

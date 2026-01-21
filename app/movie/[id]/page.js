@@ -57,23 +57,21 @@ export default function Page({ params }) {
     backgroundImage: showData?.backdrop_path
       ? `linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 1)), url(https://image.tmdb.org/t/p/w1280${showData.backdrop_path})`
       : `linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.5)), url(${DEFAULT_SHOW_BACKGROUND})`,
-
-    backgroundSize: 'cover',
-    backgroundAttachment: 'fixed',
-    backgroundPosition: 'center',
-    backgroundRepeat: 'no-repeat',
   };
   return (
-    <div style={backgroundStyles}>
-      {showData && castData && imagesData && videosData && (
-        <div className={styles.container}>
-          <ShowDetails show={showData} cast={castData} providers={providersData} />
-          <ShowCast cast={castData} />
-          <ShowImages images={imagesData.backdrops} />
-          <ShowVideos videos={videosData} />
-          <ScrollToTopButton />
-        </div>
-      )}
-    </div>
+    <>
+      <div className={styles.background} style={backgroundStyles}></div>
+      <>
+        {showData && castData && imagesData && videosData && (
+          <div className={styles.container}>
+            <ShowDetails show={showData} cast={castData} providers={providersData} />
+            <ShowCast cast={castData} />
+            <ShowImages images={imagesData.backdrops} />
+            <ShowVideos videos={videosData} />
+            <ScrollToTopButton />
+          </div>
+        )}
+      </>
+    </>
   );
 }

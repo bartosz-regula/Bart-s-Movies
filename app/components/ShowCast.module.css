@@ -1,7 +1,6 @@
 .container {
   max-width: 116rem;
   margin: 7rem auto 0 auto;
-  min-height: 35rem;
 }
 
 .header {
@@ -13,6 +12,7 @@
   display: flex;
   overflow-x: scroll;
   margin-top: 2.2rem;
+  line-height: 1.1;
 }
 
 .justify_content {
@@ -27,12 +27,14 @@
 }
 
 .img_container {
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  overflow: hidden;
+  position: relative;
+  width: 17rem;
+  height: 23rem;
 }
 
 .person_img {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
   transition: transform 0.3s ease;
 }
 
@@ -41,8 +43,9 @@
 }
 
 .person_box p {
-  margin-top: 0.5rem;
+  margin-top: 0.3rem;
   color: var(--grey);
+  line-height: 1.15;
 }
 
 .person_box strong {
@@ -93,4 +96,100 @@
 .spinner {
   position: absolute;
   top: 40%;
+}
+
+@media (pointer: coarse) and (hover: none) {
+  .btn {
+    display: none;
+  }
+}
+
+@media (max-width: 1200px) {
+  .container {
+    max-width: 104rem;
+  }
+  .img_container {
+    width: 15rem;
+    height: 20rem;
+  }
+}
+
+@media (max-width: 1060px) {
+  .container {
+    max-width: 86.1rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .container {
+    max-width: 68.4rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .container {
+    max-width: 54rem;
+  }
+
+  .person_box {
+    margin-right: 2rem;
+    font-size: 1.2rem;
+  }
+
+  .img_container {
+    width: 12rem;
+    height: 16rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    max-width: 46rem;
+  }
+
+  .img_container {
+    width: 10rem;
+    height: 14rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    max-width: 38.7rem;
+    margin-top: 3rem;
+  }
+
+  .person_box {
+    margin-right: 1.4rem;
+  }
+
+  .img_container {
+    width: 12rem;
+    height: 16rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .container {
+    max-width: 35.8rem;
+  }
+
+  .img_container {
+    width: 11rem;
+    height: 15.5rem;
+  }
+}
+
+@media (max-width: 365px) {
+  .container {
+    max-width: 29.8rem;
+  }
+
+  /* .cast_container {
+    line-height: 1.1;
+  } */
+  .img_container {
+    width: 9rem;
+    height: 13rem;
+  }
 }

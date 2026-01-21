@@ -1,6 +1,6 @@
 .container {
   margin: 3rem auto 0 auto;
-  max-width: 127.9rem;
+  max-width: 130rem;
 }
 .header {
   font-size: 2.1rem;
@@ -9,6 +9,7 @@
 
 .images_container {
   display: flex;
+  gap: 2.45rem;
   overflow-y: hidden;
   margin-top: 2.2rem;
 }
@@ -27,10 +28,11 @@
 .image_box {
   overflow: hidden;
   border-radius: 10px;
+  width: 295px;
+  height: 165.93px;
 }
 
 .image {
-  margin-right: 2.45rem;
   cursor: pointer;
   transition: transform 0.3s ease;
   border-radius: 10px;
@@ -79,4 +81,103 @@
   position: absolute;
   left: 40%;
   top: 50%;
+}
+
+@media (pointer: coarse) and (hover: none) {
+  .btn {
+    display: none;
+  }
+}
+
+@media (max-width: 1300px) {
+  .container {
+    max-width: 116rem;
+  }
+
+  .image_box {
+    width: 260px;
+    height: 146.25px;
+  }
+}
+
+@media (max-width: 1160px) {
+  .container {
+    max-width: 86rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .container {
+    max-width: 81.8rem;
+  }
+  .image_box {
+    width: 240px;
+    height: 135px;
+  }
+}
+
+@media (max-width: 820px) {
+  .container {
+    max-width: 59rem;
+  }
+  .image_box {
+    width: 260px;
+    height: 146.25px;
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    max-width: 51rem;
+  }
+  .image_box {
+    width: 220px;
+    height: 123.75px;
+  }
+}
+
+@media (max-width: 520px) {
+  .container {
+    max-width: 47rem;
+  }
+  .image_box {
+    width: 200px;
+    height: 112.5px;
+  }
+}
+
+@media (max-width: 470px) {
+  .container {
+    max-width: 38rem;
+    gap: 1rem;
+  }
+
+  .images_container {
+    gap: 1.2rem;
+  }
+  .image_box {
+    width: 175px;
+    height: 98.43px;
+  }
+}
+
+@media (max-width: 415px) {
+  .container {
+    max-width: 36.5rem;
+    margin-left: auto;
+  }
+  .image_box {
+    width: 165px;
+    height: 92.81px;
+  }
+}
+
+@media (max-width: 370px) {
+  .container {
+    max-width: 24rem;
+  }
+  .image_box {
+    width: 220px;
+    height: 123.75px;
+  }
 }

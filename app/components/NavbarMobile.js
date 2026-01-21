@@ -13,6 +13,7 @@ import { auth } from '../config/firebase';
 
 export default function NavbarMobile() {
   const [isOpen, setIsOpen] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
 
   const toggleMenu = useCallback(() => {
     setIsOpen((prev) => !prev);
@@ -34,7 +35,7 @@ export default function NavbarMobile() {
       <div className={styles.links_container}>
         <NavbarItem icon={<SearchIcon sx={{ fontSize: 30 }} />} param="/search" />
 
-        <NavbarItem icon={<MenuIcon sx={{ fontSize: 30 }} />} param="/" onClick={toggleMenu} />
+        <NavbarItem icon={<MenuIcon sx={{ fontSize: 30 }} />} param="#" onClick={toggleMenu} />
       </div>
       <HamburgerMenu isOpen={isOpen} toggleMenu={toggleMenu} />
     </div>

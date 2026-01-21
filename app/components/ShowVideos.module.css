@@ -1,6 +1,6 @@
 .container {
   margin: 6rem auto 0 auto;
-  max-width: 127.9rem;
+  max-width: 128.1rem;
 }
 .header {
   font-size: 2.1rem;
@@ -47,6 +47,8 @@
 
 .iframeContainer iframe {
   pointer-events: none;
+  width: 408px;
+  height: 230px;
 }
 
 .iframeContainer:hover {
@@ -89,4 +91,83 @@
 .spinner {
   position: absolute;
   top: 45%;
+}
+
+@media (pointer: coarse) and (hover: none) {
+  .btn {
+    display: none;
+  }
+}
+
+@media (max-width: 1310px) {
+  .container {
+    max-width: 120rem;
+  }
+  .iframeContainer iframe {
+    width: 380px;
+    height: 213px;
+  }
+}
+
+@media (max-width: 1230px) {
+  .container {
+    max-width: 111rem;
+  }
+  .iframeContainer iframe {
+    width: 350px;
+    height: 196.8px;
+  }
+}
+
+@media (max-width: 1160px) {
+  .container {
+    max-width: 102rem;
+  }
+  .iframeContainer iframe {
+    width: 320px;
+    height: 180px;
+  }
+}
+
+@media (max-width: 1050px) {
+  .container {
+    max-width: 90rem;
+  }
+  .iframeContainer iframe {
+    width: 280px;
+    height: 157px;
+  }
+}
+
+@media (max-width: 930px) {
+  .container {
+    max-width: 59rem;
+  }
+}
+
+@media (max-width: 630px) {
+  .container {
+    max-width: 55rem;
+    margin-right: 4.5rem;
+    margin-left: 4.5rem;
+  }
+}
+
+@media (max-width: 470px) {
+  .container {
+    margin-right: 1rem;
+    margin-left: 1rem;
+  }
+  .iframeContainer iframe {
+    width: 270px;
+    height: 152px;
+  }
+}
+
+@media (max-width: 320px) {
+  .container {
+    max-width: 28rem;
+    margin-right: auto;
+    margin-left: auto;
+  }
 }

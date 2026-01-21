@@ -179,27 +179,23 @@ export default function ShowImages({ images }) {
   const [isLoading, setIsLoading] = useState(true);
   const [edgeReached, setEdgeReached] = useState({ left: false, right: false });
 
-  // Funkcja do przewijania w lewo
   const handleLeftClick = useCallback(() => {
-    if (!containerRef.current) return; // Zabezpieczenie przed null
+    if (!containerRef.current) return;
     handleScroll(containerRef.current, 'left', 976.5);
   }, []);
 
-  // Funkcja do przewijania w prawo
   const handleRightClick = useCallback(() => {
-    if (!containerRef.current) return; // Zabezpieczenie przed null
+    if (!containerRef.current) return;
     handleScroll(containerRef.current, 'right', 976.5);
   }, []);
 
-  // Zamknięcie modala
   const closeModal = () => {
     setActiveImage(null);
   };
 
-  // Sprawdzenie, czy przewinięto do krańców kontenera
   const checkEdge = () => {
     const container = containerRef.current;
-    if (!container) return; // Zabezpieczenie przed null
+    if (!container) return;
 
     const isAtStart = container.scrollLeft === 0;
     const margin = 1;
@@ -210,7 +206,6 @@ export default function ShowImages({ images }) {
     });
   };
 
-  // Obsługa klawiszy (np. Escape, strzałki)
   useEffect(() => {
     const keyPressHandler = (event) => {
       handleKeyPress(
@@ -228,7 +223,6 @@ export default function ShowImages({ images }) {
     };
   }, [activeImage, images]);
 
-  // Sprawdzenie widoczności przycisków i krawędzi po załadowaniu komponentu i zmianie rozmiaru okna
   useEffect(() => {
     const resizeHandler = () => {
       checkButtonsVisibility(containerRef, setShowButtons);
@@ -244,10 +238,9 @@ export default function ShowImages({ images }) {
     };
   }, [images]);
 
-  // Dodanie nasłuchiwania na zdarzenie scroll
   useEffect(() => {
     const container = containerRef.current;
-    if (!container) return; // Zabezpieczenie przed null
+    if (!container) return;
 
     const handleScrollEvent = () => {
       checkEdge();
@@ -259,7 +252,6 @@ export default function ShowImages({ images }) {
     };
   }, []);
 
-  // Blokowanie scrolla, gdy modal jest otwarty
   useEffect(() => {
     disableScroll(activeImage !== null);
     return () => {
@@ -267,12 +259,10 @@ export default function ShowImages({ images }) {
     };
   }, [activeImage]);
 
-  // Obsługa zakończenia ładowania obrazka
   const handleImageLoad = () => {
     setIsLoading(false);
   };
 
-  // Jeśli nie ma obrazków, nie renderuj komponentu
   if (!images?.length) {
     return null;
   }
@@ -293,7 +283,7 @@ export default function ShowImages({ images }) {
             &lt;
           </button>
         )}
-        {images.map((image, index) => (
+        {images.slice(0, 12).map((image, index) => (
           <li key={index}>
             {isLoading && <Spinner className={styles.spinner} />}
             <div className={styles.image_box}>
@@ -302,8 +292,9 @@ export default function ShowImages({ images }) {
                 className={styles.image}
                 src={`https://image.tmdb.org/t/p/w300${image.file_path}`}
                 alt={`Image ${index}`}
-                width={301}
-                height={170}
+                // width={301}
+                // height={170}
+                fill
                 onLoadingComplete={handleImageLoad}
                 onClick={() => handleImageClick(index, setActiveImage)}
               />
