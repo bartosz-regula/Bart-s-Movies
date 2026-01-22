@@ -179,13 +179,16 @@ export default function ShowImages({ images }) {
   const [isLoading, setIsLoading] = useState(true);
   const [edgeReached, setEdgeReached] = useState({ left: false, right: false });
 
+  const MAX_IMAGES = 12;
+  const limitedImages = images.slice(0, MAX_IMAGES);
+
   const handleLeftClick = useCallback(() => {
-    if (!containerRef.current) return;
+    if (!containerRef.current);
     handleScroll(containerRef.current, 'left', 976.5);
   }, []);
 
   const handleRightClick = useCallback(() => {
-    if (!containerRef.current) return;
+    if (!containerRef.current);
     handleScroll(containerRef.current, 'right', 976.5);
   }, []);
 
@@ -283,7 +286,7 @@ export default function ShowImages({ images }) {
             &lt;
           </button>
         )}
-        {images.slice(0, 12).map((image, index) => (
+        {limitedImages.map((image, index) => (
           <li key={index}>
             {isLoading && <Spinner className={styles.spinner} />}
             <div className={styles.image_box}>
@@ -314,13 +317,13 @@ export default function ShowImages({ images }) {
 
       {activeImage !== null && (
         <ModalImage
-          images={images}
+          images={limitedImages}
           activeImage={activeImage}
-          totalImages={images.length}
+          totalImages={limitedImages.length}
           currentIndex={activeImage}
           closeModal={closeModal}
-          handleNextImage={() => handleNextImage(images, activeImage, setActiveImage)}
-          handlePrevImage={() => handlePrevImage(images, activeImage, setActiveImage)}
+          handleNextImage={() => handleNextImage(limitedImages, activeImage, setActiveImage)}
+          handlePrevImage={() => handlePrevImage(limitedImages, activeImage, setActiveImage)}
         />
       )}
     </div>
