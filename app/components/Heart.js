@@ -16,8 +16,6 @@ export default function Heart({ isFavorite, className, handleAddToFavorites, han
             xmlns="http://www.w3.org/2000/svg"
             xmlnsXlink="http://www.w3.org/1999/xlink"
             version="1.1"
-            // width="25"
-            // height="25"
             viewBox="0 0 256 256"
             xmlSpace="preserve"
           >
@@ -59,8 +57,6 @@ export default function Heart({ isFavorite, className, handleAddToFavorites, han
             xmlns="http://www.w3.org/2000/svg"
             xmlnsXlink="http://www.w3.org/1999/xlink"
             version="1.1"
-            // width="25"
-            // height="25"
             viewBox="0 0 256 256"
             xmlSpace="preserve"
           >

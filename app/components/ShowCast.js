@@ -14,7 +14,7 @@ export default function ShowCast({ cast }) {
   const containerRef = useRef(null);
   const [showButtons, setShowButtons] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [edgeReached, setEdgeReached] = useState({ left: false, right: false }); //toooooo
+  const [edgeReached, setEdgeReached] = useState({ left: false, right: false });
 
   const handleLeftClick = useCallback(() => {
     handleScroll(containerRef.current, 'left', 990);

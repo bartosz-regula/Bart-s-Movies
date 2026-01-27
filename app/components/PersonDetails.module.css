@@ -1,29 +1,30 @@
 .container {
-  margin: 0 auto 0 auto;
-  display: flex;
-  max-width: 120rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  grid-template-rows: auto 1fr auto;
+  max-width: 125.2rem;
+  padding: 0 2.6rem;
+  column-gap: 3.5rem;
 }
 
-.imsge_container {
+.image_container {
   position: relative;
-}
-
-.text_container {
-  margin-left: 4rem;
-  width: 100%;
-  font-size: 2rem;
-  margin-top: 2rem;
+  width: 300px;
+  height: 450px;
+  grid-row: 1 / span 3;
 }
 
 .person_name {
   font-size: 3.8rem;
   font-weight: 600;
-  margin-bottom: 3rem;
+  grid-column: 2;
 }
 
 .biography_container {
   font-size: 1.6rem;
-  margin-top: 1.2rem;
+  margin-top: 3.2rem;
+  grid-column: 2;
 }
 
 .biography_container button {
@@ -56,7 +57,10 @@
 
 .details_container {
   display: grid;
+  gap: 4rem;
   grid-template-columns: 1fr 1fr;
+  line-height: 1.1;
+  grid-column: -2 / -1;
 }
 
 .details_container strong {
@@ -74,4 +78,98 @@
   position: absolute;
   left: 45%;
   top: 50%;
+}
+
+@media (max-width: 1000px) {
+  .image_container {
+    width: 250px;
+    height: 350px;
+  }
+  .biography_container {
+    font-size: 1.55rem;
+  }
+
+  .biography_container strong {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 810px) {
+  .person_name {
+    font-size: 3rem;
+  }
+
+  .image_container {
+    grid-row: 1 / span 2;
+  }
+
+  .biography_container {
+    grid-column: 2;
+  }
+
+  .details_container {
+    grid-column: 1 / -1;
+    justify-items: center;
+    margin-top: 2rem;
+  }
+}
+
+@media (max-width: 710px) {
+  .container {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    justify-items: center;
+  }
+
+  .person_name {
+    margin: 1.4rem 0;
+  }
+
+  .biography_container {
+    margin-top: 2rem;
+  }
+
+  .image_container,
+  .person_name,
+  .biography_container,
+  .details_container {
+    grid-column: auto;
+    grid-row: auto;
+    text-align: center;
+  }
+
+  .details_container {
+    text-align: left;
+    line-height: 1.25;
+    gap: 0;
+  }
+}
+
+@media (max-width: 500px) {
+  .biography_container {
+    font-size: 1.4rem;
+  }
+
+  .person_name {
+    font-size: 2.8rem;
+  }
+
+  .details_container {
+    text-align: center;
+    margin: 1rem 0 0 0;
+    line-height: 1.25;
+  }
+}
+
+@media (max-width: 460px) {
+  .details_container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .details_container li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }

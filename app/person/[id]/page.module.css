@@ -3,3 +3,9 @@
   margin: -10rem auto 0 auto;
   padding-bottom: 10rem;
 }
+
+@media (max-width: 710px) {
+  .container {
+    padding-top: 15rem;
+  }
+}

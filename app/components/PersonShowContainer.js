@@ -16,20 +16,20 @@ export default function PersonShowContainer({ show, header }) {
   const [edgeReached, setEdgeReached] = useState({ left: false, right: false });
 
   const handleLeftClick = useCallback(() => {
-    if (!containerRef.current) return; // Zabezpieczenie przed null
+    if (!containerRef.current) return;
 
     handleScroll(containerRef.current, 'left', 1020);
   }, []);
 
   const handleRightClick = useCallback(() => {
-    if (!containerRef.current) return; // Zabezpieczenie przed null
+    if (!containerRef.current) return;
 
     handleScroll(containerRef.current, 'right', 1020);
   }, []);
 
   const checkEdge = () => {
     const container = containerRef.current;
-    if (!container) return; // Zabezpieczenie przed null
+    if (!container) return;
 
     const isAtStart = container.scrollLeft === 0;
     const margin = 1;
@@ -55,7 +55,7 @@ export default function PersonShowContainer({ show, header }) {
 
   useEffect(() => {
     const container = containerRef.current;
-    if (!container) return; // Zabezpieczenie przed null
+    if (!container) return;
 
     const handleScrollEvent = () => {
       checkEdge();

@@ -19,13 +19,13 @@ export default function PersonImages({ images }) {
   const [edgeReached, setEdgeReached] = useState({ left: false, right: false });
 
   const handleLeftClick = useCallback(() => {
-    if (!containerRef.current) return; // Zabezpieczenie przed null
+    if (!containerRef.current) return;
 
     handleScroll(containerRef.current, 'left', 1020);
   }, []);
 
   const handleRightClick = useCallback(() => {
-    if (!containerRef.current) return; // Zabezpieczenie przed null
+    if (!containerRef.current) return;
 
     handleScroll(containerRef.current, 'right', 1020);
   }, []);
@@ -36,8 +36,7 @@ export default function PersonImages({ images }) {
 
   const checkEdge = () => {
     const container = containerRef.current;
-    if (!container) return; // Zabezpieczenie przed null
-
+    if (!container) return;
     const isAtStart = container.scrollLeft === 0;
     const margin = 1;
     const isAtEnd = container.scrollLeft + container.clientWidth >= container.scrollWidth - margin;
@@ -70,7 +69,7 @@ export default function PersonImages({ images }) {
 
     const resizeHandler = () => checkButtonsVisibility(containerRef, setShowButtons);
     window.addEventListener('resize', resizeHandler);
-    checkEdge(); // check the edge on load
+    checkEdge();
 
     window.addEventListener('resize', resizeHandler);
 
@@ -81,7 +80,7 @@ export default function PersonImages({ images }) {
 
   useEffect(() => {
     const container = containerRef.current;
-    if (!container) return; // Zabezpieczenie przed null
+    if (!container) return;
 
     const handleScrollEvent = () => {
       checkEdge();

@@ -321,6 +321,13 @@
 @media (max-width: 460px) {
   .details_container {
     display: block;
-    margin-left: 0;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .details_container li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 }
