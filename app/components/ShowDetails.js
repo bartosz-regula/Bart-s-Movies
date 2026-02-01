@@ -200,11 +200,11 @@ export default function ShowDetails({ show, cast, providers }) {
               ))}
             <li>
               <strong>Language: </strong>
-              {formatList(show.spoken_languages, (language) => language.name)}
+              {formatList(show.spoken_languages.slice(0, 1), (language) => language.name)}
             </li>
             <li>
               <strong>Production: </strong>
-              {formatList(show.production_countries.slice(0, 4), (country) => country.name)}
+              {formatList(show.production_countries.slice(0, 1), (country) => country.name)}
             </li>
             <li>
               <strong>Available on streaming: </strong>
@@ -213,12 +213,11 @@ export default function ShowDetails({ show, cast, providers }) {
               <ul className={styles.providers}>
                 {streamingProviders.length > 0 &&
                   streamingProviders.map((provider) => (
-                    <li key={provider.provider_id}>
+                    <li className={styles.providerItem} key={provider.provider_id}>
                       <Image
                         src={`https://image.tmdb.org/t/p/original/${provider.logo_path}`}
                         alt={provider.provider_name}
-                        width={40}
-                        height={40}
+                        fill
                       />
                     </li>
                   ))}
@@ -238,7 +237,7 @@ export default function ShowDetails({ show, cast, providers }) {
             </li>
             <li>
               <strong>Entities: </strong>
-              {formatList(show.production_companies.slice(0, 2), (company) => company.name)}
+              {formatList(show.production_companies.slice(0, 1), (company) => company.name)}
             </li>
             <li>
               <strong>Available for Buy/Rent: </strong>
@@ -246,12 +245,11 @@ export default function ShowDetails({ show, cast, providers }) {
               <ul className={styles.providers}>
                 {buyProviders.length > 0 &&
                   buyProviders.map((provider) => (
-                    <li key={provider.provider_id}>
+                    <li className={styles.providerItem} key={provider.provider_id}>
                       <Image
                         src={`https://image.tmdb.org/t/p/original/${provider.logo_path}`}
                         alt={provider.provider_name}
-                        width={40}
-                        height={40}
+                        fill
                       />
                     </li>
                   ))}
