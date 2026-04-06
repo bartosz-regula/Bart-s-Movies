@@ -1,5 +1,5 @@
 .container {
-  margin: 0 auto;
+  margin: 0 auto 8rem auto;
   display: grid;
   grid-template-columns: max-content 1fr;
   grid-template-rows: 4rem auto auto;
@@ -64,7 +64,6 @@
   grid-template-columns: 1fr 1fr;
   line-height: 1.1;
   grid-column: -2 / -1;
-  justify-items: center;
   max-width: 80rem;
 }
 
@@ -184,6 +183,7 @@
     align-items: center;
     margin-left: 0rem;
     margin-right: 0rem;
+    text-align: center;
   }
 }
 

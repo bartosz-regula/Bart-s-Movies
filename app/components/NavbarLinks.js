@@ -14,8 +14,8 @@ const navItems = [
   { title: 'Movies', param: '/movie', icon: <LocalMoviesIcon fontSize="inherit" /> },
   { title: 'Series', param: '/series', icon: <MovieFilterOutlinedIcon fontSize="inherit" /> },
   { title: 'Favorites', param: '/favorites', icon: <FavoriteBorderIcon fontSize="inherit" /> },
-  { title: 'Search', param: '/search', icon: <SearchIcon fontSize="inherit" /> },
   { title: 'Rated', param: '/rated', icon: <StarBorderIcon fontSize="inherit" /> },
+  { title: 'Search', param: '/search', icon: <SearchIcon fontSize="inherit" /> },
 ];
 
 export const NavbarLinks = () => (

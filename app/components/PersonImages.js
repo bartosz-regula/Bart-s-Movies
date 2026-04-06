@@ -3,7 +3,7 @@
 import styles from './PersonImages.module.css';
 import Image from 'next/image';
 import { useState, useEffect, useRef, useCallback } from 'react';
-import ModalImage from './ModalImage';
+import ModalImagePerson from './ModalImagePerson';
 import handleKeyPress from '../helpers/handleKeyPress';
 import checkButtonsVisibility from '../helpers/checkButtonsVisibility';
 import { handleScroll } from '../helpers/handleScroll';
@@ -137,8 +137,9 @@ export default function PersonImages({ images }) {
               <Image
                 className={styles.image}
                 src={`https://image.tmdb.org/t/p/w300${image.file_path}`}
-                width={180}
-                height={260}
+                // width={180}
+                // height={260}
+                fill
                 onClick={() => handleImageClick(index, setActiveImage)}
                 alt={`Image ${index}`}
                 onLoadingComplete={handleImageLoad}
@@ -157,7 +158,7 @@ export default function PersonImages({ images }) {
       </ul>
 
       {activeImage !== null && (
-        <ModalImage
+        <ModalImagePerson
           images={images.profiles}
           activeImage={activeImage}
           totalImages={images.profiles ? images.profiles.length : images.length}

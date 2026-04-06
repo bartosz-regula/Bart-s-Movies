@@ -99,8 +99,6 @@ export default function PersonShowContainer({ show, header }) {
                     className={styles.image}
                     src={imageUrl}
                     alt={title ? title : 'No Poster Available'}
-                    // width={180}
-                    // height={260}
                     fill
                     onLoadingComplete={handleImageLoad}
                   />

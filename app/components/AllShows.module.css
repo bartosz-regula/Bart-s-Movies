@@ -1,6 +1,9 @@
 .container {
-  position: relative;
+  /* position: relative; */
   min-height: calc(100vh - 328px);
+  max-width: 140rem;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .filter_container {
@@ -10,7 +13,8 @@
 }
 
 .header {
-  margin-left: 3rem;
+  margin-left: 2.5rem;
+  margin-bottom: 1.6rem;
 }
 
 .card {

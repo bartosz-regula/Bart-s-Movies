@@ -176,7 +176,7 @@ export default function Hero() {
   return (
     <div className={styles.hero}>
       <Carousel
-        // autoPlay
+        autoPlay
         infiniteLoop
         interval={5000}
         showThumbs={false}

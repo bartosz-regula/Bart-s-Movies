@@ -16,14 +16,16 @@ export default function ExploreMore({ showType, header }) {
 
   return (
     <ProtectedRoute>
-      <h2 className={styles.header}>{header}</h2>
-      <CardContainer>
-        {movies.map((movie) => (
-          <Card key={movie.id} show={movie} className={styles.card} />
-        ))}
+      <div className={styles.container}>
+        <h2 className={styles.header}>{header}</h2>
+        <CardContainer>
+          {movies.map((movie) => (
+            <Card key={movie.id} show={movie} className={styles.card} />
+          ))}
 
-        {isVisible && <ButtonTop />}
-      </CardContainer>
+          {isVisible && <ButtonTop />}
+        </CardContainer>
+      </div>
     </ProtectedRoute>
   );
 }

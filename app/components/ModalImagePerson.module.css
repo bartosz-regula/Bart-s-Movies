@@ -17,8 +17,8 @@
 
 .modal_image_wrapper {
   position: relative;
-  max-width: 120rem;
-  width: 80%;
+  max-width: 70rem;
+  width: 40%;
   overflow: hidden;
   z-index: 2;
   border: 3px solid white;
@@ -32,6 +32,8 @@
 .modal_image {
   width: 100%;
   max-height: auto;
+  /* height: 0%; */
+  /* max-height: 30%; */
   flex-shrink: 0;
   user-select: none;
   pointer-events: none;
